@@ -39,6 +39,7 @@
 		<module>app-net</module>
 		<module>app-world</module>
 		<module>client_uma</module>
+		<module>third_party</module>
 	</modules>
 	<description>Project Uma</description>
 </project>
