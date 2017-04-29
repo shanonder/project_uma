@@ -25,9 +25,14 @@
 			<artifactId>app-nosql</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-				<dependency>
+		<dependency>
 			<groupId>app.uma</groupId>
 			<artifactId>app-net</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>app.uma</groupId>
+			<artifactId>app-world</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
