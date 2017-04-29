@@ -6,30 +6,26 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Item {
-
-	// @Id
-	// @GeneratedValue(strategy=GenerationType.AUTO)
-	// private Integer id;
-
+public class Role {
+	
 	@Id
 	@GenericGenerator(name = "UUIDGENERATE", strategy = "uuid2")
 	@GeneratedValue(generator = "UUIDGENERATE")
 	@Column(length = 36)
 	private String id;
-
-	private Integer sourceId;
-
-	@Lob
-	private String detail;
-
+	
+	private int profession;
+	
+	private int level;
+	
+	private long exp;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(updatable = false)
 	@org.hibernate.annotations.CreationTimestamp
@@ -47,20 +43,28 @@ public class Item {
 		this.id = id;
 	}
 
-	public Integer getSourceId() {
-		return sourceId;
+	public int getProfession() {
+		return profession;
 	}
 
-	public void setSourceId(Integer sourceId) {
-		this.sourceId = sourceId;
+	public void setProfession(int profession) {
+		this.profession = profession;
 	}
 
-	public String getDetail() {
-		return detail;
+	public int getLevel() {
+		return level;
 	}
 
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public long getExp() {
+		return exp;
+	}
+
+	public void setExp(long exp) {
+		this.exp = exp;
 	}
 
 	public Date getCreateTime() {
@@ -78,10 +82,5 @@ public class Item {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-
-	@Override
-	public String toString() {
-		return "Item [id=" + id + ", sourceId=" + sourceId + ", detail=" + detail + ", createTime=" + createTime
-				+ ", updateTime=" + updateTime + "]";
-	}
+	
 }
