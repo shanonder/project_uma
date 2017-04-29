@@ -4,7 +4,6 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>app.uma</groupId>
-	<description>project_uma</description>
 	<name>project_uma</name>
 	<artifactId>project_uma</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -38,5 +37,7 @@
 		<module>app-nosql</module>
 		<module>app-main</module>
 		<module>app-net</module>
+		<module>client_uma</module>
 	</modules>
+	<description>Project Uma</description>
 </project>
