@@ -20,6 +20,9 @@ public class Role {
 	@Column(length = 36)
 	private String id;
 	
+	@Column(length = 36)
+	private String uid;
+	
 	private int profession;
 	
 	private int level;
