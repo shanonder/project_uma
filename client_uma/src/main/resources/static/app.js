@@ -13,12 +13,12 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('http://localhost:9221/uma-websocket/');
+    var socket = new SockJS(host + '/uma-websocket/');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
+        stompClient.subscribe('/respon/auth', function (greeting) {
             showGreeting(JSON.parse(greeting.body).content);
         });
     });
@@ -33,7 +33,7 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+    stompClient.send("/request/login", {}, JSON.stringify({'name': $("#name").val()}));
 }
 
 function showGreeting(message) {

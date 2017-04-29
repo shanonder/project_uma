@@ -1,4 +1,4 @@
-package app.uma.net;
+package app.uma.net.message;
 
 public class HelloMessage {
 
