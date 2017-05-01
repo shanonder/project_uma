@@ -18,7 +18,8 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
     
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/uma-websocket").setAllowedOrigins("http://localhost:9900").withSockJS();
+        registry.addEndpoint("/uma-websocket").setAllowedOrigins("http://localhost:9900",
+        		"http://localhost:8999").withSockJS();
     }
 
 }

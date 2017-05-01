@@ -14,6 +14,11 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+//        String xmlPath="classpath:resource/spring-*.xml";  
+//        @SuppressWarnings("resource")  
+//        ApplicationContext ctx=new ClassPathXmlApplicationContext(xmlPath);  
+//        GoodsService goodsService=(GoodsService)ctx.getBean("goodsService");  
+//        goodsService.execute("loadTest");  
     }
     
     @Bean
