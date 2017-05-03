@@ -6,7 +6,7 @@ package app.third;
  *
  */
 
-public class Const {
+public interface Const {
 	public static String appId = "1101331347";
 	public static String appkey = "wKKPEoDfesfbWESr";
 }

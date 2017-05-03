@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "tencent.openid",
+  "type": "java.lang.String",
+  "description": "A description for 'tencent.openid'"
+}]}

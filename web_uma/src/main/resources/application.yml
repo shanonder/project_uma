@@ -1,0 +1,8 @@
+tencent:
+  appid:1101331347
+  appkey:wKKPEoDfesfbWESr
+
+
+logging:
+  level:
+    org.springframework.security: DEBUG
