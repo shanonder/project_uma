@@ -1,4 +1,4 @@
-package app.uma.web;
+package app.uma;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

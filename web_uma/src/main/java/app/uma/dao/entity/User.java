@@ -1,5 +1,6 @@
-package app.entity;
+package app.uma.dao.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +8,8 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity 
+@Cacheable(true)
 public class User {
 	@Id
 	@GenericGenerator(name = "UUIDGENERATE", strategy = "uuid2")
@@ -15,12 +17,27 @@ public class User {
 	@Column(length = 36)
 	private String id;
 
+	@Column(length = 36 , unique = true , nullable = false)
+	private String username;
+	
+	@Column(length = 36)
     private String name;
-    
-    @Column(length = 50)
+	
+	@Column(length = 50, unique = true , nullable = false)
     private String password;
 
+	@Column(length = 50)
     private String email;
+
+    
+    public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 
 	public String getId() {
 		return id;

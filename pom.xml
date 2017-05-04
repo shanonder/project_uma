@@ -5,6 +5,7 @@
 
 	<groupId>app.uma</groupId>
 	<name>project_uma</name>
+	<description>Project Uma</description>
 	<artifactId>project_uma</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -42,5 +43,4 @@
 		<module>third_party</module>
 		<module>web_uma</module>
 	</modules>
-	<description>Project Uma</description>
 </project>

@@ -7,6 +7,6 @@ package app.third;
  */
 
 public interface Const {
-	public static String appId = "1101331347";
-	public static String appkey = "wKKPEoDfesfbWESr";
+	final public static String appId = "1101331347";
+	final public static String appkey = "wKKPEoDfesfbWESr";
 }
