@@ -8,8 +8,7 @@
 <!--Mobile first-->
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Login Page</title>
-
+<title th:switch="${type}">Login Page</title>
 <meta name="description"
 	content="Free Admin Template Based On Twitter Bootstrap 3.x" />
 <meta name="author" content="" />
@@ -48,15 +47,19 @@
 
 </head>
 
+
 <body class="login">
-<p th:text="'Hello, ' + ${name} + '!'" />
+
 	<div class="form-signin">
 		<div class="text-center">
 			<img src="assets/img/logo.png" alt="Metis Logo" />
 		</div>
 		<hr />
-		<div class="tab-content">
-			<div id="login" class="tab-pane">
+		<p >3333</p>
+		 <p th:text="'Hello, ' + ${type} + '!'" />
+		<p >3333</p>
+		<div th:switch="${type}" class="tab-content"  >
+			<div th:case="'login'" id="login" class="tab-pane active">
 				<form >
 					<p class="text-muted text-center">Enter your username and
 						password</p>
@@ -70,7 +73,7 @@
 						type="button">Sign in</button>
 				</form>
 			</div>
-			<div id="forgot" class="tab-pane">
+			<div th:case="'forgot'" id="forgot" class="tab-pane active">
 				<form action="index.html">
 					<p class="text-muted text-center">Enter your valid e-mail</p>
 					<input type="email" placeholder="mail@domain.com" class="form-control" /> <br />
@@ -78,7 +81,7 @@
 						Password</button>
 				</form>
 			</div>
-			<div id="signup" class="tab-pane active">
+			<div th:case="'signup'" id="signup" class="tab-pane active">
 				<form action="index.html">
 					<input type="text" placeholder="username" class="form-control top" />
 					<input type="email" placeholder="mail@domain.com" class="form-control middle" />
@@ -91,9 +94,9 @@
 		<hr />
 		<div class="text-center">
 			<ul class="list-inline">
-				<li><a class="text-muted" href="#login" data-toggle="tab">Login</a></li>
-				<li><a class="text-muted" href="#forgot" data-toggle="tab">Forgot Password</a></li>
-				<li><a class="text-muted" href="#signup" data-toggle="tab">Signup</a></li>
+				<li><a class="text-muted" href="/login" data-toggle="tab">Login</a></li>
+				<li><a class="text-muted" href="/forgot" data-toggle="tab">Forgot Password</a></li>
+				<li><a class="text-muted" href="/signup" data-toggle="tab">Signup</a></li>
 			</ul>
 		</div>
 	</div>

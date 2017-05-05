@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import app.uma.dao.entity.User;
-import app.uma.dao.repository.UserRepository;
+import app.uma.dao.entity.UserUma;
+import app.uma.dao.repository.UserUmaRepository;
 import app.uma.message.Acount;
 
 @RestController
@@ -18,7 +18,7 @@ import app.uma.message.Acount;
 public class AuthController {
 
 	@Autowired 
-	private UserRepository userRepository;
+	private UserUmaRepository userRepository;
 	
 	
 	
@@ -26,7 +26,7 @@ public class AuthController {
 	public @ResponseBody Acount login(@RequestParam String username,@RequestParam String password){
 		Acount acount = new Acount();
 		
-		User user = userRepository.findByUsername(username);
+		UserUma user = userRepository.findByUsername(username);
 		if(user == null){
 			acount.state = 102;
 			acount.username = username;
@@ -43,10 +43,10 @@ public class AuthController {
 	@PostMapping(path="/registPost") // Map ONLY GET Requests
 	public @ResponseBody Acount regist(@RequestParam String username,@RequestParam String password){
 		Acount acount = new Acount();
-		User user = userRepository.findByUsername(username);
+		UserUma user = userRepository.findByUsername(username);
 		if(user == null){
 			acount.state = 200;
-			user = new User();
+			user = new UserUma();
 			user.setUsername(username);
 			user.setPassword(password);
 			userRepository.save(user);
