@@ -32,16 +32,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-		.antMatchers("/","/auth/**").permitAll()
-		.anyRequest().authenticated()
-		.and().formLogin().loginPage("/login.html").permitAll()
-		.and().logout().logoutUrl("/login.html").permitAll()
-		.and().exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/"))
-		.and().logout().logoutSuccessUrl("/login.html").permitAll()
-		.and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-		//		.and()
-		//		.addFilterBefore(springSecurityFilterChain, BasicAuthenticationFilter.class);
-		//		http.antMatcher("login.html").csrf().disable();
+			.antMatchers("/guest/**","/auth/**").permitAll()
+			.anyRequest().authenticated()
+//		.and().formLogin()
+//			.loginPage("/guest/login").permitAll()
+//		.and().logout().logoutUrl("/guest/login").permitAll()
+//		.and().exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/guest/login"))
+//		.and().logout().logoutSuccessUrl("/guest/login").permitAll()
+		.and().csrf()
+			.disable();
+//		http.antMatcher("login").csrf().disable();
 		http.addFilterBefore(appFilterSecurityInterceptor, FilterSecurityInterceptor.class);
 	}
 
