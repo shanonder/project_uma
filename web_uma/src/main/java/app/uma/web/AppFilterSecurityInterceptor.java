@@ -18,21 +18,21 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.stereotype.Service;
 
 @Service
-public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
+public class AppFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
 
 
     @Autowired
     private FilterInvocationSecurityMetadataSource securityMetadataSource;
 
     @Autowired
-    public void setMyAccessDecisionManager(MyAccessDecisionManager myAccessDecisionManager) {
+    public void setMyAccessDecisionManager(AppAccessDecisionManager myAccessDecisionManager) {
         super.setAccessDecisionManager(myAccessDecisionManager);
     }
 
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+    	
     }
 
     @Override

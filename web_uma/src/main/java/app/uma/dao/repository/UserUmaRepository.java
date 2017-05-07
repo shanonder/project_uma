@@ -11,6 +11,6 @@ import app.uma.dao.entity.UserUma;
 
 public interface UserUmaRepository extends CrudRepository<UserUma, Long> {
 	
-	@Query("from user_uma where username=?1" )
+	@Query("select u from UserUma u where username=?1" )
 	UserUma findByUsername(String username);
 }

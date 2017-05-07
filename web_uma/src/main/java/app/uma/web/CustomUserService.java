@@ -1,7 +1,6 @@
 package app.uma.web;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,8 +30,8 @@ public class CustomUserService implements UserDetailsService { //自定义UserDe
 	public UserDetails loadUserByUsername(String username) {
 		UserUma user = userRepository.findByUsername(username);
 		if (user != null) {
-			List<Permission> permissions = permissionRepository.findByUserId(user.getId());
-			List<GrantedAuthority> grantedAuthorities = new ArrayList <>();
+			Iterable<Permission> permissions = permissionRepository.findByUserId(user.getId());
+			ArrayList<GrantedAuthority> grantedAuthorities = new ArrayList <>();
 			for (Permission permission : permissions) {
 				if (permission != null && permission.getName()!=null) {
 
@@ -45,5 +44,6 @@ public class CustomUserService implements UserDetailsService { //自定义UserDe
 			throw new UsernameNotFoundException("admin: " + username + " do not exist!");
 		}
 	}
+	
 
 }

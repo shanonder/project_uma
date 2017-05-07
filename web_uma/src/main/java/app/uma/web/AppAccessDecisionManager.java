@@ -15,7 +15,7 @@ import java.util.Iterator;
  * Created by yangyibo on 17/1/19.
  */
 @Service
-public class MyAccessDecisionManager implements AccessDecisionManager {
+public class AppAccessDecisionManager implements AccessDecisionManager {
     @Override
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
 

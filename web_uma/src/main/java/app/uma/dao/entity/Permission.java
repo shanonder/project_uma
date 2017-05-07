@@ -1,11 +1,15 @@
 package app.uma.dao.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
+@Entity 
+@Cacheable(true)
 public class Permission {
 
 	@Id
@@ -21,6 +25,8 @@ public class Permission {
 
     //授权链接
     private String url;
+    
+    private String method;
 
     /**父节点id*/
     @Column(length = 36, nullable = false)
@@ -62,9 +68,17 @@ public class Permission {
         return uid;
     }
 
-    public void setUid(String pid) {
-        this.uid = pid;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
+
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
+	}
 
 
 }
