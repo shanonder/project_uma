@@ -4,7 +4,7 @@
  * date: 2017年4月30日 上午12:00:56
  *
  */
-package app.uma.net.controller;
+package app.uma.net.websocket.controller;
 
 import org.springframework.stereotype.Controller;
 

@@ -1,4 +1,4 @@
-package app.uma.net.controller;
+package app.uma.net.websocket.controller;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;

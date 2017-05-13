@@ -1,4 +1,4 @@
-package app.uma.net.config;
+package app.uma.net.websocket.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package app.uma.net.message;
+package app.uma.net.websocket.message;
 
 public class MessageBase {
 	public int state;
