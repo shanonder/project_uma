@@ -5,8 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/guest")
-public class GuestController {
+public class LoginController {
 
     @RequestMapping("/login")
     public String login( Model model) {
@@ -19,11 +18,9 @@ public class GuestController {
         model.addAttribute("type", "forgot");
         return "login";
     }
-    
     @RequestMapping("/signup")
     public String signup(Model model) {
         model.addAttribute("type", "signup");
         return "login";
     }
 }
-
