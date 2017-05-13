@@ -30,7 +30,7 @@ public class Permission {
 
     /**父节点id*/
     @Column(length = 36, nullable = false)
-    private String uid;
+    private String fid;
 
     public String getId() {
         return id;
@@ -65,11 +65,11 @@ public class Permission {
     }
 
     public String getUid() {
-        return uid;
+        return fid;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setUid(String fid) {
+        this.fid = fid;
     }
 
 	public String getMethod() {
