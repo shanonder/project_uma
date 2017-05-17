@@ -42,5 +42,6 @@
 		<module>client_uma</module>
 		<module>third_party</module>
 		<module>web_uma</module>
+		<module>gm_uma</module>
 	</modules>
 </project>
