@@ -30,7 +30,7 @@ public class MyX509TrustManager implements X509TrustManager
 
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see javax.net.ssl.X509TrustManager#checkServerTrusted(java.security.cert.X509Certificate[], java.lang.String)
 	 */
 	public void checkServerTrusted(X509Certificate[] arg0, String arg1)
