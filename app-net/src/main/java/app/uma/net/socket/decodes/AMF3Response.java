@@ -12,5 +12,4 @@ public class AMF3Response extends ServerResponse {
 			e.printStackTrace();
 		}
 	}
-
 }

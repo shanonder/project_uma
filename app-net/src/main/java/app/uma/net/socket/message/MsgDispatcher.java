@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import app.uma.net.socket.decodes.ClientRequest;
+import app.uma.net.socket.interfaces.INotAuthProcessor;
 import app.uma.net.socket.sessions.GameSession;
 
 /**
