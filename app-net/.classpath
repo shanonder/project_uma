@@ -27,7 +27,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/workspaces/wp_java/classpath/flex-messaging-common-3.2.0.jar"/>
-	<classpathentry kind="lib" path="C:/workspaces/wp_java/classpath/flex-messaging-core-3.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/workspace/wp_spring/project_uma/libs/flex-messaging-common.jar"/>
+	<classpathentry kind="lib" path="C:/workspace/wp_spring/project_uma/libs/flex-messaging-core-3.2.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
