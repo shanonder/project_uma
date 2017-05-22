@@ -11,9 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Iterator;
 
-/**
- * Created by yangyibo on 17/1/19.
- */
 @Service
 public class AppAccessDecisionManager implements AccessDecisionManager {
     @Override

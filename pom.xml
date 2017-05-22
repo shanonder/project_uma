@@ -43,5 +43,6 @@
 		<module>third_party</module>
 		<module>web_uma</module>
 		<module>gm_uma</module>
+		<module>data-generate</module>
 	</modules>
 </project>
