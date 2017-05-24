@@ -41,12 +41,12 @@ public class GeneralBeans {
 		return new CodeProperties();
 	}
 	
-	@Bean
-	public GenerateVersion version() throws IOException{
-		GenerateVersion v = new GenerateVersion();
-//		v.init();
-		return v;
-	}
+//	@Bean
+//	public GenerateVersion version() throws IOException{
+//		GenerateVersion v = new GenerateVersion();
+////		v.init();
+//		return v;
+//	}
 	
 	public GeneralBeans() {
 		

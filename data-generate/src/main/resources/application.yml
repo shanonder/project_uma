@@ -10,7 +10,7 @@ code:
   java: 
     lang: java
     path: C:/workspaces/wp_spring/project_uma/app-net/src/main/java/
-    packurl: app.uma.net.socket
+    pack: app.uma.net.socket
     requestImport: 
       - app.uma.net.socket.decodes.ServerResponse
     responseImport: 
@@ -20,7 +20,7 @@ code:
   as: 
     lang: as
     path: C:/workspaces/wp_as/code_client/src/
-    packurl: com.icday.database.net
+    pack: com.icday.database.net
     requestImport: 
       - app.uma.net.socket.decodes.ServerResponse
     responseImport: 

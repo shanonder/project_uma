@@ -5,10 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-import app.uma.generate.SpringContextUtil;
-import app.uma.generate.builder.GenerateVersion;
 import app.uma.generate.config.GeneralBeans;
 import app.uma.generate.properties.CodeProperties;
 import app.uma.generate.properties.Config;
@@ -25,10 +24,10 @@ public class AsRegisterBuilder extends AsCodeFileWriter {
 //		dir = outDir + t + "/";
 //		CreateFileUtil.createDir(dir);
 //	}
-	private String outPack;
+//	private String outPack;
 	
 	private String codeName;
-	private StringBuilder constructs;
+//	private StringBuilder constructs;
 	private String desc;
 	private String md5;
 	
@@ -43,20 +42,19 @@ public class AsRegisterBuilder extends AsCodeFileWriter {
 		addImport("flash.net.registerClassAlias");
 	}
 	
-	public void init(){
-//		outPack = 
-	}
+	@Autowired
+	private Config config;
+	
+	@Autowired
+	@Qualifier(GeneralBeans.AS_PROPERTIES) 
+	private CodeProperties props;
 	
 	public void frush(){
 		
-		ApplicationContext context = SpringContextUtil.getApplicationContext();
-//		GenerateVersion version = context.getBean(GenerateVersion.class);
-		Config config = context.getBean(Config.class);
-		CodeProperties props = (CodeProperties)context.getBean(GeneralBeans.AS_PROPERTIES);
 		if(desc != null){
 			classInfo.append("\t * desc:" + desc + "\r\n" );
 		}
-		packageinfo = "package " + props.getPackurl() + "{\r\n\r\n";
+		packageinfo = "package " + props.getPack() + "{\r\n\r\n";
 		
 		classInfo.append("\t/**\r\n\t * 此类由").append(config.getAppName()).append("自动生成\r\n");
 		if(md5 != null){
@@ -95,7 +93,7 @@ public class AsRegisterBuilder extends AsCodeFileWriter {
 		if(map.containsKey(name)){
 			return;
 		}
-		addImport(outPack + ".datas." + name);
-		regists.append("\t\t\tregisterClassAlias(\"").append(outPack).append(".datas.").append(name).append("\",").append(name).append(");\r\n");
+		addImport(config + ".datas." + name);
+		regists.append("\t\t\tregisterClassAlias(\"").append(props.getPack()).append(".datas.").append(name).append("\",").append(name).append(");\r\n");
 	}
 }

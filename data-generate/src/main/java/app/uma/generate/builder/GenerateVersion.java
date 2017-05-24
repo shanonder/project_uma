@@ -8,14 +8,16 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
-import app.uma.generate.SpringContextUtil;
 import app.uma.generate.properties.AssetsProperties;
 
+@Component
 public class GenerateVersion {
 	
 	private HashMap<String,String> map;
@@ -23,12 +25,13 @@ public class GenerateVersion {
 	public GenerateVersion(){
 		map = new HashMap<>();
 	}
+
+	@Autowired
+	private AssetsProperties assetsProps;
 	
 	private String path;
 	public void init() throws IOException {
-		ApplicationContext context = SpringContextUtil.getApplicationContext();
-		AssetsProperties ap = (AssetsProperties)context.getBean("AssetsProperties");
-		path = ap.getPath() + "protocol/md5.csv";
+		path = assetsProps.getRoot() + "protocol/md5.csv";
 		File file = new File(path);
 		if(file.exists()){
 			FileReader fReader  = new FileReader(file);

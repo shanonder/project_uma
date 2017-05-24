@@ -9,9 +9,10 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
-import app.uma.generate.SpringContextUtil;
 import app.uma.generate.properties.AssetsProperties;
 import app.uma.generate.properties.Config;
 import app.uma.generate.vo.CellVO;
@@ -19,7 +20,7 @@ import app.uma.generate.vo.DataOptCell;
 import app.uma.utils.MD5Util;
 
 
-
+@Component
 public class DataExecute {
 	private static final Logger logger = Logger.getLogger(DataExecute.class);
 	
@@ -28,6 +29,9 @@ public class DataExecute {
 //		asRegisterBuilder = new AsRegisterBuilder("DataRegister", null, Version.version);
 //	}
 	private DataOptCell optCell;
+	
+	@Autowired
+	private ApplicationContext context;
 	
 	@SuppressWarnings("unused")
 	private String getCellStringValue(Cell cell) {
@@ -47,7 +51,6 @@ public class DataExecute {
 		return cell.getStringCellValue();
 	}
 	public void execute() throws Exception{
-		ApplicationContext context = SpringContextUtil.getApplicationContext();
 		GenerateVersion version = context.getBean(GenerateVersion.class);
 		Config config = context.getBean(Config.class);
 		AssetsProperties assetsProp = (AssetsProperties)context.getBean(AssetsProperties.class);
@@ -74,7 +77,7 @@ public class DataExecute {
 				}
 				String key = getCellStringValue(rowKey,0).replaceAll(" ", "");
 				if(key.equals("#NAME")){
-					operateCell();
+//					operateCell();
 					optCell = new DataOptCell();
 					optCell.md5 = hash;
 					optCell.name = getCellStringValue(rowKey,1).replaceAll(" ", "");
@@ -96,15 +99,15 @@ public class DataExecute {
 				} 
 			}
 		}
-		operateCell();
-		asRegisterBuilder.frush();
+//		operateCell();
+//		asRegisterBuilder.frush();
 	}
 
-	private void operateCell() {
-		if(optCell != null){
-			optCell.operate();
-			asRegisterBuilder.addData(optCell.name);
-			optCell = null;
-		}		
-	}
+//	private void operateCell() {
+//		if(optCell != null){
+//			optCell.operate();
+//			asRegisterBuilder.addData(optCell.name);
+//			optCell = null;
+//		}		
+//	}
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CodeProperties {
 	private String path;
 
-	private String packurl;
+	private String pack;
 
 	private String lang;
 
@@ -55,12 +55,12 @@ public class CodeProperties {
 		this.path = path;
 	}
 
-	public String getPackurl() {
-		return packurl;
+	public String getPack() {
+		return pack;
 	}
 
-	public void setPackurl(String packurl) {
-		this.packurl = packurl;
+	public void setPack(String pack) {
+		this.pack = pack;
 	}
 
 }
