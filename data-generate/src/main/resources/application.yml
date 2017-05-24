@@ -1,12 +1,29 @@
+config:
+  generateAll: true
+  appName: CodeGenerateUtil
+
 assets: 
-  path: C:/workspaces/datas/
-java: 
-  path: C:/workspaces/wp_spring/project_uma/app-net/src/main/java/
-  packurl: app.uma.net.socket
-  packResponse: app.uma.net.socket.decodes.ServerResponse
-  packRequest: app.uma.net.socket.decodes.ClientRequest
-as: 
-  path: C:/workspaces/wp_as/code_client/src/
-  packurl: com.icday.database.net
-  packResponse: app.uma.net.socket.decodes.ServerResponse
-  packRequest: app.uma.net.socket.decodes.ClientRequest
+  data: 
+    root: C:/workspaces/datas/
+    
+code: 
+  java: 
+    lang: java
+    path: C:/workspaces/wp_spring/project_uma/app-net/src/main/java/
+    packurl: app.uma.net.socket
+    requestImport: 
+      - app.uma.net.socket.decodes.ServerResponse
+    responseImport: 
+      - app.uma.net.socket.decodes.ClientRequest
+    dataImport: 
+      - app.uma.net.socket.decodes.ClientRequest
+  as: 
+    lang: as
+    path: C:/workspaces/wp_as/code_client/src/
+    packurl: com.icday.database.net
+    requestImport: 
+      - app.uma.net.socket.decodes.ServerResponse
+    responseImport: 
+      - app.uma.net.socket.decodes.ClientRequest
+    dataImport: 
+      - app.uma.net.socket.decodes.ClientRequest

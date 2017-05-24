@@ -25,11 +25,15 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.slf4j</groupId> -->
-<!-- 			<artifactId>slf4j-jdk14</artifactId> -->
-<!-- 		</dependency> -->
-		
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session</artifactId>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.slf4j</groupId> -->
+		<!-- <artifactId>slf4j-jdk14</artifactId> -->
+		<!-- </dependency> -->
+
 		<!-- Mina -->
 		<dependency>
 			<groupId>org.apache.mina</groupId>
@@ -48,39 +52,49 @@
 			<artifactId>mina-integration-spring</artifactId>
 			<version>1.1.7</version>
 		</dependency>
-		
-<!-- BlazeDS -->
-<!--         <dependency> -->
-<!--             <groupId>com.adobe.blazeds</groupId> -->
-<!--             <artifactId>blazeds-proxy</artifactId> -->
-<!--             <version>4.0.0.14931</version> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>com.adobe.blazeds</groupId> -->
-<!--             <artifactId>blazeds-core</artifactId> -->
-<!--             <version>4.0.0.14931</version> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>com.adobe.blazeds</groupId> -->
-<!--             <artifactId>blazeds-remoting</artifactId> -->
-<!--             <version>4.0.0.14931</version> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>com.adobe.blazeds</groupId> -->
-<!--             <artifactId>blazeds-common</artifactId> -->
-<!--             <version>4.0.0.14931</version> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>com.adobe.blazeds</groupId> -->
-<!--             <artifactId>blazeds-opt</artifactId> -->
-<!--             <version>4.0.0.14931</version> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>commons-httpclient</groupId> -->
-<!--             <artifactId>commons-httpclient</artifactId> -->
-<!--             <version>3.1</version> -->
-<!--         </dependency> -->
+
+		<!-- BlazeDS -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.adobe.blazeds</groupId> -->
+		<!-- <artifactId>blazeds-proxy</artifactId> -->
+		<!-- <version>4.0.0.14931</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.adobe.blazeds</groupId> -->
+		<!-- <artifactId>blazeds-core</artifactId> -->
+		<!-- <version>4.0.0.14931</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.adobe.blazeds</groupId> -->
+		<!-- <artifactId>blazeds-remoting</artifactId> -->
+		<!-- <version>4.0.0.14931</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.adobe.blazeds</groupId> -->
+		<!-- <artifactId>blazeds-common</artifactId> -->
+		<!-- <version>4.0.0.14931</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.adobe.blazeds</groupId> -->
+		<!-- <artifactId>blazeds-opt</artifactId> -->
+		<!-- <version>4.0.0.14931</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>commons-httpclient</groupId> -->
+		<!-- <artifactId>commons-httpclient</artifactId> -->
+		<!-- <version>3.1</version> -->
+		<!-- </dependency> -->
 	</dependencies>
+	<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/libs-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 	<build>
 		<plugins>
 			<plugin>

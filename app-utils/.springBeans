@@ -7,7 +7,6 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:app.uma.generate.AppUtilsApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
