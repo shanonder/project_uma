@@ -1,0 +1,49 @@
+server:
+  port: 9001
+  
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_generate?characterEncoding=utf8&useSSL=true
+    username: root
+    password: 
+security: 
+  user: 
+    name: shan
+    password: zys`123
+    role:
+    - admin
+    
+
+
+config:
+  generateAll: true
+  appName: CodeGenerateUtil
+
+assets: 
+  data: 
+    root: C:/workspaces/datas/
+    
+code: 
+  java: 
+    lang: java
+    path: C:/workspaces/wp_spring/project_uma/app-net/src/main/java/
+    packurl: app.uma.net.socket
+    requestImport: 
+      - app.uma.net.socket.decodes.ServerResponse
+    responseImport: 
+      - app.uma.net.socket.decodes.ClientRequest
+    dataImport: 
+      - app.uma.net.socket.decodes.ClientRequest
+  as: 
+    lang: as
+    path: C:/workspaces/wp_as/code_client/src/
+    packurl: com.icday.database.net
+    requestImport: 
+      - app.uma.net.socket.decodes.ServerResponse
+    responseImport: 
+      - app.uma.net.socket.decodes.ClientRequest
+    dataImport: 
+      - app.uma.net.socket.decodes.ClientRequest

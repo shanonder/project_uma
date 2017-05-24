@@ -44,5 +44,6 @@
 		<module>web_uma</module>
 		<module>gm_uma</module>
 		<module>data-generate</module>
+		<module>web-generate</module>
 	</modules>
 </project>

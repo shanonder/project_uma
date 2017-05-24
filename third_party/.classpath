@@ -27,8 +27,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="outerlib/commons-codec-1.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="outerlib/commons-httpclient-3.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="outerlib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/workspaces/wp_spring/project_uma/third_party/outerlib/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/workspaces/wp_spring/project_uma/third_party/outerlib/commons-httpclient-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/workspaces/wp_spring/project_uma/third_party/outerlib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

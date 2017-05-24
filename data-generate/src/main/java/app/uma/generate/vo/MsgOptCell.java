@@ -1,4 +1,4 @@
-packagepackage app.uma.generate.vo;
+package app.uma.generate.vo;
 
 import java.util.ArrayList;
 

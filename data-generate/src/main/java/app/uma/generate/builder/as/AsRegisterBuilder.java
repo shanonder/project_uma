@@ -56,9 +56,6 @@ public class AsRegisterBuilder extends AsCodeFileWriter {
 		if(desc != null){
 			classInfo.append("\t * desc:" + desc + "\r\n" );
 		}
-		if(md5 != null){
-			classInfo.append("\t * md5:" + md5 + "\r\n" );
-		}
 		packageinfo = "package " + props.getPackurl() + "{\r\n\r\n";
 		
 		classInfo.append("\t/**\r\n\t * 此类由").append(config.getAppName()).append("自动生成\r\n");
