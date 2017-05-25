@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import app.uma.generate.builder.as.AsCodeBuilder;
 import app.uma.generate.builder.java.JavaCodeBuilder;
+import app.uma.generate.node.DataOptNode;
 import app.uma.generate.properties.Config;
-import app.uma.generate.vo.DataOptNode;
 import app.uma.utils.CreateFileUtil;
 
 @Component

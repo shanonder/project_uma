@@ -1,4 +1,4 @@
-package app.uma.generate.vo;
+package app.uma.generate.node;
 
 import java.util.ArrayList;
 

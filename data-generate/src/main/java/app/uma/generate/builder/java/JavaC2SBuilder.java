@@ -5,35 +5,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.icday.builds.CellVO;
-import com.icday.utils.CreateFileUtil;
-
-import config.Config;
+import app.uma.generate.node.CellVO;
 
 public class JavaC2SBuilder extends JavaDataWriter {
-	private static String outDir;
-	private static String outPack;
-	private static String packageinfo;
-	private static String dir;
-	private static String packRequest;
-	static {
-		outPack = Config.p.getProperty("packname") + ".requests";
-		outDir = Config.p.getProperty("outDir");
-		packRequest = Config.p.getProperty("packRequest");
-		String t = outPack.replace(".", "/");
-		dir = outDir + t + "/";
-		packageinfo = "package " + outPack + ";\r\n\r\n";
-		CreateFileUtil.createDir(dir);
-	}
+
 	public JavaC2SBuilder(String codeName,String cmd, ArrayList<CellVO> cells, String md5){
 		super();
+		String outPack = props.getPack() + ".requests";
+		String packageinfo = "package " + outPack + ";\r\n\r\n";
+		String dir = props.getPath() + outPack.replace(".", "/") + "/";
+		for (String pock :props.getRequestImport()){
+			addImport(pock);
+		}
 		File file = new File(dir, codeName + ".java");
-		System.out.println(file.getAbsolutePath());
-//		addImport("java.io.IOException");
-		addImport(packRequest);
+
+		
 		classInfo.append(imports);
 		
-		classInfo.append("/**\r\n * 此类由").append(Config.APP_NAME).append("自动生成\r\n");
+		classInfo.append("/**\r\n * 此类由").append(config.getAppName()).append("自动生成\r\n");
 		if(md5 != null){
 			classInfo.append(" * md5:" + md5 + "\r\n" );
 		}
@@ -69,7 +58,6 @@ public class JavaC2SBuilder extends JavaDataWriter {
 	}
 	
 	private void optCell(CellVO cvo) {
-		// TODO Auto-generated method stub
 		writeConstructs(cvo);
 		String type = typeTrans(cvo.type);
 		fields.append(getFieldStr(cvo.key, type, cvo.desc));

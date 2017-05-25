@@ -5,32 +5,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.icday.builds.CellVO;
-import com.icday.utils.CreateFileUtil;
-
-import config.Config;
+import app.uma.generate.node.CellVO;
 
 public class JavaDataBuilder extends JavaDataWriter{
-	private static String outDir;
-	private static String outPack;
-	private static String packageinfo;
-	private static String dir;
 	
-//	static {
-//		outPack = Config.p.getProperty("packname") + ".datas";
-//		outDir = Config.p.getProperty("outDir");
-//		String t = outPack.replace(".", "/");
-//		dir = outDir + t + "/";
-//		packageinfo = "package " + outPack + ";\r\n\r\n";
-//		CreateFileUtil.createDir(dir);
-//	}
-	
-//	private StringBuilder decodes;
-//	private StringBuilder encodes;
+
 	public JavaDataBuilder(String name,String parent,ArrayList<CellVO> cells,String desc,String md5){
 		super();
-//		decodes = new StringBuilder();
-//		encodes = new StringBuilder();
+		String outPack = props.getPack() + ".datas";
+		String dir = props.getPath() + outPack.replace(".", "/") + "/";
+		String packageinfo = "package " + outPack + ";\r\n\r\n";
+		for (String pock :props.getDataImport()){
+			addImport(pock);
+		}
+
 		String codeName = upperFirestChar(name);
 		File file = new File(dir, codeName + ".java");
 		System.out.println(file.getAbsolutePath());
@@ -40,7 +28,7 @@ public class JavaDataBuilder extends JavaDataWriter{
 			optCell(cvo);
 		}
 		classInfo.append(imports);
-		classInfo.append("\t/**\r\n\t * 此类由").append(Config.APP_NAME).append("自动生成\r\n");
+		classInfo.append("\t/**\r\n\t * 此类由").append(config.getAppName()).append("自动生成\r\n");
 		if(md5 != null){
 			classInfo.append("\t * md5:" + md5 + "\r\n" );
 		}

@@ -1,6 +1,7 @@
 package app.uma.utils;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 
 public class CsvUtll {
@@ -9,7 +10,7 @@ public class CsvUtll {
 		if(cell == null){
 			return null;
 		}
-		cell.setCellType(Cell.CELL_TYPE_STRING);
+		cell.setCellType(CellType.STRING);
 		return cell.getStringCellValue();
 	}
 	

@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import app.uma.generate.config.GeneralBeans;
+import app.uma.generate.node.CellVO;
 import app.uma.generate.properties.CodeProperties;
 import app.uma.generate.properties.Config;
-import app.uma.generate.vo.CellVO;
 
 public class AsCodeFileWriter {
 	public AsCodeFileWriter(){
@@ -101,12 +101,12 @@ public class AsCodeFileWriter {
 			return null;
 		}
 		if(type.contains("ArrayList")){
-			String t = getListCell(type);
+			getListCell(type);
 //			typeTrans(t);
 			return "Array";
 		}
 		if(type.contains("List")){
-			String t = getListCell(type);
+			getListCell(type);
 //			typeTrans(t);
 			return "Array";
 		}

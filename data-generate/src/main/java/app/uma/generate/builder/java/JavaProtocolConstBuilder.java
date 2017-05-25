@@ -4,23 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.icday.utils.CreateFileUtil;
-
-import config.Config;
-
 public class JavaProtocolConstBuilder extends JavaDataWriter {
-	private static String outDir;
-	private static String outPack;
-	private static String packageinfo;
-	private static String dir;
-	static {
-		outPack = Config.p.getProperty("packname") + ".consts";
-		outDir = Config.p.getProperty("outDir");
-		String t = outPack.replace(".", "/");
-		dir = outDir + t + "/";
-		packageinfo = "package " + outPack + ";\r\n\r\n";
-		CreateFileUtil.createDir(dir);
-	}
 
 	private String codeName;
 	private String desc;
@@ -42,10 +26,14 @@ public class JavaProtocolConstBuilder extends JavaDataWriter {
 	}
 
 	public void frush(){
+		String outPack = props.getPack() + ".consts";
+		String dir = props.getPath() + outPack.replace(".", "/") + "/";
+		String packageinfo = "package " + outPack + ";\r\n\r\n";
+		
 		if(desc != null){
 			classInfo.append("\t * md5:" + desc + "\r\n" );
 		}
-		classInfo.append("\t/**\r\n\t * 此类由").append(Config.APP_NAME).append("自动生成\r\n");
+		classInfo.append("\t/**\r\n\t * 此类由").append(config.getAppName()).append("自动生成\r\n");
 		if(md5 != null){
 			classInfo.append("\t * md5:" + md5 + "\r\n" );
 		}

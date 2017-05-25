@@ -3,33 +3,33 @@ package app.uma.generate.builder.as;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
-import app.uma.generate.builder.DataOptManager;
-import app.uma.generate.config.GeneralBeans;
-import app.uma.generate.properties.CodeProperties;
-import app.uma.generate.properties.Config;
-import app.uma.generate.vo.CellVO;
-import app.uma.generate.vo.DataOptNode;
+import app.uma.generate.node.CellVO;
+import app.uma.generate.node.DataOptNode;
 
 public class AsDataCodeBuilder extends AsCodeFileWriter{
 	private static final Logger logger = Logger.getLogger(AsDataCodeBuilder.class);
 	
-	private String packageinfo;
+	
 	protected StringBuilder decodes;
 	protected StringBuilder encodes;
 	protected StringBuilder disposes;
 	
-	public AsDataCodeBuilder(DataOptNode node){
+	public AsDataCodeBuilder(){
 		super();
-		
-		packageinfo = "package " + props.getPack() +".data {\r\n\r\n";
+	}
+	
+	public void frush(DataOptNode node){
+		String outPack = props.getPack() + ".data";
+		String packageinfo = "package " + outPack +" {\r\n\r\n";
+		String dir = props.getPath() + outPack.replace(".", "/") + "/";
+		for (String pock :props.getDataImport()){
+			addImport(pock);
+		}
 		disposes = new StringBuilder();
-		File file = new File(props.getPath() + props.getPack().replace(".", "/") + "/", node.name + ".as");
+		File file = new File(dir, node.name + ".as");
 		
 		if(node.desc != null){
 			classInfo.append("\t * md5:" + node.desc + "\r\n" );
@@ -38,7 +38,7 @@ public class AsDataCodeBuilder extends AsCodeFileWriter{
 		if(node.md5 != null){
 			classInfo.append("\t * md5:" + node.md5 + "\r\n" );
 		}
-		int size = node.cells.size();
+//		int size = node.cells.size();
 		for(CellVO cvo : node.cells){
 			optCell(cvo);
 		}

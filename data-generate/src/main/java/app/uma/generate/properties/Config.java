@@ -6,6 +6,8 @@ public class Config {
 	private boolean generateAll;
 
 	private String appName;
+	private String version;
+	
 	public String getAppName() {
 		return appName;
 	}
@@ -20,5 +22,10 @@ public class Config {
 
 	public void setGenerateAll(boolean generateAll) {
 		this.generateAll = generateAll;
+	}
+
+	public String getVersion() {
+		// TODO Auto-generated method stub
+		return version;
 	} 
 }

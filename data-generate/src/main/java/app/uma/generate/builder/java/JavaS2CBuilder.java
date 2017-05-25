@@ -5,31 +5,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import app.uma.generate.vo.CellVO;
+import app.uma.generate.node.CellVO;
 
 public class JavaS2CBuilder extends JavaDataWriter {
-//	private static String outDir;
-//	private static String outPack;
-//	private static String packageinfo;
-//	private static String dir;
-//	private static String packResponse;
-//	static {
-//		outPack = Config.p.getProperty("packname") + ".responses";
-//		outDir = Config.p.getProperty("outDir");
-//		packResponse = Config.p.getProperty("packResponse");
-//		String t = outPack.replace(".", "/");
-//		dir = outDir + t + "/";
-//		
-//		
-//		packageinfo = "package " + outPack + ";\r\n\r\n";
-//		CreateFileUtil.createDir(dir);
-//	}
-	
+
 	public JavaS2CBuilder(String codeName,String cmd, ArrayList<CellVO> cells, String md5){
 		super();
+		String outPack = props.getPack() + ".response";
+		String packageinfo = "package " + outPack + ";\r\n\r\n";
+		String dir = props.getPath() + outPack.replace(".", "/") + "/";
+		for (String pock :props.getResponseImport()){
+			addImport(pock);
+		}
+		
 		File file = new File(dir, codeName + ".java");
 		System.out.println(file.getAbsolutePath());
-		addImport(packResponse);
 
 		params.append("int status ");
 		for(CellVO cvo : cells){
@@ -37,7 +27,7 @@ public class JavaS2CBuilder extends JavaDataWriter {
 			optCell(cvo);
 		}
 		classInfo.append(imports);
-		classInfo.append("/**\r\n * 此类由").append(Config.APP_NAME).append("自动生成\r\n");
+		classInfo.append("/**\r\n * 此类由").append(config.getAppName()).append("自动生成\r\n");
 		if(md5 != null){
 			classInfo.append(" * md5:" + md5 + "\r\n" );
 		}

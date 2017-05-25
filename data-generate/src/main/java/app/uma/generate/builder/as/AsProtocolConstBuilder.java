@@ -4,48 +4,41 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.icday.utils.CreateFileUtil;
-
-import config.Config;
+import app.uma.generate.node.MessageOptNode;
 
 public class AsProtocolConstBuilder extends AsCodeFileWriter {
-	private static String outDir;
-	private static String outPack;
-	private static String packageinfo;
-	private static String dir;
-	static {
-		outPack = Config.p.getProperty("flashpack") + ".consts";
-		outDir = Config.p.getProperty("flashDir");
-		String t = outPack.replace(".", "/");
-		dir = outDir + t + "/";
-		packageinfo = "package " + outPack + "{\r\n\r\n";
-		CreateFileUtil.createDir(dir);
-	}
-	private String codeName;
-	private StringBuilder constructs;
-	private String desc;
+
+//	private StringBuilder constructs;
+//	private String desc;
 	private String md5;
-	public AsProtocolConstBuilder(String codeName,String desc , String md5){
+	private String codeName;
+	public AsProtocolConstBuilder(){
 		super();
-		this.codeName = codeName;
-		this.desc = desc;
-		this.md5 = md5;
+		this.codeName = "ProtocolConst";
 	}
 	
-	public void addCmd(String name,String cmd,String desc){
-		if(desc != null){
-			fields.append("\t\t/** ").append(desc).append(" */\r\n");
+	public void addCmd(MessageOptNode node){
+		if(node.getDesc() != null){
+			fields.append("\t\t/** ").append(node.getDesc()).append(" */\r\n");
 		}
-		fields.append("\t\tpublic static const " + name + " : int = " + cmd).append(";\r\n");
+		fields.append("\t\tpublic static const " + node.getName() + " : int = " + node.getCmd()).append(";\r\n");
 	}
 
 	public void frush(){
-		if(desc != null){
-			classInfo.append("\t * md5:" + desc + "\r\n" );
-		}
-		classInfo.append("\t/**\r\n\t * 此类由").append(Config.APP_NAME).append("自动生成\r\n");
-		if(md5 != null){
-			classInfo.append("\t * md5:" + md5 + "\r\n" );
+		String outPack = props.getPack() + ".consts";
+		String packageinfo = "package " + outPack +" {\r\n\r\n";
+		String dir = props.getPath() + outPack.replace(".", "/") + "/";
+		
+		outPack = props.getPack() + ".";
+		dir = props.getPath() + outPack.replace(".", "/") + "/";
+		packageinfo = "package " + outPack + "{\r\n\r\n";
+		
+//		if(getDesc() != null){
+//			classInfo.append("\t * md5:" + getDesc() + "\r\n" );
+//		}
+		classInfo.append("\t/**\r\n\t * 此类由").append(config.getAppName()).append("自动生成\r\n");
+		if(getMd5() != null){
+			classInfo.append("\t * md5:" + getMd5() + "\r\n" );
 		}
 		classInfo.append("\t */\r\n");
 		classInfo.append(imports);
@@ -71,4 +64,20 @@ public class AsProtocolConstBuilder extends AsCodeFileWriter {
 			e.printStackTrace();
 		}
 	}
+
+	public String getMd5() {
+		return md5;
+	}
+
+	public void setMd5(String md5) {
+		this.md5 = md5;
+	}
+
+//	public String getDesc() {
+//		return desc;
+//	}
+//
+//	public void setDesc(String desc) {
+//		this.desc = desc;
+//	}
 }

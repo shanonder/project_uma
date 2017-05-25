@@ -3,12 +3,21 @@ package app.uma.generate.builder.java;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.icday.builds.CellVO;
-
-import config.Config;
+import app.uma.generate.config.GeneralBeans;
+import app.uma.generate.properties.CodeProperties;
+import app.uma.generate.properties.Config;
 
 public class JavaDataWriter {
+	@Autowired
+	protected Config config;
+	
+	@Autowired
+	@Qualifier(GeneralBeans.JAVA_PROPERTIES)
+	protected CodeProperties props;
+	
 	public JavaDataWriter(){
 		init();
 	}
@@ -153,7 +162,7 @@ public class JavaDataWriter {
 			return "Object";
 		}
 		else {
-			addImport(Config.packname + ".datas." + type);
+			addImport(props.getPack() + ".datas." + type);
 			return type;
 		}
 	}
