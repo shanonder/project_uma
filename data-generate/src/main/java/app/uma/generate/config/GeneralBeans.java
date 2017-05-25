@@ -1,12 +1,11 @@
 package app.uma.generate.config;
 
-import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import app.uma.generate.builder.GenerateVersion;
 import app.uma.generate.properties.AssetsProperties;
 import app.uma.generate.properties.CodeProperties;
 import app.uma.generate.properties.Config;
@@ -15,8 +14,10 @@ import app.uma.generate.properties.Config;
 @Configuration
 public class GeneralBeans {
 	
-	public static final String JAVA_PROPERTIES = "JavaProperties";
-	public static final String AS_PROPERTIES = "AsProperties";
+	public static final String JAVA_PROPERTIES = "javaproperties";
+	public static final String AS_PROPERTIES = "asproperties";
+	public static final String COUNTER = "counter";
+	
 	@Bean
 	@ConfigurationProperties("config")
 	public Config config(){
@@ -39,6 +40,11 @@ public class GeneralBeans {
 	@ConfigurationProperties("code.as")
 	public CodeProperties asProperties(){
 		return new CodeProperties();
+	}
+	
+	@Bean(COUNTER)
+	public AtomicInteger counter(){
+		return new AtomicInteger(0);
 	}
 	
 //	@Bean

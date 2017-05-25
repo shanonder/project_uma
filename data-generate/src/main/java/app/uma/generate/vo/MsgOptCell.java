@@ -26,17 +26,6 @@ public class MsgOptCell {
 		jpcb.frush();
 	}
 	
-	public String name;
-	public String desc;
-	public String md5;
-	public String cmd;
-	public ArrayList<CellVO> c2sCells;
-	public ArrayList<CellVO> s2cCells;
-	
-	public MsgOptCell(){
-		c2sCells = new ArrayList<>();
-		s2cCells = new ArrayList<>();
-	}
 
 	public void operate() {
 		String codeName = CsvUtll.upperFirestChar(name);

@@ -16,14 +16,14 @@ public class JavaDataBuilder extends JavaDataWriter{
 	private static String packageinfo;
 	private static String dir;
 	
-	static {
-		outPack = Config.p.getProperty("packname") + ".datas";
-		outDir = Config.p.getProperty("outDir");
-		String t = outPack.replace(".", "/");
-		dir = outDir + t + "/";
-		packageinfo = "package " + outPack + ";\r\n\r\n";
-		CreateFileUtil.createDir(dir);
-	}
+//	static {
+//		outPack = Config.p.getProperty("packname") + ".datas";
+//		outDir = Config.p.getProperty("outDir");
+//		String t = outPack.replace(".", "/");
+//		dir = outDir + t + "/";
+//		packageinfo = "package " + outPack + ";\r\n\r\n";
+//		CreateFileUtil.createDir(dir);
+//	}
 	
 //	private StringBuilder decodes;
 //	private StringBuilder encodes;

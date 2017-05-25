@@ -3,17 +3,25 @@ package app.uma.generate.builder.as;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.icday.builds.CellVO;
-
-import config.Config;
+import app.uma.generate.config.GeneralBeans;
+import app.uma.generate.properties.CodeProperties;
+import app.uma.generate.properties.Config;
+import app.uma.generate.vo.CellVO;
 
 public class AsCodeFileWriter {
 	public AsCodeFileWriter(){
 		init();
 	}
 
-
+	@Autowired
+	protected Config config;
+	
+	@Autowired
+	@Qualifier(GeneralBeans.AS_PROPERTIES)
+	protected CodeProperties props;
 
 	private void init() {
 		classInfo = new StringBuilder();
@@ -87,6 +95,7 @@ public class AsCodeFileWriter {
 		return t;
 
 	}
+	
 	public String typeTrans(String type) {
 		if(type == null){
 			return null;
@@ -126,7 +135,7 @@ public class AsCodeFileWriter {
 			return "Object";
 		}
 		else {
-			addImport(Config.p.getProperty("flashpack") + ".datas." + type);
+			addImport(props.getPack() + ".datas." + type);
 			return type;
 		}
 	}

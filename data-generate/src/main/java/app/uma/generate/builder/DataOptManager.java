@@ -1,6 +1,8 @@
 package app.uma.generate.builder;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
@@ -10,28 +12,67 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import app.uma.generate.properties.AssetsProperties;
 import app.uma.generate.properties.Config;
 import app.uma.generate.vo.CellVO;
-import app.uma.generate.vo.DataOptCell;
+import app.uma.generate.vo.DataOptNode;
 import app.uma.utils.MD5Util;
 
 
 @Component
-public class DataExecute {
-	private static final Logger logger = Logger.getLogger(DataExecute.class);
+public class DataOptManager {
+
+	private static final Logger logger = Logger.getLogger(DataOptManager.class);
+	@Autowired
+	private AtomicInteger counter;
 	
-//	private static AsRegisterBuilder asRegisterBuilder;
-//	static {
-//		asRegisterBuilder = new AsRegisterBuilder("DataRegister", null, Version.version);
-//	}
-	private DataOptCell optCell;
+	private ArrayList<DataOptNode> nodes;
+	public DataOptManager(){
+		nodes = new ArrayList<>();
+	}
+
+	
+	
+	private DataOptNode node;
+
+	public void insert(String name, String desc, String hash) {
+		node = new DataOptNode();
+		node.name = name;
+		node.desc = desc;
+		node.md5 = hash;
+		node.dataId = counter.incrementAndGet();
+		getNodes().add(node);
+	}
+
+	public DataOptNode getNode() {
+		return node;
+	}
+
+	public ArrayList<DataOptNode> getNodes() {
+		return nodes;
+	}
+
+
+	public void setNode(DataOptNode node) {
+		this.node = node;
+	}
+
+	public void operate() {
+		
+	}
+	
+
+	@Autowired
+	private GenerateVersion version;
+	@Autowired
+	private Config config;
 	
 	@Autowired
-	private ApplicationContext context;
+	private AssetsProperties assets;
+	
+	
 	
 	@SuppressWarnings("unused")
 	private String getCellStringValue(Cell cell) {
@@ -45,17 +86,16 @@ public class DataExecute {
 	private String getCellStringValue(Row row,int index) {
 		Cell cell = row.getCell(index);
 		if(cell == null){
-			return null;
+			return "";
 		}
 		cell.setCellType(CellType.STRING);
 		return cell.getStringCellValue();
 	}
-	public void execute() throws Exception{
-		GenerateVersion version = context.getBean(GenerateVersion.class);
-		Config config = context.getBean(Config.class);
-		AssetsProperties assetsProp = (AssetsProperties)context.getBean(AssetsProperties.class);
-		String fileName = "data.xlsx";
-		File file = new File(assetsProp.getProtocolXlsxPath() + fileName);
+	
+	public void init() throws Exception{
+		String fileName = "data.xls";
+		String path = assets.getProtocolXlsxPath() + fileName;
+		File file = new File(path);
 		String hash = MD5Util.getMd5ByFile(file);
 		String oVer = version.get(fileName);
 		if(config.isGenerateAll() == false && oVer.equals(hash)){
@@ -63,11 +103,11 @@ public class DataExecute {
 			return;
 		}
 		version.update(fileName, hash);
+//		InputStream fileInStream = new FileInputStream(file);
 		Workbook book =  WorkbookFactory.create(file);
 		
 		int size = book.getNumberOfSheets();
 		for(int i = 0 ; i < size ; ++i){
-//			Config.counter.set(i*1000);
 			Sheet sheet = book.getSheetAt(i);
 			int length = sheet.getLastRowNum() + 1;
 			for(int j = 0 ; j < length ; ++j){
@@ -77,37 +117,28 @@ public class DataExecute {
 				}
 				String key = getCellStringValue(rowKey,0).replaceAll(" ", "");
 				if(key.equals("#NAME")){
-//					operateCell();
-					optCell = new DataOptCell();
-					optCell.md5 = hash;
-					optCell.name = getCellStringValue(rowKey,1).replaceAll(" ", "");
-					optCell.desc = getCellStringValue(rowKey,2);
+					String name = getCellStringValue(rowKey,1).replaceAll(" ", "");
+					String desc = getCellStringValue(rowKey,2);
+					insert(name,desc,hash);
 				}else if(key.contains("#PARENT")){
 					String parent = getCellStringValue(rowKey,1).replaceAll(" ", "");
 					if(parent != null){
-						optCell.parent = parent;
+						getNode().parent = parent;
 					}
 				}
 				else if(key == null || key.equals("") ||key.contains("#")){
 					continue;
 				}else{
 					CellVO cvo = new CellVO();
-					optCell.cells.add(cvo);
+					getNode().cells.add(cvo);
 					cvo.key = key;
 					cvo.type = getCellStringValue(rowKey,1).replaceAll(" ", "");
 					cvo.desc = getCellStringValue(rowKey,2);
 				} 
 			}
 		}
-//		operateCell();
-//		asRegisterBuilder.frush();
+		logger.info("protocol-data import success...");
 	}
 
-//	private void operateCell() {
-//		if(optCell != null){
-//			optCell.operate();
-//			asRegisterBuilder.addData(optCell.name);
-//			optCell = null;
-//		}		
-//	}
+	
 }

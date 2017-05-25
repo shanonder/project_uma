@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import app.uma.generate.builder.DataExcute;
 import app.uma.generate.builder.GenerateBuilder;
 import app.uma.generate.config.GeneralBeans;
 
@@ -23,12 +24,14 @@ public class Application {
 		return context;
 	}
 	
+	
 	public static void main(String[] args) throws Exception {
 		context =SpringApplication.run(Application.class, args);
 //		GenerateBuilder genAction = new GenerateBuilder();
 //		genAction.execute();
 //		genAction.dispose();
 		GenerateBuilder genAction = context.getBean(GenerateBuilder.class);
+		genAction.init();
 		genAction.execute();
 		genAction.dispose();
 	}

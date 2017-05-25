@@ -5,49 +5,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
-import app.uma.generate.config.GeneralBeans;
-import app.uma.generate.properties.CodeProperties;
-import app.uma.generate.properties.Config;
-
+@Component
 public class AsRegisterBuilder extends AsCodeFileWriter {
-//	private static String outDir;
-//	private static String outPack;
-//	private static String dir;
-	private String packageinfo;
-//	static {
-//		outPack = Config.p.getProperty("flashpack");
-//		outDir = Config.p.getProperty("flashDir");
-//		String t = outPack.replace(".", "/");
-//		dir = outDir + t + "/";
-//		CreateFileUtil.createDir(dir);
-//	}
-//	private String outPack;
 	
+	
+	
+	private String packageinfo;
 	private String codeName;
-//	private StringBuilder constructs;
 	private String desc;
 	private String md5;
-	
 	private StringBuilder regists;
-	public AsRegisterBuilder(String codeName,String desc , String md5) {
+	
+	public AsRegisterBuilder() {
 		super();
 		map = new HashMap<>();
-		this.codeName = codeName;
-		this.desc = desc;
-		this.md5 = md5;
+		this.codeName = "DataRegister";
 		regists = new StringBuilder();
 		addImport("flash.net.registerClassAlias");
 	}
 	
-	@Autowired
-	private Config config;
-	
-	@Autowired
-	@Qualifier(GeneralBeans.AS_PROPERTIES) 
-	private CodeProperties props;
+
 	
 	public void frush(){
 		

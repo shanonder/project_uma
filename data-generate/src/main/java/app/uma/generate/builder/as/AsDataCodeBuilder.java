@@ -5,61 +5,55 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.icday.builds.CellVO;
-import com.icday.utils.CreateFileUtil;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-import config.Config;
+import app.uma.generate.builder.DataOptManager;
+import app.uma.generate.config.GeneralBeans;
+import app.uma.generate.properties.CodeProperties;
+import app.uma.generate.properties.Config;
+import app.uma.generate.vo.CellVO;
+import app.uma.generate.vo.DataOptNode;
 
 public class AsDataCodeBuilder extends AsCodeFileWriter{
-	private static String outDir;
-	private static String outPack;
-	private static String packageinfo;
-	private static String dir;
+	private static final Logger logger = Logger.getLogger(AsDataCodeBuilder.class);
 	
-
-	private static AsRegisterBuilder asRegisterBuilder;
-	static {
-		outPack = Config.p.getProperty("flashpack") + ".datas";
-		outDir = Config.p.getProperty("flashDir");
-		String t = outPack.replace(".", "/");
-		dir = outDir + t + "/";
-		packageinfo = "package " + outPack + "{\r\n\r\n";
-		CreateFileUtil.createDir(dir);
-		
-	}
-
+	private String packageinfo;
 	protected StringBuilder decodes;
 	protected StringBuilder encodes;
 	protected StringBuilder disposes;
-	public AsDataCodeBuilder(String codeName,String parent , ArrayList<CellVO> cells , String desc,String md5){
+	
+	public AsDataCodeBuilder(DataOptNode node){
 		super();
+		
+		packageinfo = "package " + props.getPack() +".data {\r\n\r\n";
 		disposes = new StringBuilder();
-		File file = new File(dir, codeName + ".as");
-		System.out.println(file.getAbsolutePath());
-//		addImport("com.icday.net.interfaces.ISocketData");
-		if(desc != null){
-			classInfo.append("\t * md5:" + desc + "\r\n" );
+		File file = new File(props.getPath() + props.getPack().replace(".", "/") + "/", node.name + ".as");
+		
+		if(node.desc != null){
+			classInfo.append("\t * md5:" + node.desc + "\r\n" );
 		}
-		classInfo.append("\t/**\r\n\t * 此类由").append(Config.APP_NAME).append("自动生成\r\n");
-		if(md5 != null){
-			classInfo.append("\t * md5:" + md5 + "\r\n" );
+		classInfo.append("\t/**\r\n\t * 此类由").append(config.getAppName()).append("自动生成\r\n");
+		if(node.md5 != null){
+			classInfo.append("\t * md5:" + node.md5 + "\r\n" );
 		}
-		int size = cells.size();
-		for(CellVO cvo : cells){
+		int size = node.cells.size();
+		for(CellVO cvo : node.cells){
 			optCell(cvo);
 		}
 		classInfo.append("\t */\r\n");
 		classInfo.append(imports);
 		classInfo.append("\tpublic class ")
-		.append(codeName);
-		if(parent != null){
-			classInfo.append(" extends ").append(parent);
+		.append(node.name);
+		if(node.parent != null){
+			classInfo.append(" extends ").append(node.parent);
 		}
 		classInfo
 //		.append(" implements ISocketData")
 		.append("{\r\n");
 		classInfo.append(fields);
-		classInfo.append("\t\tpublic function "+codeName+"(");
+		classInfo.append("\t\tpublic function "+node.name+"(");
 		classInfo.append(params);
 		classInfo.append("){\r\n")
 		.append("\t\t\tsuper();\r\n")
@@ -80,6 +74,7 @@ public class AsDataCodeBuilder extends AsCodeFileWriter{
 			fw.write(classInfo.toString());
 			fw.flush();
 			fw.close();
+			logger.info(node.name + "init success");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
