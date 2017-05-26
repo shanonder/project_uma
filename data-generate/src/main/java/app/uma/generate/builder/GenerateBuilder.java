@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import app.uma.generate.builder.as.AsCodeBuilder;
 import app.uma.generate.builder.java.JavaCodeBuilder;
 import app.uma.generate.node.DataOptNode;
+import app.uma.generate.node.MsgOptNode;
 import app.uma.generate.properties.Config;
 import app.uma.utils.CreateFileUtil;
 
@@ -24,6 +25,10 @@ public class GenerateBuilder {
 
 	@Autowired
 	private DataOptManager dataOptManger;
+	
+	@Autowired
+	private MsgOptManager msgOptManager;
+	
 	
 	
 	@Autowired
@@ -64,6 +69,17 @@ public class GenerateBuilder {
 			for (ICodeBuilder builder : builders) {
 				builder.buildData(node);
 			}
+		}
+		
+		msgOptManager.init();
+		for(MsgOptNode node:msgOptManager.getNodes()){
+			for (ICodeBuilder builder : builders) {
+				builder.buildMessage(node);
+			}
+		}
+		
+		for (ICodeBuilder builder : builders) {
+			builder.buildOther();
 		}
 
 		version.flush();

@@ -4,33 +4,36 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import app.uma.generate.node.CellVO;
-import app.uma.generate.node.MessageOptNode;
+import org.springframework.stereotype.Component;
 
+import app.uma.generate.node.CellVO;
+import app.uma.generate.node.MsgOptNode;
+
+@Component
 public class AsS2CBuilder extends AsCodeFileWriter{
 
 	public AsS2CBuilder(){
 		super();
 	}
 	
-	public void frush(MessageOptNode node){
-		String outPack = props.getPack() + ".responses";
+	public void frush(MsgOptNode node){
+		reset();
+		String outPack = props.getPackResponse();
 		String packageinfo = "package " + outPack +" {\r\n\r\n";
 		String dir = props.getPath() + outPack.replace(".", "/") + "/";
 		String codeName = node.getName() + "Response";
-		for (String pock :props.getRequestImport()){
+		for (String pock :props.getResponseImport()){
 			addImport(pock);
 		}
 		
 		File file = new File(dir, codeName + ".as");
-		System.out.println(file.getAbsolutePath());
 		addImport("flash.utils.ByteArray");
 		classInfo.append("\t/**\r\n\t * 此类由").append(config.getAppName()).append("自动生成\r\n");
 		if(node.getMd5() != null){
 			classInfo.append("\t * md5:" + node.getMd5() + "\r\n" );
 		}
 		params.append("bytes:ByteArray");
-		for(CellVO cvo : node.s2cCells){
+		for(CellVO cvo : node.cells){
 			optCell(cvo);
 		}
 		classInfo.append("\t */\r\n");
@@ -54,6 +57,7 @@ public class AsS2CBuilder extends AsCodeFileWriter{
 			fw.write(classInfo.toString());
 			fw.flush();
 			fw.close();
+			logger.info(codeName + " init success...");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -67,22 +71,25 @@ public class AsS2CBuilder extends AsCodeFileWriter{
 	
 	private void writeConstructs(CellVO cvo){
 		constructs.append("\t\t\t").append(cvo.key).append(" = ");
-		if(cvo.type.equals("List")){
+		if(cvo.type.equalsIgnoreCase("Array")){
 			constructs.append("bytes.readObject();\r\n");
 		}
-		else if(cvo.type.equals("Int") || cvo.type.equals("int")){
+		else if(cvo.type.equalsIgnoreCase("int")){
 			constructs.append("bytes.readInt();\r\n");
 		}
-		else if(cvo.type.equals("Double") || cvo.type.equals("double")){
+		else if(cvo.type.equalsIgnoreCase("long")){
 			constructs.append("bytes.readDouble();\r\n");
 		}
-		else if(cvo.type.equals("Short") ||  cvo.type.equals("short")){
+		else if(cvo.type.equalsIgnoreCase("double")){
+			constructs.append("bytes.readDouble();\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("short")){
 			constructs.append("bytes.readShort();\r\n");
 		}
-		else if(cvo.type.equals("String") ||  cvo.type.equals("string")){
+		else if(cvo.type.equalsIgnoreCase("String")){
 			constructs.append("bytes.readUTF();\r\n");
 		}
-		else if(cvo.type.equals("AMF")){
+		else if(cvo.type.equalsIgnoreCase("AMF")){
 			constructs.append("bytes.readObject();\r\n");
 		}else{
 			constructs.append("bytes.readObject();\r\n");

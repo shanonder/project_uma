@@ -4,17 +4,19 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import app.uma.generate.node.CellVO;
-import app.uma.generate.node.MessageOptNode;
+import org.springframework.stereotype.Component;
 
+import app.uma.generate.node.CellVO;
+import app.uma.generate.node.MsgOptNode;
+@Component
 public class AsC2SBuilder extends AsCodeFileWriter {
 	public AsC2SBuilder(){
 		super();
-		
 	}
 	
-	public void frush(MessageOptNode node){
-		String outPack = props.getPack() + ".request";
+	public void frush(MsgOptNode node){
+		reset();
+		String outPack = props.getPackRequest();
 		String packageinfo = "package " + outPack +" {\r\n\r\n";
 		String dir = props.getPath() + outPack.replace(".", "/") + "/";
 		String codeName = node.getName() + "Request";
@@ -22,17 +24,14 @@ public class AsC2SBuilder extends AsCodeFileWriter {
 			addImport(pock);
 		}
 		File file = new File(dir, codeName + ".as");
-		System.out.println(file.getAbsolutePath());
-		addImport("com.icday.net.socket.SocketRequestBase");
-		addImport("com.icday.net.interfaces.INetRequest");
 
 		classInfo.append("\t/**\r\n\t * 此类由").append(config.getAppName()).append("自动生成\r\n");
 		if(node.getMd5() != null){
 			classInfo.append("\t * md5:" + node.getMd5() + "\r\n" );
 		}
-		int size = node.c2sCells.size();
+		int size = node.cells.size();
 		for(int i = 0 ; i < size ; ++i){
-			CellVO cvo = node.c2sCells.get(i);
+			CellVO cvo = node.cells.get(i);
 			if(i == 0){
 				params.append(cvo.key + ":" + typeTrans(cvo.type));
 			}else{
@@ -61,9 +60,11 @@ public class AsC2SBuilder extends AsCodeFileWriter {
 			fw.write(classInfo.toString());
 			fw.flush();
 			fw.close();
+			logger.info(codeName + " init success...");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
  
 }

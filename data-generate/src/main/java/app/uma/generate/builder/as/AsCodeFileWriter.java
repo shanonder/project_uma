@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import app.uma.generate.config.GeneralBeans;
 import app.uma.generate.node.CellVO;
 import app.uma.generate.properties.CodeProperties;
 import app.uma.generate.properties.Config;
-
+@Component
 public class AsCodeFileWriter {
 	public AsCodeFileWriter(){
 		init();
@@ -51,6 +52,18 @@ public class AsCodeFileWriter {
 			imports.append("\timport "+ text + ";\n");
 		}
 	}
+	protected void reset(){
+		classInfo.delete(0, classInfo.length());
+		imports.delete(0, imports.length());
+		constructs.delete(0, constructs.length());
+		fields.delete(0, fields.length());
+		methods.delete(0, methods.length());
+		params.delete(0, params.length());
+		if(importList != null){
+			importList.clear();
+		}
+	}
+	
 	protected void addWrite(CellVO cvo) {
 		if(cvo.type.equals("List")){
 			constructs.append("\t\t\tbytes.writeObject("+cvo.key+");\r\n");
@@ -85,31 +98,15 @@ public class AsCodeFileWriter {
 		sb.append("\r\n");
 		return sb.toString();
 	}
-	private static String getListCell(String listStr){
-		int si = listStr.lastIndexOf("<")+1;
-		int ei = listStr.indexOf(">");
-		if(si == 0 ||ei == -1){
-			return null;
-		}
-		String t = listStr.substring(si, ei);
-		return t;
 
-	}
-	
 	public String typeTrans(String type) {
 		if(type == null){
 			return null;
 		}
-		if(type.contains("ArrayList")){
-			getListCell(type);
-//			typeTrans(t);
+		if(type.contains("[]")){
 			return "Array";
 		}
-		if(type.contains("List")){
-			getListCell(type);
-//			typeTrans(t);
-			return "Array";
-		}
+		
 		if(type.contains("double")||type.contains("Double")){
 			return "Number";
 		}
@@ -135,7 +132,7 @@ public class AsCodeFileWriter {
 			return "Object";
 		}
 		else {
-			addImport(props.getPack() + ".datas." + type);
+			addImport(props.getPackData() + "." + type);
 			return type;
 		}
 	}

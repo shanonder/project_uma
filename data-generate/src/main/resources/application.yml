@@ -11,6 +11,9 @@ code:
     lang: java
     path: C:/workspaces/wp_spring/project_uma/app-net/src/main/java/
     pack: app.uma.net.socket
+    packRequest: app.uma.net.socket.request
+    packResponse: app.uma.net.socket.response
+    packData: app.uma.net.socket.data
     requestImport: 
       - app.uma.net.socket.decodes.ServerResponse
     responseImport: 
@@ -21,9 +24,12 @@ code:
     lang: as
     path: C:/workspaces/wp_as/code_client/src/
     pack: com.icday.database.net
+    packRequest: com.icday.database.net.request
+    packResponse: com.icday.database.net.response
+    packData: com.icday.database.net.data
     requestImport: 
-      - app.uma.net.socket.decodes.ServerResponse
+      - com.icday.net.socket.SocketRequestBase
+      - com.icday.net.interfaces.INetRequest
     responseImport: 
-      - app.uma.net.socket.decodes.ClientRequest
+      
     dataImport: 
-      - app.uma.net.socket.decodes.ClientRequest

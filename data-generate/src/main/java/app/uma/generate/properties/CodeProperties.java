@@ -8,6 +8,36 @@ public class CodeProperties {
 	private String pack;
 
 	private String lang;
+	
+	private String packRequest;
+	
+	private String packResponse;
+	
+	private String packData;
+
+	public String getPackRequest() {
+		return packRequest;
+	}
+
+	public void setPackRequest(String packRequest) {
+		this.packRequest = packRequest;
+	}
+
+	public String getPackResponse() {
+		return packResponse;
+	}
+
+	public void setPackResponse(String packResponse) {
+		this.packResponse = packResponse;
+	}
+
+	public String getPackData() {
+		return packData;
+	}
+
+	public void setPackData(String packData) {
+		this.packData = packData;
+	}
 
 	private ArrayList<String> requestImport;
 

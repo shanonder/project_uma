@@ -2,15 +2,16 @@ package app.uma.generate.builder;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,53 +28,25 @@ public class DataOptManager {
 	private static final Logger logger = Logger.getLogger(DataOptManager.class);
 	@Autowired
 	private AtomicInteger counter;
-	
+
+	@Autowired
+	private GenerateVersion version;
+	@Autowired
+	private Config config;
+	@Autowired
+	private AssetsProperties assets;
+
 	private ArrayList<DataOptNode> nodes;
 	public DataOptManager(){
 		nodes = new ArrayList<>();
 	}
 
-	
-	
-	private DataOptNode node;
-
-	public void insert(String name, String desc, String hash) {
-		node = new DataOptNode();
-		node.name = name;
-		node.desc = desc;
-		node.md5 = hash;
-		node.dataId = counter.incrementAndGet();
-		getNodes().add(node);
-	}
-
-	public DataOptNode getNode() {
-		return node;
-	}
 
 	public ArrayList<DataOptNode> getNodes() {
 		return nodes;
 	}
 
 
-	public void setNode(DataOptNode node) {
-		this.node = node;
-	}
-
-	public void operate() {
-		
-	}
-	
-
-	@Autowired
-	private GenerateVersion version;
-	@Autowired
-	private Config config;
-	
-	@Autowired
-	private AssetsProperties assets;
-	
-	
-	
 	@SuppressWarnings("unused")
 	private String getCellStringValue(Cell cell) {
 		if(cell == null){
@@ -82,19 +55,20 @@ public class DataOptManager {
 		cell.setCellType(CellType.STRING);
 		return cell.getStringCellValue(); 
 	}
-	
-	private String getCellStringValue(Row row,int index) {
-		Cell cell = row.getCell(index);
-		if(cell == null){
-			return "";
-		}
-		cell.setCellType(CellType.STRING);
-		return cell.getStringCellValue();
-	}
-	
+
+//	private String getCellStringValue(Row row,int index) {
+//		Cell cell = row.getCell(index);
+//		if(cell == null){
+//			return "";
+//		}
+//		cell.setCellType(CellType.STRING);
+//		return cell.getStringCellValue();
+//	}
+
+	@SuppressWarnings("unchecked")
 	public void init() throws Exception{
-		String fileName = "data.xls";
-		String path = assets.getProtocolXlsxPath() + fileName;
+		String fileName = "data.xml";
+		String path = assets.getProtocolDataPath() + fileName;
 		File file = new File(path);
 		String hash = MD5Util.getMd5ByFile(file);
 		String oVer = version.get(fileName);
@@ -103,42 +77,32 @@ public class DataOptManager {
 			return;
 		}
 		version.update(fileName, hash);
-//		InputStream fileInStream = new FileInputStream(file);
-		Workbook book =  WorkbookFactory.create(file);
+//		Workbook book =  WorkbookFactory.create(file);
+		SAXReader reader = new SAXReader();   
+		Document doc = reader.read(file);   
+		Element root = doc.getRootElement();
+		logger.info("protocol-data name:" + root.getName());
 		
-		int size = book.getNumberOfSheets();
-		for(int i = 0 ; i < size ; ++i){
-			Sheet sheet = book.getSheetAt(i);
-			int length = sheet.getLastRowNum() + 1;
-			for(int j = 0 ; j < length ; ++j){
-				Row rowKey = sheet.getRow(j);
-				if(rowKey == null){
-					continue;
-				}
-				String key = getCellStringValue(rowKey,0).replaceAll(" ", "");
-				if(key.equals("#NAME")){
-					String name = getCellStringValue(rowKey,1).replaceAll(" ", "");
-					String desc = getCellStringValue(rowKey,2);
-					insert(name,desc,hash);
-				}else if(key.contains("#PARENT")){
-					String parent = getCellStringValue(rowKey,1).replaceAll(" ", "");
-					if(parent != null){
-						getNode().parent = parent;
-					}
-				}
-				else if(key == null || key.equals("") ||key.contains("#")){
-					continue;
-				}else{
-					CellVO cvo = new CellVO();
-					getNode().cells.add(cvo);
-					cvo.key = key;
-					cvo.type = getCellStringValue(rowKey,1).replaceAll(" ", "");
-					cvo.desc = getCellStringValue(rowKey,2);
-				} 
+		root.attributeIterator();
+		List<Element> items = root.elements("item");
+		logger.info("protocol-data import start...");
+		for(Element item : items){
+			DataOptNode node = new DataOptNode();
+			nodes.add(node);
+			node.name = item.attributeValue("name");
+			node.desc = item.attributeValue("desc");
+			node.parent = item.attributeValue("parent");
+			node.md5 = hash;
+			node.dataId = counter.incrementAndGet();
+			List<Element> props = item.elements("prop"); 
+			for(Element prop : props){
+				CellVO cvo = new CellVO();
+				cvo.key = prop.attributeValue("name");
+				cvo.type = prop.attributeValue("type");
+				cvo.desc = prop.attributeValue("desc");
+				node.cells.add(cvo);
 			}
-		}
+		}  
 		logger.info("protocol-data import success...");
 	}
-
-	
 }

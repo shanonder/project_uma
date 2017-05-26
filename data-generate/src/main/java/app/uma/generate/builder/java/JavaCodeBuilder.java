@@ -2,10 +2,13 @@ package app.uma.generate.builder.java;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Component;
+
 import app.uma.generate.builder.ICodeBuilder;
 import app.uma.generate.node.DataOptNode;
-import app.uma.generate.node.MessageOptNode;
+import app.uma.generate.node.MsgOptNode;
 
+@Component
 public class JavaCodeBuilder implements ICodeBuilder {
 
 	@Override
@@ -21,7 +24,7 @@ public class JavaCodeBuilder implements ICodeBuilder {
 	}
 
 	@Override
-	public void buildMessage(MessageOptNode node) {
+	public void buildMessage(MsgOptNode node) {
 		// TODO Auto-generated method stub
 		
 	}

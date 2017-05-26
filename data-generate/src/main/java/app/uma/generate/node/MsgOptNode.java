@@ -2,17 +2,36 @@ package app.uma.generate.node;
 
 import java.util.ArrayList;
 
-public class MessageOptNode {
+public class MsgOptNode {
 	private String name;
 	private String desc;
 	private String md5;
 	private String cmd;
-	public ArrayList<CellVO> c2sCells;
-	public ArrayList<CellVO> s2cCells;
+	private String type;
+	public ArrayList<CellVO> cells;
 	
-	public MessageOptNode(){
-		c2sCells = new ArrayList<>();
-		s2cCells = new ArrayList<>();
+	private Boolean isC2S;
+	
+	public Boolean getIsC2S() {
+		return isC2S;
+	}
+
+	public void setIsC2S(Boolean isC2S) {
+		this.isC2S = isC2S;
+	}
+
+	public Boolean getIsS2C() {
+		return isS2C;
+	}
+
+	public void setIsS2C(Boolean isS2C) {
+		this.isS2C = isS2C;
+	}
+
+	private Boolean isS2C;
+	
+	public MsgOptNode(){
+		cells = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -45,5 +64,13 @@ public class MessageOptNode {
 
 	public void setCmd(String cmd) {
 		this.cmd = cmd;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }

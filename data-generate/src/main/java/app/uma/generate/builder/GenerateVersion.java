@@ -67,4 +67,9 @@ public class GenerateVersion {
 		csvw.flush();
 		csvw.close();
 	}
+
+	public String getVersion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

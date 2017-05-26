@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import app.uma.generate.builder.ICodeBuilder;
 import app.uma.generate.config.GeneralBeans;
 import app.uma.generate.node.DataOptNode;
-import app.uma.generate.node.MessageOptNode;
+import app.uma.generate.node.MsgOptNode;
 import app.uma.generate.properties.CodeProperties;
 import app.uma.generate.properties.Config;
 
@@ -25,7 +25,7 @@ public class AsCodeBuilder implements ICodeBuilder {
 	private Config config;
 
 	@Autowired
-	private AsProtocolConstBuilder protocolConstBuilder;
+	private AsMsgConstBuilder protocolConstBuilder;
 	
 	@Autowired
 	private AsRegisterBuilder asRegisterBuilder;
@@ -42,30 +42,36 @@ public class AsCodeBuilder implements ICodeBuilder {
 	private ArrayList<String> outDirs;
 	
 	public AsCodeBuilder() {
-		outDirs = new ArrayList<>();
-		config.getAppName();
-		String pack = props.getPath();
-		outDirs.add(pack + "data/");
-		outDirs.add(pack + "request/");
-		outDirs.add(pack + "response/");
-		outDirs.add(pack + "consts/");
-		
+
 	}
+	
 	@Override
 	public ArrayList<String> getOutDirs() {
+		if(outDirs == null){
+			outDirs = new ArrayList<>();
+			String path = props.getPath() + props.getPack().replace(".", "/") + "/";
+			outDirs.add(path + "data/");
+			outDirs.add(path + "request/");
+			outDirs.add(path + "response/");
+			outDirs.add(path + "consts/");
+		}
 		return outDirs;
 	}
 	
 	@Override
 	public void buildData(DataOptNode node) {
 		asDataCodeBuilder.frush(node);
+		asRegisterBuilder.addData(node.name);
 	}
 	
 	@Override
-	public void buildMessage(MessageOptNode node) {
-//		new AsMCodeBuilder(node);
-		asC2SBuilder.frush(node);
-		asS2CBuilder.frush(node);
+	public void buildMessage(MsgOptNode node) {
+		if(node.getType().equals("request")){
+			asC2SBuilder.frush(node);
+		}
+		if(node.getType().equals("response")){
+			asS2CBuilder.frush(node);
+		}
 		protocolConstBuilder.addCmd(node);
 	}
 	

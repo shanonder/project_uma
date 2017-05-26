@@ -11,8 +11,12 @@ public class AssetsProperties {
 		return root;
 	}
 	
-	public String getProtocolXlsxPath(){
+	public String getProtocolDataPath(){
 		return root + "protocol/";
+	}
+	
+	public String getProtocolMsgDir(){
+		return root + "protocol/msg/";
 	}
 	
 }

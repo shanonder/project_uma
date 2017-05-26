@@ -5,10 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import app.uma.generate.node.CellVO;
 import app.uma.generate.node.DataOptNode;
 
+@Component
 public class AsDataCodeBuilder extends AsCodeFileWriter{
 	private static final Logger logger = Logger.getLogger(AsDataCodeBuilder.class);
 	
@@ -19,26 +21,39 @@ public class AsDataCodeBuilder extends AsCodeFileWriter{
 	
 	public AsDataCodeBuilder(){
 		super();
+		encodes = new StringBuilder();
+		decodes = new StringBuilder();
+		disposes = new StringBuilder();
+	}
+	
+	@Override
+	protected void reset(){
+		super.reset();
+		decodes.delete(0, decodes.length());
+		encodes.delete(0, encodes.length());
+		disposes.delete(0, disposes.length());
 	}
 	
 	public void frush(DataOptNode node){
-		String outPack = props.getPack() + ".data";
+		String outPack = props.getPackData();
 		String packageinfo = "package " + outPack +" {\r\n\r\n";
 		String dir = props.getPath() + outPack.replace(".", "/") + "/";
+		
+		reset();
 		for (String pock :props.getDataImport()){
 			addImport(pock);
 		}
 		disposes = new StringBuilder();
 		File file = new File(dir, node.name + ".as");
 		
-		if(node.desc != null){
-			classInfo.append("\t * md5:" + node.desc + "\r\n" );
-		}
+	
 		classInfo.append("\t/**\r\n\t * 此类由").append(config.getAppName()).append("自动生成\r\n");
+		if(node.desc != null){
+			classInfo.append("\t * " +node.desc + "\r\n" );
+		}
 		if(node.md5 != null){
 			classInfo.append("\t * md5:" + node.md5 + "\r\n" );
 		}
-//		int size = node.cells.size();
 		for(CellVO cvo : node.cells){
 			optCell(cvo);
 		}
@@ -74,7 +89,7 @@ public class AsDataCodeBuilder extends AsCodeFileWriter{
 			fw.write(classInfo.toString());
 			fw.flush();
 			fw.close();
-			logger.info(node.name + "init success");
+			logger.info(node.name + " init success");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

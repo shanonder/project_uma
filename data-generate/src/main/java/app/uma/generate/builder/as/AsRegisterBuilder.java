@@ -61,7 +61,6 @@ public class AsRegisterBuilder extends AsCodeFileWriter {
 		classInfo.append("}");
 		try {
 			File file = new File(dir, codeName + ".as");
-			System.out.println(file.getAbsolutePath());
 			FileWriter fw = new FileWriter(file);
 			fw.write(packageinfo);
 			fw.write(classInfo.toString());
@@ -76,8 +75,8 @@ public class AsRegisterBuilder extends AsCodeFileWriter {
 		if(map.containsKey(name)){
 			return;
 		}
-		addImport(config + ".datas." + name);
-		regists.append("\t\t\tregisterClassAlias(\"").append(props.getPack()).append(".datas.").append(name).append("\",").append(name).append(");\r\n");
+		addImport(props.getPack() + ".data." + name);
+		regists.append("\t\t\tregisterClassAlias(\"").append(props.getPackData()).append(".").append(name).append("\",").append(name).append(");\r\n");
 	}
 
 
