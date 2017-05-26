@@ -89,11 +89,11 @@ public class DataOptManager {
 		for(Element item : items){
 			DataOptNode node = new DataOptNode();
 			nodes.add(node);
-			node.name = item.attributeValue("name");
-			node.desc = item.attributeValue("desc");
-			node.parent = item.attributeValue("parent");
-			node.md5 = hash;
-			node.dataId = counter.incrementAndGet();
+			node.setName(item.attributeValue("name"));
+			node.setDesc(item.attributeValue("desc"));
+			node.setParent(item.attributeValue("parent"));
+			node.setMd5(hash);
+			node.setDataId(counter.incrementAndGet());
 			List<Element> props = item.elements("prop"); 
 			for(Element prop : props){
 				CellVO cvo = new CellVO();

@@ -31,6 +31,4 @@ public class Application {
 		genAction.execute();
 		genAction.dispose();
 	}
-	
-	
 }

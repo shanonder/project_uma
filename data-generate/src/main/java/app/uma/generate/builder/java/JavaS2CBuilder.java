@@ -6,11 +6,63 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import app.uma.generate.node.CellVO;
+import app.uma.generate.node.MsgOptNode;
 
 public class JavaS2CBuilder extends JavaDataWriter {
 
-	public JavaS2CBuilder(String codeName,String cmd, ArrayList<CellVO> cells, String md5){
+	public JavaS2CBuilder(){
 		super();
+
+	}
+	
+	private void optCell(CellVO cvo) {
+		// TODO Auto-generated method stub
+		writeConstructs(cvo);
+//		String type = typeTrans(cvo.type);
+//		fields.append(getFieldStr(cvo.key, type, cvo.desc));
+//		methods.append(getMethodStr(cvo.key, type));
+	}
+
+	
+	private void writeConstructs(CellVO cvo){
+		constructs.append("\t\t");
+		if(cvo.type.contains("[]")){
+			constructs.append("output.writeAMFObject(");
+			constructs.append(cvo.key).append(" == null ? ").append("new ArrayList<>() : ").append(cvo.key).append(");\r\n");
+		}
+		else if(cvo.type.contains("List")){
+			constructs.append("output.writeAMFObject(");
+			constructs.append(cvo.key).append(" == null ? ").append("new ArrayList<>() : ").append(cvo.key).append(");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("int")){
+			constructs.append("output.writeInt(");
+			constructs.append(cvo.key).append(");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("double")){
+			constructs.append("output.writeDouble(");
+			constructs.append(cvo.key).append(");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("short")){
+			constructs.append("output.writeShort(");
+			constructs.append(cvo.key).append(");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("string")){
+			constructs.append("output.writeUTF(");
+			constructs.append(cvo.key).append(" == null ? ").append("\"\" : ").append(cvo.key).append(");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("AMF")){
+			constructs.append("output.writeAMFObject(");
+			constructs.append(cvo.key).append(" == null ? ").append("new Object() : ").append(cvo.key).append(");\r\n");
+		}else{
+			constructs.append("output.writeAMFObject(");
+			constructs.append(cvo.key).append(" == null ? ").append("new Object() : ").append(cvo.key).append(");\r\n");
+		}
+		
+	}
+
+	public void frush(MsgOptNode node) {
+		reset();
+		// TODO Auto-generated method stub
 		String outPack = props.getPack() + ".response";
 		String packageinfo = "package " + outPack + ";\r\n\r\n";
 		String dir = props.getPath() + outPack.replace(".", "/") + "/";
@@ -18,26 +70,26 @@ public class JavaS2CBuilder extends JavaDataWriter {
 			addImport(pock);
 		}
 		
-		File file = new File(dir, codeName + ".java");
+		File file = new File(dir, node.getName() + ".java");
 		System.out.println(file.getAbsolutePath());
 
 		params.append("int status ");
-		for(CellVO cvo : cells){
+		for(CellVO cvo : node.cells){
 			params.append(", ").append(typeTrans(cvo.type)).append(" ").append(cvo.key);
 			optCell(cvo);
 		}
 		classInfo.append(imports);
 		classInfo.append("/**\r\n * 此类由").append(config.getAppName()).append("自动生成\r\n");
-		if(md5 != null){
-			classInfo.append(" * md5:" + md5 + "\r\n" );
+		if(node.getMd5() != null){
+			classInfo.append(" * md5:" + node.getMd5() + "\r\n" );
 		}
 		classInfo.append(" */\r\n");
 		classInfo.append("public class ")
-		.append(codeName).append("  extends ServerResponse").append("{\r\n");
-		classInfo.append("\tpublic "+codeName+"(");
+		.append(node.getName()).append("  extends ServerResponse").append("{\r\n");
+		classInfo.append("\tpublic "+node.getName()+"(");
 		classInfo.append(params);
 		classInfo.append(") throws Exception{\r\n");
-		classInfo.append("\t\tsuper("+cmd + " , status);\r\n");
+		classInfo.append("\t\tsuper("+node.getCmd() + " , status);\r\n");
 		classInfo.append(constructs).append("\r\n");
 		classInfo.append("\t}\r\n\r\n");
 		classInfo.append(fields);
@@ -53,46 +105,5 @@ public class JavaS2CBuilder extends JavaDataWriter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private void optCell(CellVO cvo) {
-		// TODO Auto-generated method stub
-		writeConstructs(cvo);
-//		String type = typeTrans(cvo.type);
-//		fields.append(getFieldStr(cvo.key, type, cvo.desc));
-//		methods.append(getMethodStr(cvo.key, type));
-	}
-
-	
-	private void writeConstructs(CellVO cvo){
-		constructs.append("\t\t");
-		if(cvo.type.contains("List")){
-			constructs.append("output.writeAMFObject(");
-			constructs.append(cvo.key).append(" == null ? ").append("new ArrayList<>() : ").append(cvo.key).append(");\r\n");
-		}
-		else if(cvo.type.equals("Int") || cvo.type.equals("int")){
-			constructs.append("output.writeInt(");
-			constructs.append(cvo.key).append(");\r\n");
-		}
-		else if(cvo.type.equals("Double") || cvo.type.equals("double")){
-			constructs.append("output.writeDouble(");
-			constructs.append(cvo.key).append(");\r\n");
-		}
-		else if(cvo.type.equals("Short") ||  cvo.type.equals("short")){
-			constructs.append("output.writeShort(");
-			constructs.append(cvo.key).append(");\r\n");
-		}
-		else if(cvo.type.equals("String") ||  cvo.type.equals("string")){
-			constructs.append("output.writeUTF(");
-			constructs.append(cvo.key).append(" == null ? ").append("\"\" : ").append(cvo.key).append(");\r\n");
-		}
-		else if(cvo.type.equals("AMF")){
-			constructs.append("output.writeAMFObject(");
-			constructs.append(cvo.key).append(" == null ? ").append("new Object() : ").append(cvo.key).append(");\r\n");
-		}else{
-			constructs.append("output.writeAMFObject(");
-			constructs.append(cvo.key).append(" == null ? ").append("new Object() : ").append(cvo.key).append(");\r\n");
-		}
-		
 	}
 }

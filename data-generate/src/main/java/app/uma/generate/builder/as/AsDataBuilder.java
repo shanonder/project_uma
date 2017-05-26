@@ -11,15 +11,15 @@ import app.uma.generate.node.CellVO;
 import app.uma.generate.node.DataOptNode;
 
 @Component
-public class AsDataCodeBuilder extends AsCodeFileWriter{
-	private static final Logger logger = Logger.getLogger(AsDataCodeBuilder.class);
+public class AsDataBuilder extends AsCodeFileWriter{
+	private static final Logger logger = Logger.getLogger(AsDataBuilder.class);
 	
 	
 	protected StringBuilder decodes;
 	protected StringBuilder encodes;
 	protected StringBuilder disposes;
 	
-	public AsDataCodeBuilder(){
+	public AsDataBuilder(){
 		super();
 		encodes = new StringBuilder();
 		decodes = new StringBuilder();
@@ -44,15 +44,15 @@ public class AsDataCodeBuilder extends AsCodeFileWriter{
 			addImport(pock);
 		}
 		disposes = new StringBuilder();
-		File file = new File(dir, node.name + ".as");
+		File file = new File(dir, node.getName() + ".as");
 		
 	
 		classInfo.append("\t/**\r\n\t * 此类由").append(config.getAppName()).append("自动生成\r\n");
-		if(node.desc != null){
-			classInfo.append("\t * " +node.desc + "\r\n" );
+		if(node.getDesc() != null){
+			classInfo.append("\t * " +node.getDesc() + "\r\n" );
 		}
-		if(node.md5 != null){
-			classInfo.append("\t * md5:" + node.md5 + "\r\n" );
+		if(node.getMd5() != null){
+			classInfo.append("\t * md5:" + node.getMd5() + "\r\n" );
 		}
 		for(CellVO cvo : node.cells){
 			optCell(cvo);
@@ -60,15 +60,15 @@ public class AsDataCodeBuilder extends AsCodeFileWriter{
 		classInfo.append("\t */\r\n");
 		classInfo.append(imports);
 		classInfo.append("\tpublic class ")
-		.append(node.name);
-		if(node.parent != null){
-			classInfo.append(" extends ").append(node.parent);
+		.append(node.getName());
+		if(node.getParent() != null){
+			classInfo.append(" extends ").append(node.getParent());
 		}
 		classInfo
 //		.append(" implements ISocketData")
 		.append("{\r\n");
 		classInfo.append(fields);
-		classInfo.append("\t\tpublic function "+node.name+"(");
+		classInfo.append("\t\tpublic function " + node.getName() +"(");
 		classInfo.append(params);
 		classInfo.append("){\r\n")
 		.append("\t\t\tsuper();\r\n")
@@ -89,7 +89,7 @@ public class AsDataCodeBuilder extends AsCodeFileWriter{
 			fw.write(classInfo.toString());
 			fw.flush();
 			fw.close();
-			logger.info(node.name + " init success");
+			logger.info(node.getName() + " init success");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

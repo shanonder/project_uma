@@ -4,24 +4,26 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class JavaProtocolConstBuilder extends JavaDataWriter {
+import app.uma.generate.node.MsgOptNode;
+
+public class JavaMsgConstBuilder extends JavaDataWriter {
 
 	private String codeName;
 	private String desc;
 	private String md5;
 	
-	public JavaProtocolConstBuilder(String codeName,String desc , String md5){
+	public JavaMsgConstBuilder(String codeName,String desc , String md5){
 		super();
 		this.codeName = codeName;
 		this.desc = desc;
 		this.md5 = md5;
 	}
 	
-	public void addCmd(String name,String cmd,String desc){
+	public void addCmd(MsgOptNode node){
 		if(desc != null){
 			fields.append("\t/** ").append(desc).append(" */\r\n");
 		}
-		fields.append("\tpublic static int " + name + "  = " + cmd).append(";\r\n");
+		fields.append("\tpublic static int " + node.getName() + node.getType() + "  = " + node.getCmd()).append(";\r\n");
 
 	}
 

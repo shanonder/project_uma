@@ -52,6 +52,7 @@ public class AsCodeFileWriter {
 			imports.append("\timport "+ text + ";\n");
 		}
 	}
+	
 	protected void reset(){
 		classInfo.delete(0, classInfo.length());
 		imports.delete(0, imports.length());

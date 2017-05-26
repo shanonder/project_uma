@@ -31,6 +31,18 @@ public class JavaDataWriter {
 		methods = new StringBuilder();
 	}
 
+	protected void reset(){
+		classInfo.delete(0, classInfo.length());
+		imports.delete(0, imports.length());
+		constructs.delete(0, constructs.length());
+		fields.delete(0, fields.length());
+		methods.delete(0, methods.length());
+		params.delete(0, params.length());
+		if(importList != null){
+			importList.clear();
+		}
+	}
+	
 	protected static final Logger logger = Logger.getLogger(JavaDataWriter.class);
 
 	protected StringBuilder classInfo;
@@ -109,32 +121,38 @@ public class JavaDataWriter {
 	}
 	
 	private static String getListCell(String listStr){
-		int si = listStr.lastIndexOf("<")+1;
-		int ei = listStr.indexOf(">");
-		if(si == 0 ||ei == -1){
+		int ei = listStr.indexOf("]");
+		if(ei == -1){
 			return null;
 		}
-		String t = listStr.substring(si, ei);
+		String t = listStr.substring(ei,listStr.length());
 		return t;
-		
 	}
+	
 	
 	public String typeTrans(String type) {
 		if(type == null){
 			return null;
 		}
-		if(type.contains("ArrayList")){
+		if(type.contains("[]")){
 			addImport("java.util.ArrayList");
 			String t = getListCell(type);
 			typeTrans(t);
-			return type;
+			return "ArrayList<" + t + ">";
 		}
-		if(type.contains("List")){
-			addImport("java.util.List");
-			String t = getListCell(type);
-			typeTrans(t);
-			return type;
-		}
+//		if(type.contains("ArrayList")){
+//			addImport("java.util.ArrayList");
+//			String t = getListCell(type);
+//			typeTrans(t);
+//			return type;
+//		}
+//		if(type.contains("List")){
+//			addImport("java.util.List");
+//			String t = getListCell(type);
+//			typeTrans(t);
+//			return type;
+//		}
+		
 		if(type.contains("double")||type.contains("Double")){
 			return "double";
 		}
@@ -162,7 +180,7 @@ public class JavaDataWriter {
 			return "Object";
 		}
 		else {
-			addImport(props.getPack() + ".datas." + type);
+			addImport(props.getPackData()+ "." + type);
 			return type;
 		}
 	}

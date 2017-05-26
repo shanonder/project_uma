@@ -4,8 +4,13 @@ import java.util.ArrayList;
 
 
 public class DataOptNode {
-	public int dataId;
-	public String name;
+	private int dataId;
+	private String name;
+	private String desc;
+	private String md5;
+	private String parent;
+	public ArrayList<CellVO> cells;
+	
 	public int getDataId() {
 		return dataId;
 	}
@@ -46,10 +51,7 @@ public class DataOptNode {
 		this.parent = parent;
 	}
 
-	public String desc;
-	public String md5;
-	public String parent;
-	public ArrayList<CellVO> cells;
+
 	
 	public DataOptNode() {
 		cells = new ArrayList<>();

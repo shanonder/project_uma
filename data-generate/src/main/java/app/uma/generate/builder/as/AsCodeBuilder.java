@@ -31,7 +31,7 @@ public class AsCodeBuilder implements ICodeBuilder {
 	private AsRegisterBuilder asRegisterBuilder;
 	
 	@Autowired
-	private AsDataCodeBuilder asDataCodeBuilder;
+	private AsDataBuilder asDataBuilder;
 	
 	@Autowired
 	private AsC2SBuilder asC2SBuilder;
@@ -49,19 +49,18 @@ public class AsCodeBuilder implements ICodeBuilder {
 	public ArrayList<String> getOutDirs() {
 		if(outDirs == null){
 			outDirs = new ArrayList<>();
-			String path = props.getPath() + props.getPack().replace(".", "/") + "/";
-			outDirs.add(path + "data/");
-			outDirs.add(path + "request/");
-			outDirs.add(path + "response/");
-			outDirs.add(path + "consts/");
+			outDirs.add(props.getPath() + props.getPack().replace(".", "/") + "/");
+			outDirs.add(props.getPath() + props.getPackData().replace(".", "/") + "/");
+			outDirs.add(props.getPath() + props.getPackRequest().replace(".", "/") + "/");
+			outDirs.add(props.getPath() + props.getPackResponse().replace(".", "/") + "/");
 		}
 		return outDirs;
 	}
 	
 	@Override
 	public void buildData(DataOptNode node) {
-		asDataCodeBuilder.frush(node);
-		asRegisterBuilder.addData(node.name);
+		asDataBuilder.frush(node);
+		asRegisterBuilder.addData(node.getName());
 	}
 	
 	@Override

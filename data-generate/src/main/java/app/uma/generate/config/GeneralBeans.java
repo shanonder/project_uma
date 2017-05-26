@@ -12,6 +12,7 @@ import app.uma.generate.properties.Config;
 
 
 @Configuration
+
 public class GeneralBeans {
 	
 	public static final String JAVA_PROPERTIES = "javaproperties";
