@@ -48,12 +48,6 @@ public class GeneralBeans {
 		return new AtomicInteger(0);
 	}
 	
-//	@Bean
-//	public GenerateVersion version() throws IOException{
-//		GenerateVersion v = new GenerateVersion();
-////		v.init();
-//		return v;
-//	}
 	
 	public GeneralBeans() {
 		

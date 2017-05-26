@@ -8,7 +8,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -30,7 +29,7 @@ public class DataOptManager {
 	private AtomicInteger counter;
 
 	@Autowired
-	private GenerateVersion version;
+	private HashManager version;
 	@Autowired
 	private Config config;
 	@Autowired
@@ -81,9 +80,6 @@ public class DataOptManager {
 		SAXReader reader = new SAXReader();   
 		Document doc = reader.read(file);   
 		Element root = doc.getRootElement();
-		logger.info("protocol-data name:" + root.getName());
-		
-		root.attributeIterator();
 		List<Element> items = root.elements("item");
 		logger.info("protocol-data import start...");
 		for(Element item : items){

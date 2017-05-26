@@ -25,7 +25,7 @@ public class AsCodeBuilder implements ICodeBuilder {
 	private Config config;
 
 	@Autowired
-	private AsMsgConstBuilder protocolConstBuilder;
+	private AsMsgConstBuilder msgConstBuilder;
 	
 	@Autowired
 	private AsRegisterBuilder asRegisterBuilder;
@@ -71,13 +71,13 @@ public class AsCodeBuilder implements ICodeBuilder {
 		if(node.getType().equals("response")){
 			asS2CBuilder.frush(node);
 		}
-		protocolConstBuilder.addCmd(node);
+		msgConstBuilder.addCmd(node);
 	}
 	
 	@Override
 	public void buildOther() {
-		protocolConstBuilder.setMd5(config.getVersion());
-		protocolConstBuilder.frush();
+		msgConstBuilder.setMd5(config.getVersion());
+		msgConstBuilder.frush();
 		asRegisterBuilder.setMd5(config.getVersion());
 		asRegisterBuilder.frush();
 	}

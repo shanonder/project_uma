@@ -8,36 +8,34 @@ import app.uma.generate.node.MsgOptNode;
 
 public class JavaMsgConstBuilder extends JavaDataWriter {
 
-	private String codeName;
 	private String desc;
 	private String md5;
 	
-	public JavaMsgConstBuilder(String codeName,String desc , String md5){
+	public JavaMsgConstBuilder(){
 		super();
-		this.codeName = codeName;
-		this.desc = desc;
-		this.md5 = md5;
+
 	}
 	
 	public void addCmd(MsgOptNode node){
-		if(desc != null){
-			fields.append("\t/** ").append(desc).append(" */\r\n");
+		if(getDesc() != null){
+			fields.append("\t/** ").append(getDesc()).append(" */\r\n");
 		}
 		fields.append("\tpublic static int " + node.getName() + node.getType() + "  = " + node.getCmd()).append(";\r\n");
 
 	}
 
 	public void frush(){
+		String codeName = "ProtocolConst";
 		String outPack = props.getPack() + ".consts";
 		String dir = props.getPath() + outPack.replace(".", "/") + "/";
 		String packageinfo = "package " + outPack + ";\r\n\r\n";
-		
-		if(desc != null){
-			classInfo.append("\t * md5:" + desc + "\r\n" );
-		}
+
 		classInfo.append("\t/**\r\n\t * 此类由").append(config.getAppName()).append("自动生成\r\n");
-		if(md5 != null){
-			classInfo.append("\t * md5:" + md5 + "\r\n" );
+		if(getDesc() != null){
+			classInfo.append("\t * " + getDesc() + "\r\n" );
+		}
+		if(getMd5() != null){
+			classInfo.append("\t * md5:" + getMd5() + "\r\n" );
 		}
 		classInfo.append("\t */\r\n");
 		classInfo.append(imports);
@@ -61,5 +59,21 @@ public class JavaMsgConstBuilder extends JavaDataWriter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String getMd5() {
+		return md5;
+	}
+
+	public void setMd5(String md5) {
+		this.md5 = md5;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 }

@@ -3,7 +3,6 @@ package app.uma.generate.builder.java;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import app.uma.generate.node.CellVO;
 import app.uma.generate.node.MsgOptNode;

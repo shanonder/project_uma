@@ -12,10 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import app.uma.generate.node.CellVO;
-import app.uma.generate.node.DataOptNode;
 import app.uma.generate.node.MsgOptNode;
 import app.uma.generate.properties.AssetsProperties;
-import app.uma.generate.properties.Config;
 
 @Component
 public class MsgOptManager {
@@ -24,10 +22,10 @@ public class MsgOptManager {
 	}
 
 	private static final Logger logger = Logger.getLogger(MsgOptManager.class);
-	@Autowired
-	private GenerateVersion version;
-	@Autowired
-	private Config config;
+//	@Autowired
+//	private GenerateVersion version;
+//	@Autowired
+//	private Config config;
 	@Autowired
 	private AssetsProperties assets;
 	
@@ -37,7 +35,7 @@ public class MsgOptManager {
 		nodes = new ArrayList<>();
 	}
 	
-	@SuppressWarnings({ "unused", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	public void init() throws Exception{
 		String dir = assets.getProtocolMsgDir();
 		File dirFile = new File(dir);

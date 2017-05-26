@@ -70,8 +70,8 @@ public class JavaCodeBuilder implements ICodeBuilder {
 
 	@Override
 	public void buildOther() {
-		// TODO Auto-generated method stub
-		
+		msgConstBuilder.setMd5(config.getVersion());
+		msgConstBuilder.frush();
 	}
 
 }

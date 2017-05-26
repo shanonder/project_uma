@@ -61,7 +61,7 @@ public class GenerateBuilder {
 				}
 			}
 		}
-		GenerateVersion version = context.getBean(GenerateVersion.class);
+		HashManager version = context.getBean(HashManager.class);
 		config.getAppName();
 		version.init();
 		dataOptManger.init();
