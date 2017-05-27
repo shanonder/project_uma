@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.springframework.stereotype.Component;
+
 import app.uma.generate.node.CellVO;
 import app.uma.generate.node.DataOptNode;
 
+@Component
 public class JavaDataBuilder extends JavaDataWriter{
 	
 
@@ -33,7 +36,6 @@ public class JavaDataBuilder extends JavaDataWriter{
 
 		String codeName = upperFirestChar(node.getName());
 		File file = new File(dir, codeName + ".java");
-		System.out.println(file.getAbsolutePath());
 		addImport("java.io.Serializable");
 
 		for(CellVO cvo : node.cells){

@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.springframework.stereotype.Component;
 
 import app.uma.generate.node.MsgOptNode;
+import app.uma.utils.StringUtil;
 
 @Component
 public class AsMsgConstBuilder extends AsCodeFileWriter {
@@ -19,19 +20,11 @@ public class AsMsgConstBuilder extends AsCodeFileWriter {
 		super();
 		this.codeName = "ProtocolConst";
 	}
-	public static String captureName(String name) {
-		name = name.substring(0, 1).toUpperCase() + name.substring(1);
-		return  name;
-//		char[] cs=name.toCharArray();
-//		cs[0]-=32;
-//		return String.valueOf(cs);
-
-	}
 	public void addCmd(MsgOptNode node){
 		if(node.getDesc() != null){
 			fields.append("\t\t/** ").append(node.getDesc()).append(" */\r\n");
 		}
-		fields.append("\t\tpublic static const " + node.getName() + captureName(node.getType()) + " : int = " + node.getCmd()).append(";\r\n");
+		fields.append("\t\tpublic static const " + node.getName() + StringUtil.UpperCaseFirst(node.getType()) + " : int = " + node.getCmd()).append(";\r\n");
 	}
 
 	public void frush(){
@@ -81,12 +74,4 @@ public class AsMsgConstBuilder extends AsCodeFileWriter {
 	public void setMd5(String md5) {
 		this.md5 = md5;
 	}
-
-	//	public String getDesc() {
-	//		return desc;
-	//	}
-	//
-	//	public void setDesc(String desc) {
-	//		this.desc = desc;
-	//	}
 }

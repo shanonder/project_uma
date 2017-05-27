@@ -18,13 +18,14 @@ public class JavaC2SBuilder extends JavaDataWriter {
 	
 	public void frush(MsgOptNode node){
 		reset();
+		String fileName = node.getName() + "Response";
 		String outPack = props.getPackRequest();
 		String packageinfo = "package " + outPack + ";\r\n\r\n";
 		String dir = props.getPath() + outPack.replace(".", "/") + "/";
 		for (String pock :props.getRequestImport()){
 			addImport(pock);
 		}
-		File file = new File(dir, node.getName() + ".java");
+		File file = new File(dir, fileName + ".java");
 
 		
 		classInfo.append(imports);
@@ -39,8 +40,8 @@ public class JavaC2SBuilder extends JavaDataWriter {
 		}
 		classInfo.append(" */\r\n");
 		classInfo.append("public class ")
-		.append(node.getName()).append("{\r\n");
-		classInfo.append("\tpublic "+node.getName()+"(");
+		.append(fileName).append("{\r\n");
+		classInfo.append("\tpublic " + fileName + "(");
 		classInfo.append(params);
 		classInfo.append(") throws Exception{\r\n");
 		classInfo.append(constructs).append("\r\n");

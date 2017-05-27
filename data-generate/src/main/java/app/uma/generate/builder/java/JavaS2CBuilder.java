@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.springframework.stereotype.Component;
+
 import app.uma.generate.node.CellVO;
 import app.uma.generate.node.MsgOptNode;
 
+@Component
 public class JavaS2CBuilder extends JavaDataWriter {
 
 	public JavaS2CBuilder(){
@@ -61,16 +64,16 @@ public class JavaS2CBuilder extends JavaDataWriter {
 
 	public void frush(MsgOptNode node) {
 		reset();
+		String fileName = node.getName() + "Response";
 		// TODO Auto-generated method stub
-		String outPack = props.getPack() + ".response";
+		String outPack = props.getPackResponse();
 		String packageinfo = "package " + outPack + ";\r\n\r\n";
 		String dir = props.getPath() + outPack.replace(".", "/") + "/";
 		for (String pock :props.getResponseImport()){
 			addImport(pock);
 		}
 		
-		File file = new File(dir, node.getName() + ".java");
-		System.out.println(file.getAbsolutePath());
+		File file = new File(dir, fileName + ".java");
 
 		params.append("int status ");
 		for(CellVO cvo : node.cells){
@@ -84,8 +87,8 @@ public class JavaS2CBuilder extends JavaDataWriter {
 		}
 		classInfo.append(" */\r\n");
 		classInfo.append("public class ")
-		.append(node.getName()).append("  extends ServerResponse").append("{\r\n");
-		classInfo.append("\tpublic "+node.getName()+"(");
+		.append(fileName).append("  extends ServerResponse").append("{\r\n");
+		classInfo.append("\tpublic "+ fileName +"(");
 		classInfo.append(params);
 		classInfo.append(") throws Exception{\r\n");
 		classInfo.append("\t\tsuper("+node.getCmd() + " , status);\r\n");

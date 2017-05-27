@@ -4,8 +4,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import app.uma.generate.node.MsgOptNode;
+import org.springframework.stereotype.Component;
 
+import app.uma.generate.node.MsgOptNode;
+import app.uma.utils.StringUtil;
+
+@Component
 public class JavaMsgConstBuilder extends JavaDataWriter {
 
 	private String desc;
@@ -20,7 +24,7 @@ public class JavaMsgConstBuilder extends JavaDataWriter {
 		if(getDesc() != null){
 			fields.append("\t/** ").append(getDesc()).append(" */\r\n");
 		}
-		fields.append("\tpublic static int " + node.getName() + node.getType() + "  = " + node.getCmd()).append(";\r\n");
+		fields.append("\tpublic static int " + node.getName() + StringUtil.UpperCaseFirst(node.getType()) + "  = " + node.getCmd()).append(";\r\n");
 
 	}
 
@@ -50,7 +54,6 @@ public class JavaMsgConstBuilder extends JavaDataWriter {
 		classInfo.append("}");
 		try {
 			File file = new File(dir, codeName + ".java");
-			System.out.println(file.getAbsolutePath());
 			FileWriter fw = new FileWriter(file);
 			fw.write(packageinfo);
 			fw.write(classInfo.toString());
