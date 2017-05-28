@@ -12,8 +12,8 @@ import app.uma.generate.node.CellVO;
 import app.uma.generate.properties.CodeProperties;
 import app.uma.generate.properties.Config;
 @Component
-public class AsCodeFileWriter {
-	public AsCodeFileWriter(){
+public class AsFileWriter {
+	public AsFileWriter(){
 		init();
 	}
 
@@ -33,7 +33,7 @@ public class AsCodeFileWriter {
 		methods = new StringBuilder();
 	}
 
-	protected static final Logger logger = Logger.getLogger(AsCodeFileWriter.class);
+	protected static final Logger logger = Logger.getLogger(AsFileWriter.class);
 
 	protected StringBuilder classInfo;
 	protected StringBuilder imports;
@@ -69,6 +69,15 @@ public class AsCodeFileWriter {
 		if(cvo.type.equals("List")){
 			constructs.append("\t\t\tbytes.writeObject("+cvo.key+");\r\n");
 		}
+		
+		else if(cvo.type.equals("u16")){
+			constructs.append("\t\t\tbytes.writeInt("+cvo.key+");\r\n");
+		}
+		
+		else if(cvo.type.equals("u32")){
+			constructs.append("\t\t\tbytes.writeInt("+cvo.key+");\r\n");
+		}
+		
 		else if(cvo.type.equals("Int") || cvo.type.equals("int")){
 			constructs.append("\t\t\tbytes.writeInt("+cvo.key+");\r\n");
 		}

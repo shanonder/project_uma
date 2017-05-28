@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import app.uma.generate.node.CellVO;
 import app.uma.generate.node.MsgOptNode;
 @Component
-public class AsC2SBuilder extends AsCodeFileWriter {
+public class AsC2SBuilder extends AsFileWriter {
 	public AsC2SBuilder(){
 		super();
 	}

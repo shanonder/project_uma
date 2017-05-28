@@ -10,7 +10,7 @@ import app.uma.generate.config.GeneralBeans;
 import app.uma.generate.properties.CodeProperties;
 import app.uma.generate.properties.Config;
 
-public class JavaDataWriter {
+public class JavaFileWriter {
 	@Autowired
 	protected Config config;
 	
@@ -18,7 +18,7 @@ public class JavaDataWriter {
 	@Qualifier(GeneralBeans.JAVA_PROPERTIES)
 	protected CodeProperties props;
 	
-	public JavaDataWriter(){
+	public JavaFileWriter(){
 		init();
 	}
 
@@ -43,7 +43,7 @@ public class JavaDataWriter {
 		}
 	}
 	
-	protected static final Logger logger = Logger.getLogger(JavaDataWriter.class);
+	protected static final Logger logger = Logger.getLogger(JavaFileWriter.class);
 
 	protected StringBuilder classInfo;
 	protected StringBuilder imports;

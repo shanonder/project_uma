@@ -10,7 +10,7 @@ import app.uma.generate.node.CellVO;
 import app.uma.generate.node.MsgOptNode;
 
 @Component
-public class AsS2CBuilder extends AsCodeFileWriter{
+public class AsS2CBuilder extends AsFileWriter{
 
 	public AsS2CBuilder(){
 		super();

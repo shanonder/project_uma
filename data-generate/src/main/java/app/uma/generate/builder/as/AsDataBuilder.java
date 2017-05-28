@@ -11,7 +11,7 @@ import app.uma.generate.node.CellVO;
 import app.uma.generate.node.DataOptNode;
 
 @Component
-public class AsDataBuilder extends AsCodeFileWriter{
+public class AsDataBuilder extends AsFileWriter{
 	private static final Logger logger = Logger.getLogger(AsDataBuilder.class);
 	
 	

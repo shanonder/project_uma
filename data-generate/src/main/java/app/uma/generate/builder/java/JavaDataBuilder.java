@@ -10,7 +10,7 @@ import app.uma.generate.node.CellVO;
 import app.uma.generate.node.DataOptNode;
 
 @Component
-public class JavaDataBuilder extends JavaDataWriter{
+public class JavaDataBuilder extends JavaFileWriter{
 	
 
 	public JavaDataBuilder(){

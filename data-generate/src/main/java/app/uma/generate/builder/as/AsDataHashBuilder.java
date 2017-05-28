@@ -1,5 +1,8 @@
 package app.uma.generate.builder.as;
 
-public class AsDataHashBuilder {
+import org.springframework.stereotype.Component;
+
+@Component
+public class AsDataHashBuilder extends AsFileWriter{
 	
 }

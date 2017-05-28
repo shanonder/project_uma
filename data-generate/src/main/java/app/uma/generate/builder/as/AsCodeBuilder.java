@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import app.uma.generate.builder.HashManager;
 import app.uma.generate.builder.ICodeBuilder;
 import app.uma.generate.config.GeneralBeans;
 import app.uma.generate.node.DataOptNode;
@@ -39,6 +40,9 @@ public class AsCodeBuilder implements ICodeBuilder {
 	@Autowired
 	private AsS2CBuilder asS2CBuilder;
 	
+	@Autowired
+	private HashManager hashManager;
+	
 	private ArrayList<String> outDirs;
 	
 	public AsCodeBuilder() {
@@ -59,12 +63,14 @@ public class AsCodeBuilder implements ICodeBuilder {
 	
 	@Override
 	public void buildData(DataOptNode node) {
-		asDataBuilder.frush(node);
+		hashManager.update(node.getName(), node.getMd5());
+//		asDataBuilder.frush(node);
 		asRegisterBuilder.addData(node.getName());
 	}
 	
 	@Override
 	public void buildMessage(MsgOptNode node) {
+		hashManager.update(node.getName(), node.getMd5());
 		if(node.getType().equals("request")){
 			asC2SBuilder.frush(node);
 		}

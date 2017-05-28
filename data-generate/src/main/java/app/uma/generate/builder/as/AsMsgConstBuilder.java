@@ -10,7 +10,7 @@ import app.uma.generate.node.MsgOptNode;
 import app.uma.utils.StringUtil;
 
 @Component
-public class AsMsgConstBuilder extends AsCodeFileWriter {
+public class AsMsgConstBuilder extends AsFileWriter {
 
 	//	private StringBuilder constructs;
 	//	private String desc;

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AsRegisterBuilder extends AsCodeFileWriter {
+public class AsRegisterBuilder extends AsFileWriter {
 	
 	
 	

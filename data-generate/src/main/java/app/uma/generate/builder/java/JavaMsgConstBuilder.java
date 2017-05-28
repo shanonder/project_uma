@@ -10,7 +10,7 @@ import app.uma.generate.node.MsgOptNode;
 import app.uma.utils.StringUtil;
 
 @Component
-public class JavaMsgConstBuilder extends JavaDataWriter {
+public class JavaMsgConstBuilder extends JavaFileWriter {
 
 	private String desc;
 	private String md5;

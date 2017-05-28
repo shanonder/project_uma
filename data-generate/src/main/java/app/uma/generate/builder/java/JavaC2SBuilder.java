@@ -10,7 +10,7 @@ import app.uma.generate.node.CellVO;
 import app.uma.generate.node.MsgOptNode;
 
 @Component
-public class JavaC2SBuilder extends JavaDataWriter {
+public class JavaC2SBuilder extends JavaFileWriter {
 
 	public JavaC2SBuilder(){
 		super();

@@ -69,9 +69,10 @@ public class HashManager {
 			Element item = root.addElement("item");
 			item.addAttribute("name", key).addAttribute("hash", value);
 		}  
+		String path = assetsProps.getRoot() + "protocol/md5.xml";
 		OutputFormat format = new OutputFormat("    ",true);  
         format.setEncoding("UTF-8");//设置编码格式  
-        XMLWriter xmlWriter = new XMLWriter(new FileOutputStream("md5.xml"),format);  
+        XMLWriter xmlWriter = new XMLWriter(new FileOutputStream(path),format);  
         xmlWriter.write(document);  
         xmlWriter.close();  
 	}
