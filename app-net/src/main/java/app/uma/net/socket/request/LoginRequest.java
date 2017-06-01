@@ -1,11 +1,11 @@
 package app.uma.net.socket.request;
 
-import app.uma.net.socket.decodes.ServerResponse;
+import app.uma.net.socket.decodes.ClientRequest;
 /**
  * 此类由CodeGenerateUtil自动生成
  */
-public class LoginResponse{
-	public LoginResponse(ClientRequest request) throws Exception{
+public class LoginRequest{
+	public LoginRequest(ClientRequest request) throws Exception{
 		uid = request.getString();
 		token = request.getString();
 		platform = request.getString();

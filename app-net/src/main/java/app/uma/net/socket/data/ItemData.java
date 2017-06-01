@@ -1,10 +1,9 @@
 package app.uma.net.socket.data;
 
-import app.uma.net.socket.decodes.ClientRequest;
 import java.io.Serializable;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:494f6ee78d1370fc086573ace26b8b1a
+	 * md5:5096a07b246f0a976f543a8c5aef3a95
 	 */
 public class ItemData implements Serializable{
 	private static final long serialVersionUID = 1L;

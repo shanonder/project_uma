@@ -9,7 +9,7 @@ import app.uma.net.socket.message.MsgProcessor;
  */
 public enum UserMsgRegister {
 	/**用户登录*/
-	login(ProtocolConst.Loginresponse,new LoginProcesser())
+	login(ProtocolConst.LoginResponse,new LoginProcesser())
 	;
 	
 	

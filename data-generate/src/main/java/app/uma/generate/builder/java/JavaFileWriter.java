@@ -125,7 +125,7 @@ public class JavaFileWriter {
 		if(ei == -1){
 			return null;
 		}
-		String t = listStr.substring(ei,listStr.length());
+		String t = listStr.substring(ei+1,listStr.length());
 		return t;
 	}
 	

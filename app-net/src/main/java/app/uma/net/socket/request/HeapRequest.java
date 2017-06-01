@@ -1,8 +1,8 @@
-package app.uma.net.socket.requests;
+package app.uma.net.socket.request;
 
 import app.uma.net.socket.decodes.ClientRequest;
 /**
- * 此类由protocol_generate_util自动生成
+ * 此类由CodeGenerateUtil自动生成
  */
 public class HeapRequest{
 	public HeapRequest(ClientRequest request) throws Exception{

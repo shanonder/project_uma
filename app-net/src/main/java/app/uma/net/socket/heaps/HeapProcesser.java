@@ -3,7 +3,7 @@ package app.uma.net.socket.heaps;
 
 import app.uma.net.socket.decodes.ClientRequest;
 import app.uma.net.socket.message.MsgProcessor;
-import app.uma.net.socket.responses.HeapResponse;
+import app.uma.net.socket.response.HeapResponse;
 import app.uma.net.socket.sessions.GameSession;
 
 public class HeapProcesser extends MsgProcessor{

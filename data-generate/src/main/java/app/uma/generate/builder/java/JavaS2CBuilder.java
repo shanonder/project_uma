@@ -40,6 +40,10 @@ public class JavaS2CBuilder extends JavaFileWriter {
 			constructs.append("output.writeInt(");
 			constructs.append(cvo.key).append(");\r\n");
 		}
+		else if(cvo.type.equalsIgnoreCase("long")){
+			constructs.append("output.writeLong(");
+			constructs.append(cvo.key).append(");\r\n");
+		}
 		else if(cvo.type.equalsIgnoreCase("double")){
 			constructs.append("output.writeDouble(");
 			constructs.append(cvo.key).append(");\r\n");

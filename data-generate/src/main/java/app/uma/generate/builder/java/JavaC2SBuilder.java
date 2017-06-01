@@ -18,7 +18,7 @@ public class JavaC2SBuilder extends JavaFileWriter {
 	
 	public void frush(MsgOptNode node){
 		reset();
-		String fileName = node.getName() + "Response";
+		String fileName = node.getName() + "Request";
 		String outPack = props.getPackRequest();
 		String packageinfo = "package " + outPack + ";\r\n\r\n";
 		String dir = props.getPath() + outPack.replace(".", "/") + "/";
@@ -73,16 +73,20 @@ public class JavaC2SBuilder extends JavaFileWriter {
 		if(cvo.type.equals("List")){
 			constructs.append("request.getAMFObject();\r\n");
 		}
-		else if(cvo.type.equals("Int") || cvo.type.equals("int")){
+		else if(cvo.type.equalsIgnoreCase("int")){
 			constructs.append("request.getInt();\r\n");
 		}
-		else if(cvo.type.equals("Double") || cvo.type.equals("double")){
+		else if(cvo.type.equalsIgnoreCase("long")){
+			constructs.append("request.getLong();\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("double")){
 			constructs.append("request.getDouble();\r\n");
 		}
-		else if(cvo.type.equals("Short") ||  cvo.type.equals("short")){
+		
+		else if(cvo.type.equalsIgnoreCase("short")){
 			constructs.append("request.getShort();\r\n");
 		}
-		else if(cvo.type.equals("String") ||  cvo.type.equals("string")){
+		else if(cvo.type.equalsIgnoreCase("string")){
 			constructs.append("request.getString();\r\n");
 		}
 		else if(cvo.type.equals("AMF")){

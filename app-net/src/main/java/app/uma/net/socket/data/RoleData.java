@@ -1,12 +1,11 @@
 package app.uma.net.socket.data;
 
-import app.uma.net.socket.decodes.ClientRequest;
 import java.io.Serializable;
 import java.util.ArrayList;
-import app.uma.net.socket.data.]AttributesData>;
+import app.uma.net.socket.data.AttributesData;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:494f6ee78d1370fc086573ace26b8b1a
+	 * md5:5096a07b246f0a976f543a8c5aef3a95
 	 */
 public class RoleData implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -15,7 +14,7 @@ public class RoleData implements Serializable{
 	private String name;//姓名
 	private int level;//等级
 	private long exp;//经验
-	private ArrayList<]AttributesData>> attributes;//属性
+	private ArrayList<AttributesData> attributes;//属性
 	public String getInsId(){
 		return this.insId;
 	}
@@ -46,10 +45,10 @@ public class RoleData implements Serializable{
 	public void setExp(long exp){
 		this.exp=exp;
 	}
-	public ArrayList<]AttributesData>> getAttributes(){
+	public ArrayList<AttributesData> getAttributes(){
 		return this.attributes;
 	}
-	public void setAttributes(ArrayList<]AttributesData>> attributes){
+	public void setAttributes(ArrayList<AttributesData> attributes){
 		this.attributes=attributes;
 	}
 

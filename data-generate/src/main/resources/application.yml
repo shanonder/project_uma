@@ -15,11 +15,12 @@ code:
     packResponse: app.uma.net.socket.response
     packData: app.uma.net.socket.data
     requestImport: 
-      - app.uma.net.socket.decodes.ServerResponse
+      - app.uma.net.socket.decodes.ClientRequest
+      
     responseImport: 
-      - app.uma.net.socket.decodes.ClientRequest
+      - app.uma.net.socket.decodes.ServerResponse
     dataImport: 
-      - app.uma.net.socket.decodes.ClientRequest
+      
   as: 
     lang: as
     path: C:/workspaces/wp_as/code_client/src/

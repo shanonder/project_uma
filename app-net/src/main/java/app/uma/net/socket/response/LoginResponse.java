@@ -1,6 +1,6 @@
 package app.uma.net.socket.response;
 
-import app.uma.net.socket.decodes.ClientRequest;
+import app.uma.net.socket.decodes.ServerResponse;
 /**
  * 此类由CodeGenerateUtil自动生成
  */

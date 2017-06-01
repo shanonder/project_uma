@@ -1,18 +1,17 @@
 package app.uma.net.socket.data;
 
-import app.uma.net.socket.decodes.ClientRequest;
 import java.io.Serializable;
 import java.util.ArrayList;
-import app.uma.net.socket.data.]GridData;
+import app.uma.net.socket.data.GridData;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:494f6ee78d1370fc086573ace26b8b1a
+	 * md5:5096a07b246f0a976f543a8c5aef3a95
 	 */
 public class PackData implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int type;//唯一ID
 	private int openLength;//开启长度
-	private ArrayList<]GridData> itemList;
+	private ArrayList<GridData> itemList;
 	public int getType(){
 		return this.type;
 	}
@@ -25,10 +24,10 @@ public class PackData implements Serializable{
 	public void setOpenLength(int openLength){
 		this.openLength=openLength;
 	}
-	public ArrayList<]GridData> getItemList(){
+	public ArrayList<GridData> getItemList(){
 		return this.itemList;
 	}
-	public void setItemList(ArrayList<]GridData> itemList){
+	public void setItemList(ArrayList<GridData> itemList){
 		this.itemList=itemList;
 	}
 

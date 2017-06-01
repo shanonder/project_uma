@@ -43,7 +43,7 @@ public class GameService extends Thread {
 		threadpool = new OrderedThreadPoolExecutor(500);
 		threadpool.setThreadFactory(new ServerThreadFactory("OrderedThreadPool"));
 		
-		MsgDispatcher.getInstance().registProcess(ProtocolConst.Heaprequest, new HeapProcesser());
+		MsgDispatcher.getInstance().registProcess(ProtocolConst.HeapRequest, new HeapProcesser());
 		chain.addLast("threadPool", new ExecutorFilter(threadpool));
 		int recsize = 5120;
 		int sendsize = 40480;                                                                                         
