@@ -66,36 +66,7 @@ public class AsFileWriter {
 	}
 	
 	protected void addWrite(CellVO cvo) {
-		if(cvo.type.equals("List")){
-			constructs.append("\t\t\tbytes.writeObject("+cvo.key+");\r\n");
-		}
-		
-		else if(cvo.type.equals("u16")){
-			constructs.append("\t\t\tbytes.writeInt("+cvo.key+");\r\n");
-		}
-		
-		else if(cvo.type.equals("u32")){
-			constructs.append("\t\t\tbytes.writeInt("+cvo.key+");\r\n");
-		}
-		
-		else if(cvo.type.equals("Int") || cvo.type.equals("int")){
-			constructs.append("\t\t\tbytes.writeInt("+cvo.key+");\r\n");
-		}
-		else if(cvo.type.equals("Double") || cvo.type.equals("double")){
-			constructs.append("\t\t\tbytes.writeDouble("+cvo.key+");\r\n");
-		}
-		else if(cvo.type.equals("Short") ||  cvo.type.equals("short")){
-			constructs.append("\t\t\tbytes.writeShort("+cvo.key+");\r\n");
-		}
-		else if(cvo.type.equals("String") ||  cvo.type.equals("string")){
-			constructs.append("\t\t\tbytes.writeUTF("+cvo.key)
-			.append(" == null ?").append("\"\" : ").append(cvo.key).append(");\r\n");
-		}
-		else if(cvo.type.equals("AMF")){
-			constructs.append("\t\t\tbytes.writeObject("+cvo.key+");\r\n");
-		}else{
-			logger.warn("unknown type " + cvo.type);
-		}
+		addWrite(cvo, constructs, null);
 	}
 
 	protected Object getPublicFieldStr(String key, String type, String desc) {
@@ -126,6 +97,9 @@ public class AsFileWriter {
 		if(type.contains("Short") ||type.contains("short") ){
 			return "int";
 		}
+//		if(type.contains("String") ||type.contains("string") ){
+//			return "String";
+//		}
 		if (type.contains("tinyint") ||type.contains("bool")) {
 			return "boolean";
 		} else if (type.contains("int")||type.contains("Int")) {
@@ -133,7 +107,7 @@ public class AsFileWriter {
 		} else if (type.contains("varchar") || type.contains("date")
 				|| type.contains("time") || type.contains("datetime")
 				|| type.contains("timestamp") || type.contains("text")
-				|| type.contains("String")
+				|| type.contains("String") ||type.contains("string")
 				|| type.contains("enum") || type.contains("set")) {
 			return "String";
 		} else if (type.contains("binary") || type.contains("blob")) {
@@ -144,6 +118,83 @@ public class AsFileWriter {
 		else {
 			addImport(props.getPackData() + "." + type);
 			return type;
+		}
+	}
+	
+
+	protected void addRead(CellVO cvo, StringBuilder builder ,String target){
+		if(target == null ||target.equals("")){
+			target = "";
+		}else{
+			target = target + ".";
+		}
+		builder.append("\t\t\t").append(target).append(cvo.key).append(" = ");
+		if(cvo.type.equalsIgnoreCase("Array")){
+			builder.append("bytes.readObject();\r\n");
+		}
+		else if(cvo.type.contains("[]")){//todo
+			builder.append("bytes.readObject();\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("int")){
+			builder.append("bytes.readInt();\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("long")){
+			builder.append("bytes.readDouble();\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("double")){
+			builder.append("bytes.readDouble();\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("short")){
+			builder.append("bytes.readShort();\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("String")){
+			builder.append("bytes.readUTF();\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("AMF")){
+			builder.append("bytes.readObject();\r\n");
+		}else{
+			logger.warn("unknown type " + cvo.type);
+			builder.append("bytes.readObject();\r\n");
+		}
+	}
+	
+	
+	protected void addWrite(CellVO cvo , StringBuilder builder ,String target) {
+		if(target == null || target.equals("")){
+			target = "";
+		}else{
+			target = target + ".";
+		}
+		
+		if(cvo.type.equals("Array")){
+			builder.append("\t\t\tbytes.writeObject(" + target + cvo.key+");\r\n");
+		}
+		
+		else if(cvo.type.contains("[]")){//todo
+			builder.append("\t\t\tbytes.writeObject(" + target + cvo.key+");\r\n");
+		}
+		
+		else if(cvo.type.equalsIgnoreCase("int")){
+			builder.append("\t\t\tbytes.writeInt(" + target + cvo.key+");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("double")){
+			builder.append("\t\t\tbytes.writeDouble(" + target +cvo.key+");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("long")){
+			builder.append("\t\t\tbytes.writeDouble(" + target +cvo.key+");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("Short")){
+			builder.append("\t\t\tbytes.writeShort(" + target +cvo.key+");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("String")){
+			builder.append("\t\t\tbytes.writeUTF(" + target +cvo.key)
+			.append(" == null ?").append("\"\" : ").append(target  + cvo.key).append(");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("AMF")){
+			builder.append("\t\t\tbytes.writeObject(" + target +cvo.key+");\r\n");
+		}else{
+			logger.warn("unknown type " + cvo.type);
+			builder.append("\t\t\tbytes.writeObject(" + target +cvo.key+");\r\n");
 		}
 	}
 }

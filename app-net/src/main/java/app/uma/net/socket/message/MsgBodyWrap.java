@@ -5,8 +5,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import app.uma.net.socket.decodes.AMFUtil;
+import app.uma.net.socket.util.ArrayUtil;
 
 /**
  * 封装了消息体(内容,不包括消息号),用于封装从客户端读取到的数据，或者发送到客户端的数据
@@ -46,6 +48,10 @@ public class MsgBodyWrap {
 
 	public int read() throws IOException {
 		return dataIn.read();
+	}
+	
+	public ArrayList<?> readArray() throws Exception{
+		return ArrayUtil.read(dataIn);
 	}
 
 	public short readShort() throws IOException {

@@ -3,7 +3,7 @@ package app.uma.net.socket.data;
 import java.io.Serializable;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:5096a07b246f0a976f543a8c5aef3a95
+	 * md5:1c505c2d0134b4cc2aec1ae1f3e8dd20
 	 */
 public class AttributesData implements Serializable{
 	private static final long serialVersionUID = 1L;

@@ -41,6 +41,7 @@ public class AsS2CBuilder extends AsFileWriter{
 		classInfo.append("\tpublic class ")
 		.append(codeName).append("{\r\n");
 		classInfo.append(fields);
+//		addConstruct
 		classInfo.append("\t\tpublic function "+codeName+"(");
 		classInfo.append(params);
 		classInfo.append("){\r\n")
@@ -70,29 +71,30 @@ public class AsS2CBuilder extends AsFileWriter{
 	}
 	
 	private void writeConstructs(CellVO cvo){
-		constructs.append("\t\t\t").append(cvo.key).append(" = ");
-		if(cvo.type.equalsIgnoreCase("Array")){
-			constructs.append("bytes.readObject();\r\n");
-		}
-		else if(cvo.type.equalsIgnoreCase("int")){
-			constructs.append("bytes.readInt();\r\n");
-		}
-		else if(cvo.type.equalsIgnoreCase("long")){
-			constructs.append("bytes.readDouble();\r\n");
-		}
-		else if(cvo.type.equalsIgnoreCase("double")){
-			constructs.append("bytes.readDouble();\r\n");
-		}
-		else if(cvo.type.equalsIgnoreCase("short")){
-			constructs.append("bytes.readShort();\r\n");
-		}
-		else if(cvo.type.equalsIgnoreCase("String")){
-			constructs.append("bytes.readUTF();\r\n");
-		}
-		else if(cvo.type.equalsIgnoreCase("AMF")){
-			constructs.append("bytes.readObject();\r\n");
-		}else{
-			constructs.append("bytes.readObject();\r\n");
-		}
+		addRead(cvo, constructs, null);
+//		constructs.append("\t\t\t").append(cvo.key).append(" = ");
+//		if(cvo.type.equalsIgnoreCase("Array")){
+//			constructs.append("bytes.readObject();\r\n");
+//		}
+//		else if(cvo.type.equalsIgnoreCase("int")){
+//			constructs.append("bytes.readInt();\r\n");
+//		}
+//		else if(cvo.type.equalsIgnoreCase("long")){
+//			constructs.append("bytes.readDouble();\r\n");
+//		}
+//		else if(cvo.type.equalsIgnoreCase("double")){
+//			constructs.append("bytes.readDouble();\r\n");
+//		}
+//		else if(cvo.type.equalsIgnoreCase("short")){
+//			constructs.append("bytes.readShort();\r\n");
+//		}
+//		else if(cvo.type.equalsIgnoreCase("String")){
+//			constructs.append("bytes.readUTF();\r\n");
+//		}
+//		else if(cvo.type.equalsIgnoreCase("AMF")){
+//			constructs.append("bytes.readObject();\r\n");
+//		}else{
+//			constructs.append("bytes.readObject();\r\n");
+//		}
 	}
 }

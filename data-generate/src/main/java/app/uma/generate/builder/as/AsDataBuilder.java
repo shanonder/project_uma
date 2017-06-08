@@ -18,12 +18,16 @@ public class AsDataBuilder extends AsFileWriter{
 	protected StringBuilder decodes;
 	protected StringBuilder encodes;
 	protected StringBuilder disposes;
+	protected StringBuilder writes;
+	protected StringBuilder reads;
 	
 	public AsDataBuilder(){
 		super();
 		encodes = new StringBuilder();
 		decodes = new StringBuilder();
 		disposes = new StringBuilder();
+		writes = new StringBuilder();
+		reads = new StringBuilder();
 	}
 	
 	@Override
@@ -32,6 +36,8 @@ public class AsDataBuilder extends AsFileWriter{
 		decodes.delete(0, decodes.length());
 		encodes.delete(0, encodes.length());
 		disposes.delete(0, disposes.length());
+		writes.delete(0, writes.length());
+		reads.delete(0, reads.length());
 	}
 	
 	public void frush(DataOptNode node){
@@ -68,15 +74,32 @@ public class AsDataBuilder extends AsFileWriter{
 //		.append(" implements ISocketData")
 		.append("{\r\n");
 		classInfo.append(fields);
-		classInfo.append("\t\tpublic function " + node.getName() +"(");
+		classInfo.append("\n\t\tpublic function " + node.getName() +"(");
 		classInfo.append(params);
 		classInfo.append("){\r\n")
 		.append("\t\t\tsuper();\r\n")
 		.append(constructs)
 		.append("\t\t}\r\n");
 //		function encode
-		
+		classInfo
+		.append("\n\t\tpublic static function read(bytes :ByteArray , item : "+node.getName()+"):" + node.getName() + "{\n");
+		if(node.getParent()!= null){
+			classInfo.append("\t\t\t"+ node.getParent() + ".read(bytes , item);\n");
+		}
+		classInfo.append(reads);
+		classInfo.append("\t\t\treturn item;\n");
+		classInfo.append("\t\t}\n");
 //		function decode
+		classInfo
+		.append("\n\t\tpublic static function write(bytes :ByteArray , item : "+node.getName()+"):ByteArray{\n");
+		if(node.getParent()!= null){
+			classInfo.append("\t\t\t"+ node.getParent() + ".write(bytes , item);\n");
+		}
+		classInfo.append(writes);
+		classInfo.append("\t\t\treturn bytes;\n");
+		classInfo.append("\t\t}\n");
+		
+		
 		
 		classInfo.append(methods);
 		classInfo.append(disposes);
@@ -97,5 +120,10 @@ public class AsDataBuilder extends AsFileWriter{
 	private void optCell(CellVO cvo) {
 		String type = typeTrans(cvo.type);
 		fields.append(getPublicFieldStr(cvo.key, type, cvo.desc));
+//		writes.append(cvo,)
+		addWrite(cvo,writes,"item");
+		addRead(cvo,reads,"item");
 	}
+	
+	
 }

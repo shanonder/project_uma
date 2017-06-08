@@ -4,7 +4,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import app.uma.net.socket.datas.ItemData;
+import app.uma.net.socket.data.ItemData;
 import flex.messaging.io.SerializationContext;
 import flex.messaging.io.amf.Amf3Input;
 import flex.messaging.io.amf.Amf3Output;

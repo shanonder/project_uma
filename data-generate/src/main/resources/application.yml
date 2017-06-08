@@ -34,3 +34,4 @@ code:
     responseImport: 
       
     dataImport: 
+      - flash.utils.ByteArray

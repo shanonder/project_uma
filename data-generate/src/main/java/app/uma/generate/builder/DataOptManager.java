@@ -76,7 +76,6 @@ public class DataOptManager {
 			return;
 		}
 		version.update(fileName, hash);
-//		Workbook book =  WorkbookFactory.create(file);
 		SAXReader reader = new SAXReader();   
 		Document doc = reader.read(file);   
 		Element root = doc.getRootElement();

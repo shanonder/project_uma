@@ -8,8 +8,8 @@ import app.uma.net.socket.data.PackData;
  * 此类由CodeGenerateUtil自动生成
  */
 public class EnterWorldResponse  extends ServerResponse{
-	public EnterWorldResponse(int status , RoleData role, ArrayList<PackData> packs, ArrayList<Short> modules, String customize) throws Exception{
-		super(0x30001 , status);
+	public EnterWorldResponse(int status , RoleData role, ArrayList<PackData> packs, ArrayList<Integer> modules, String customize) throws Exception{
+		super(0x3001 , status);
 		output.writeAMFObject(role == null ? new Object() : role);
 		output.writeAMFObject(packs == null ? new ArrayList<>() : packs);
 		output.writeAMFObject(modules == null ? new ArrayList<>() : modules);

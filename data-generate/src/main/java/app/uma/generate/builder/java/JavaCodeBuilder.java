@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import app.uma.generate.builder.HashManager;
 import app.uma.generate.builder.ICodeBuilder;
 import app.uma.generate.config.GeneralBeans;
 import app.uma.generate.node.DataOptNode;
@@ -38,6 +39,8 @@ public class JavaCodeBuilder implements ICodeBuilder {
 	@Autowired
 	private JavaS2CBuilder s2CBuilder;
 	
+	@Autowired
+	private JavaDataHashBuilder dataHashManager;
 	private ArrayList<String> outDirs;
 	@Override
 	public ArrayList<String> getOutDirs() {
@@ -54,6 +57,7 @@ public class JavaCodeBuilder implements ICodeBuilder {
 	@Override
 	public void buildData(DataOptNode node) {
 		dataBuilder.frush(node);
+		dataHashManager.addNode(node);
 	}
 
 	@Override
@@ -72,6 +76,8 @@ public class JavaCodeBuilder implements ICodeBuilder {
 	public void buildOther() {
 		msgConstBuilder.setMd5(config.getVersion());
 		msgConstBuilder.frush();
+		dataHashManager.setMd5(config.getVersion());
+		dataHashManager.frush();
 	}
 
 }

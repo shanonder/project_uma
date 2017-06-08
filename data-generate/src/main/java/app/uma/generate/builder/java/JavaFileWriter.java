@@ -129,47 +129,34 @@ public class JavaFileWriter {
 		return t;
 	}
 	
-	
-	public String typeTrans(String type) {
+	public String typeTrans(String type,Boolean referenceType) {
 		if(type == null){
 			return null;
 		}
 		if(type.contains("[]")){
 			addImport("java.util.ArrayList");
 			String t = getListCell(type);
-			typeTrans(t);
+			t = typeTrans(t,true);
 			return "ArrayList<" + t + ">";
 		}
-//		if(type.contains("ArrayList")){
-//			addImport("java.util.ArrayList");
-//			String t = getListCell(type);
-//			typeTrans(t);
-//			return type;
-//		}
-//		if(type.contains("List")){
-//			addImport("java.util.List");
-//			String t = getListCell(type);
-//			typeTrans(t);
-//			return type;
-//		}
 		
 		if(type.contains("double")||type.contains("Double")){
-			return "double";
+			return referenceType?"Double":"double";
 		}
 		if(type.contains("long") ||type.contains("Long") ){
-			return "long";
+			return referenceType?"Long":"long";
 		}
 		else if (type.contains("tinyint") ||type.contains("bool")) {
-			return "boolean";
+			return referenceType?"Boolean":"boolean";
 		} 
 		else if (type.contains("int")||type.contains("Int")  
 				|| type.contains("Short")||type.contains("short")) {
-			return "int";
+			return referenceType?"Integer":"int";
 		} 
 		else if (type.contains("varchar") || type.contains("date")
 				|| type.contains("time") || type.contains("datetime")
 				|| type.contains("timestamp") || type.contains("text")
-				|| type.contains("String")
+				|| type.contains("String") || type.contains("string")
 				|| type.contains("enum") || type.contains("set")) {
 			return "String";
 		} 
@@ -184,27 +171,8 @@ public class JavaFileWriter {
 			return type;
 		}
 	}
+	public String typeTrans(String type) {
+		return typeTrans(type, false);
+	}
 
-//	protected void addWrite(CellVO cvo) {
-//		if(cvo.type.contains("List")){
-//			constructs.append("\t\t\tbytes.writeObject("+cvo.key+");\r\n");
-//		}
-//		else if(cvo.type.equals("Int") || cvo.type.equals("int")){
-//			constructs.append("\t\t\tbytes.writeInt("+cvo.key+");\r\n");
-//		}
-//		else if(cvo.type.equals("Double") || cvo.type.equals("double")){
-//			constructs.append("\t\t\tbytes.writeDouble("+cvo.key+");\r\n");
-//		}
-//		else if(cvo.type.equals("Short") ||  cvo.type.equals("short")){
-//			constructs.append("\t\t\tbytes.writeShort("+cvo.key+");\r\n");
-//		}
-//		else if(cvo.type.equals("String") ||  cvo.type.equals("string")){
-//			constructs.append("\t\t\tbytes.writeUTF("+cvo.key+");\r\n");
-//		}
-//		else if(cvo.type.equals("AMF")){
-//			constructs.append("\t\t\tbytes.writeAMFObject("+cvo.key+");\r\n");
-//		}else{
-//			constructs.append("\t\t\tbytes.writeAMFObject("+cvo.key+");\r\n");
-//		}
-//	}
 }

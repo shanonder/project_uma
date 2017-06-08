@@ -43,6 +43,9 @@ public class AsCodeBuilder implements ICodeBuilder {
 	@Autowired
 	private HashManager hashManager;
 	
+	@Autowired
+	private AsDataHashBuilder asDataHashBuilder;
+	
 	private ArrayList<String> outDirs;
 	
 	public AsCodeBuilder() {
@@ -64,8 +67,9 @@ public class AsCodeBuilder implements ICodeBuilder {
 	@Override
 	public void buildData(DataOptNode node) {
 		hashManager.update(node.getName(), node.getMd5());
-//		asDataBuilder.frush(node);
+		asDataBuilder.frush(node);
 		asRegisterBuilder.addData(node.getName());
+		asDataHashBuilder.addClass(node);
 	}
 	
 	@Override
@@ -86,6 +90,8 @@ public class AsCodeBuilder implements ICodeBuilder {
 		msgConstBuilder.frush();
 		asRegisterBuilder.setMd5(config.getVersion());
 		asRegisterBuilder.frush();
+		asDataHashBuilder.setMd5(config.getVersion());
+		asDataHashBuilder.frush();
 	}
 	
 

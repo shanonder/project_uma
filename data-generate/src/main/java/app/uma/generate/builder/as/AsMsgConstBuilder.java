@@ -32,7 +32,6 @@ public class AsMsgConstBuilder extends AsFileWriter {
 		String packageinfo = "package " + outPack +" {\r\n\r\n";
 		String dir = props.getPath() + outPack.replace(".", "/") + "/";
 
-		outPack = props.getPack() + ".";
 		dir = props.getPath() + outPack.replace(".", "/") + "/";
 		packageinfo = "package " + outPack + "{\r\n\r\n";
 
