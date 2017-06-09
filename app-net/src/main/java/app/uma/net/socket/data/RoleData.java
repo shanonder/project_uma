@@ -1,11 +1,14 @@
 package app.uma.net.socket.data;
 
 import java.io.Serializable;
+import java.io.DataOutputStream;
+import java.io.DataInputStream;
 import java.util.ArrayList;
 import app.uma.net.socket.data.AttributesData;
+import app.uma.net.socket.util.ArrayUtil;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:1c505c2d0134b4cc2aec1ae1f3e8dd20
+	 * md5:9ff1b2f52a6c4f172053a9e30951340
 	 */
 public class RoleData implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -50,6 +53,26 @@ public class RoleData implements Serializable{
 	}
 	public void setAttributes(ArrayList<AttributesData> attributes){
 		this.attributes=attributes;
+	}
+
+	public static void write(DataOutputStream out,RoleData data) throws Exception{
+		out.writeUTF(data.insId == null ?"" : data.insId);
+		out.writeInt(data.cfgId);
+		out.writeUTF(data.name == null ?"" : data.name);
+		out.writeInt(data.level);
+		out.writeLong(data.exp);
+		ArrayUtil.write(out,data.attributes);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static RoleData read(DataInputStream in , RoleData data) throws Exception{
+		data.insId = in.readUTF();
+		data.cfgId = in.readInt();
+		data.name = in.readUTF();
+		data.level = in.readInt();
+		data.exp = in.readLong();
+		data.attributes = ArrayUtil.read(in);
+		return data;
 	}
 
 }

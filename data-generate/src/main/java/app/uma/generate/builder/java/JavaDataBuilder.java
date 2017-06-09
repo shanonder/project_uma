@@ -12,17 +12,27 @@ import app.uma.generate.node.DataOptNode;
 @Component
 public class JavaDataBuilder extends JavaFileWriter{
 	
+	private StringBuilder writes;
+	private StringBuilder reads;
 
 	public JavaDataBuilder(){
 		super();
-
+		writes = new StringBuilder();
+		reads = new StringBuilder();
 	}
 
 	private void optCell(CellVO cvo) {
 		String type = typeTrans(cvo.type);
 		fields.append(getFieldStr(cvo.key, type, cvo.desc));
 		methods.append(getMethodStr(cvo.key, type));
-//		fields.append(getPublicFieldStr(cvo.key, type, cvo.desc));
+		addWrite(cvo,writes,"data");
+		addRead(cvo,reads,"data");
+	}
+	
+	public void reset(){
+		super.reset();
+		writes.delete(0, writes.length());
+		reads.delete(0, reads.length());
 	}
 
 	public void frush(DataOptNode node) {
@@ -37,7 +47,8 @@ public class JavaDataBuilder extends JavaFileWriter{
 		String codeName = upperFirestChar(node.getName());
 		File file = new File(dir, codeName + ".java");
 		addImport("java.io.Serializable");
-
+		addImport("java.io.DataOutputStream");
+		addImport("java.io.DataInputStream");
 		for(CellVO cvo : node.cells){
 			optCell(cvo);
 		}
@@ -55,6 +66,23 @@ public class JavaDataBuilder extends JavaFileWriter{
 		classInfo.append("\tprivate static final long serialVersionUID = 1L;\r\n");
 		classInfo.append(fields);
 		classInfo.append(methods);
+//		=======================write==========================
+		classInfo.append("\n\tpublic static void write(DataOutputStream out,"+ codeName + " data) throws Exception{\n");
+		if(node.getParent() != null){
+			classInfo.append("\t\t" + node.getParent() + ".write( out , data );\n");
+		}
+		classInfo.append(writes);
+		classInfo.append("\t}\n");
+//		=======================read==========================
+		classInfo.append("\n\t@SuppressWarnings(\"unchecked\")\n");
+		classInfo.append("\tpublic static " + codeName + " read(DataInputStream in , "+ codeName +" data) throws Exception{\n");
+		if(node.getParent() != null){
+			classInfo.append("\t\t" + node.getParent() + ".read( in , data );\n");
+		}
+		classInfo.append(reads);
+		classInfo.append("\t\treturn data;\n");
+		classInfo.append("\t}\n");
+		
 		classInfo.append("\r\n");
 		classInfo.append("}");
 		try {

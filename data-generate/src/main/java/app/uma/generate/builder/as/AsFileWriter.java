@@ -139,7 +139,7 @@ public class AsFileWriter {
 			builder.append("bytes.readInt();\r\n");
 		}
 		else if(cvo.type.equalsIgnoreCase("long")){
-			builder.append("bytes.readDouble();\r\n");
+			builder.append("bytes.readLong();\r\n");
 		}
 		else if(cvo.type.equalsIgnoreCase("double")){
 			builder.append("bytes.readDouble();\r\n");
@@ -166,11 +166,7 @@ public class AsFileWriter {
 			target = target + ".";
 		}
 		
-		if(cvo.type.equals("Array")){
-			builder.append("\t\t\tbytes.writeObject(" + target + cvo.key+");\r\n");
-		}
-		
-		else if(cvo.type.contains("[]")){//todo
+		if(cvo.type.contains("[]")){//todo
 			builder.append("\t\t\tbytes.writeObject(" + target + cvo.key+");\r\n");
 		}
 		
@@ -190,9 +186,7 @@ public class AsFileWriter {
 			builder.append("\t\t\tbytes.writeUTF(" + target +cvo.key)
 			.append(" == null ?").append("\"\" : ").append(target  + cvo.key).append(");\r\n");
 		}
-		else if(cvo.type.equalsIgnoreCase("AMF")){
-			builder.append("\t\t\tbytes.writeObject(" + target +cvo.key+");\r\n");
-		}else{
+		else{
 			logger.warn("unknown type " + cvo.type);
 			builder.append("\t\t\tbytes.writeObject(" + target +cvo.key+");\r\n");
 		}

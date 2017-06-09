@@ -1,9 +1,11 @@
 package app.uma.net.socket.data;
 
 import java.io.Serializable;
+import java.io.DataOutputStream;
+import java.io.DataInputStream;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:1c505c2d0134b4cc2aec1ae1f3e8dd20
+	 * md5:9ff1b2f52a6c4f172053a9e30951340
 	 */
 public class ItemData implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -34,6 +36,22 @@ public class ItemData implements Serializable{
 	}
 	public void setCreateTime(long createTime){
 		this.createTime=createTime;
+	}
+
+	public static void write(DataOutputStream out,ItemData data) throws Exception{
+		out.writeUTF(data.insId == null ?"" : data.insId);
+		out.writeInt(data.cfgId);
+		out.writeUTF(data.type == null ?"" : data.type);
+		out.writeLong(data.createTime);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static ItemData read(DataInputStream in , ItemData data) throws Exception{
+		data.insId = in.readUTF();
+		data.cfgId = in.readInt();
+		data.type = in.readUTF();
+		data.createTime = in.readLong();
+		return data;
 	}
 
 }

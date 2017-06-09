@@ -1,11 +1,14 @@
 package app.uma.net.socket.data;
 
 import java.io.Serializable;
+import java.io.DataOutputStream;
+import java.io.DataInputStream;
 import java.util.ArrayList;
 import app.uma.net.socket.data.GridData;
+import app.uma.net.socket.util.ArrayUtil;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:1c505c2d0134b4cc2aec1ae1f3e8dd20
+	 * md5:9ff1b2f52a6c4f172053a9e30951340
 	 */
 public class PackData implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -29,6 +32,20 @@ public class PackData implements Serializable{
 	}
 	public void setItemList(ArrayList<GridData> itemList){
 		this.itemList=itemList;
+	}
+
+	public static void write(DataOutputStream out,PackData data) throws Exception{
+		out.writeShort(data.type);
+		out.writeShort(data.openLength);
+		ArrayUtil.write(out,data.itemList);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static PackData read(DataInputStream in , PackData data) throws Exception{
+		data.type = in.readShort();
+		data.openLength = in.readShort();
+		data.itemList = ArrayUtil.read(in);
+		return data;
 	}
 
 }

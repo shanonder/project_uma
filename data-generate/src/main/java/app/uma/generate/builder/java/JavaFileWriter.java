@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import app.uma.generate.config.GeneralBeans;
+import app.uma.generate.node.CellVO;
 import app.uma.generate.properties.CodeProperties;
 import app.uma.generate.properties.Config;
 
@@ -127,6 +128,78 @@ public class JavaFileWriter {
 		}
 		String t = listStr.substring(ei+1,listStr.length());
 		return t;
+	}
+	
+	protected void addRead(CellVO cvo, StringBuilder builder ,String target){
+		if(target == null ||target.equals("")){
+			target = "";
+		}else{
+			target = target + ".";
+		}
+		builder.append("\t\t").append(target).append(cvo.key).append(" = ");
+		
+		if(cvo.type.contains("[]")){
+			addImport("app.uma.net.socket.util.ArrayUtil");
+			builder.append("ArrayUtil.read(in);\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("boolean")){
+			builder.append("in.readBoolean();\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("int")){
+			builder.append("in.readInt();\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("long")){
+			builder.append("in.readLong();\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("double")){
+			builder.append("in.readDouble();\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("short")){
+			builder.append("in.readShort();\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("string")){
+			builder.append("in.readUTF();\r\n");
+		}
+		else{
+			addImport("app.uma.net.socket.util.DataUtil");
+			builder.append("DataUtil.read(in);\r\n");
+		}
+	}
+	
+	protected void addWrite(CellVO cvo , StringBuilder builder ,String target) {
+		if(target == null || target.equals("")){
+			target = "";
+		}else{
+			target = target + ".";
+		}
+		String key = target + cvo.key;
+
+		if(cvo.type.contains("[]")){
+			addImport("app.uma.net.socket.util.ArrayUtil");
+			builder.append("\t\tArrayUtil.write(out,"+ key + ");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("boolean")){
+			builder.append("\t\tout.writeBoolean(" + key + ");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("int")){
+			builder.append("\t\tout.writeInt(" + key + ");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("double")){
+			builder.append("\t\tout.writeDouble(" + key + ");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("long")){
+			builder.append("\t\tout.writeLong(" + key + ");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("Short")){
+			builder.append("\t\tout.writeShort(" + key + ");\r\n");
+		}
+		else if(cvo.type.equalsIgnoreCase("String")){
+			builder.append("\t\tout.writeUTF(" + key )
+			.append(" == null ?").append("\"\" : ").append( key ).append(");\r\n");
+		}
+		else{
+			builder.append("\t\tDataUtil.write( out , " + key + ");\r\n");
+		}
 	}
 	
 	public String typeTrans(String type,Boolean referenceType) {

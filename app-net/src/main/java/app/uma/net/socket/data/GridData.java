@@ -1,10 +1,13 @@
 package app.uma.net.socket.data;
 
 import java.io.Serializable;
+import java.io.DataOutputStream;
+import java.io.DataInputStream;
 import app.uma.net.socket.data.ItemData;
+import app.uma.net.socket.util.DataUtil;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:1c505c2d0134b4cc2aec1ae1f3e8dd20
+	 * md5:9ff1b2f52a6c4f172053a9e30951340
 	 */
 public class GridData implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -21,6 +24,18 @@ public class GridData implements Serializable{
 	}
 	public void setItem(ItemData item){
 		this.item=item;
+	}
+
+	public static void write(DataOutputStream out,GridData data) throws Exception{
+		out.writeShort(data.index);
+		DataUtil.write( out , data.item);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static GridData read(DataInputStream in , GridData data) throws Exception{
+		data.index = in.readShort();
+		data.item = DataUtil.read(in);
+		return data;
 	}
 
 }
