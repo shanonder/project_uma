@@ -6,7 +6,7 @@ import app.uma.net.socket.decodes.ServerResponse;
  */
 public class HeapResponse  extends ServerResponse{
 	public HeapResponse(int status , long time) throws Exception{
-		super(0x2000 , status);
+		super(0x20000 , status);
 		output.writeLong(time);
 
 	}

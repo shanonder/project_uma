@@ -4,97 +4,102 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 import app.uma.net.socket.DataHash;
 import app.uma.net.socket.consts.DefaultTypeConst;
+import app.uma.net.socket.enums.ClassTypeEnum;
 
 public class ArrayUtil {
 	
+
 	public static void write(DataOutputStream dataOut, ArrayList<?> item) throws Exception{
 		if(item == null){
-			dataOut.writeBoolean(false);
+			dataOut.writeShort(-1);
 			return;
 		}
 		dataOut.writeShort(item.size());
-		int size = dataOut.size();
-		dataOut.writeShort(0);
-		int count = 0;
-		for (Object ele :item){ 
-			if(ele != null){
-				count ++;
-				Class<?> clazz= ele.getClass();
-				int type = DataHash.Class2Type.get(clazz.getName());
-				if(type == DefaultTypeConst.type_byte){ 
-					dataOut.writeByte((int) ele);
-				}
-				else if(type == DefaultTypeConst.type_boolean){
-					dataOut.writeBoolean((boolean) ele);
-				}
-				else if(type == DefaultTypeConst.type_int){
-					dataOut.writeInt((int) ele);
-				}
-				else if(type == DefaultTypeConst.type_long){
-					dataOut.writeLong((long) ele);
-				}
-				else if(type == DefaultTypeConst.type_short){
-					dataOut.writeShort((short) ele);
-				}
-				else if(type == DefaultTypeConst.type_string){
-					dataOut.writeUTF((String)ele);
-				}else{
-					Method method = clazz.getMethod("write", long.class);  
-					method.invoke(null, dataOut , ele);
-				}
+		for(int i=0 , len = item.size() ; i<len ; i++){
+			Object ele = item.get(i);
+			if(ele!=null){
+				dataOut.writeShort(i);
+			}else{
+				continue;
+			}
+			Class<?> clazz= ele.getClass();
+			int type = DataHash.Class2Type.get(clazz.getName());
+			dataOut.writeShort(type);
+//			if(type == DefaultTypeConst.type_byte){ 
+//				dataOut.writeByte((int) ele);
+//			}
+//			else 
+			if(type == DefaultTypeConst.type_boolean){
+				dataOut.writeBoolean((boolean) ele);
+			}
+			else if(type == DefaultTypeConst.type_int){
+				dataOut.writeInt((int) ele);
+			}
+			else if(type == DefaultTypeConst.type_long){
+				dataOut.writeLong((long) ele);
+			}
+			else if(type == DefaultTypeConst.type_short){
+				dataOut.writeShort((short) ele);
+			}
+			else if(type == DefaultTypeConst.type_string){
+				dataOut.writeUTF((String)ele);
+			}else{
+				Method method = clazz.getMethod("write", DataOutputStream.class, clazz);  
+				method.invoke(null, dataOut , ele);
 			}
 		}
-		byte[] b = new byte[2];
-		b[0] = (byte) ((byte)(count >>> 8) & 0xFF);
-		b[1] = (byte) ((byte)(count >>> 0) & 0xFF);
-		dataOut.get
-		
-//		dataOut.write(b, 0, b.length);
-//		dataOut.write(count, size, 2);
+		dataOut.writeShort(-1);
 	}
 	
 	
-	public static ArrayList<Object> read(DataInputStream input) throws Exception{
-		if(!input.readBoolean()){
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static ArrayList read(DataInputStream input) throws Exception{
+		int length = input.readShort();
+		if(length == -1){
 			return null;
 		}
-		ArrayList<Object> item = new ArrayList<>(input.readShort());
-		int itemCount = input.readShort();
-		for(int i = 0 ; i < itemCount ; ++i){
-			int index = input.readShort();
-			int type = input.readShort();
-			if(type == 0){ //ArrayList
-				ArrayList<Object> ele = read(input);
-				item.set(index, ele);
+		ArrayList item = new ArrayList<>(length);
+		int index = 0;
+		int i;
+		while((index = input.readShort()) != -1)
+		{
+			while(( i = item.size()) < index){
+				item.add(i, null);
 			}
+			int type = input.readShort();
 			if(type > 0){
 				String className = DataHash.Type2Class.get(type);
-				Class<?> threadClazz = Class.forName(className);  
-				Method method = threadClazz.getMethod("read", long.class);  
-				item.set(index, method.invoke(null, input , null));
+				Class threadClazz = Class.forName(className);
+				Method method = threadClazz.getMethod("read", DataInputStream.class,threadClazz);
+				Object ele = method.invoke(null, input , threadClazz.newInstance());
+				item.add(index, ele);
 			}
-			
-			if(type == DefaultTypeConst.type_byte){ 
-				item.set(index,input.readByte());
+			else if(type == ClassTypeEnum.t_boolean.getType()){
+				item.add(index,input.readBoolean());
 			}
-			if(type == DefaultTypeConst.type_boolean){
-				item.set(index,input.readBoolean());
+			else if(type == ClassTypeEnum.t_short.getType()){
+				item.add(index,input.readShort());
 			}
-			if(type == DefaultTypeConst.type_int){
-				item.set(index,input.readInt());
+			else if(type == ClassTypeEnum.t_int.getType()){
+				int value = input.readInt();
+				item.add(index, value);
 			}
-			if(type == DefaultTypeConst.type_long){
-				item.set(index,input.readLong());
+			else if(type == ClassTypeEnum.t_long.getType()){
+				item.add(index,input.readLong());
 			}
-			if(type == DefaultTypeConst.type_short){
-				item.set(index,input.readShort());
+			else if(type == ClassTypeEnum.t_string.getType()){
+				item.add(index, input.readUTF());
 			}
-			if(type == DefaultTypeConst.type_long){
-				item.set(index,input.readUTF());
+			else if(type == ClassTypeEnum.t_array.getType()){
+				item.add(index,read(input));
 			}
+		}
+		while(( i = item.size()) < length){
+			item.add(i, null);
 		}
 		return item;
 	}
