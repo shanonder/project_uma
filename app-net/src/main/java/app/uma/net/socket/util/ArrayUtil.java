@@ -7,15 +7,10 @@ import java.util.ArrayList;
 
 import app.uma.net.socket.DataHash;
 import app.uma.net.socket.consts.DefaultTypeConst;
-import app.uma.net.socket.message.MsgBodyWrap;
 
 public class ArrayUtil {
-	public static void writeCustom(MsgBodyWrap output, ArrayList<Object> item){
-//		Object obj = item[1];
-//		obj.getClass().write(output,obj);
-	}
 	
-	public static void writeBasic(DataOutputStream dataOut, ArrayList<Object> item) throws Exception{
+	public static void write(DataOutputStream dataOut, ArrayList<?> item) throws Exception{
 		if(item == null){
 			dataOut.writeBoolean(false);
 			return;
@@ -50,9 +45,14 @@ public class ArrayUtil {
 					Method method = clazz.getMethod("write", long.class);  
 					method.invoke(null, dataOut , ele);
 				}
-				
 			}
 		}
+		byte[] b = new byte[2];
+		b[0] = (byte) ((byte)(count >>> 8) & 0xFF);
+		b[1] = (byte) ((byte)(count >>> 0) & 0xFF);
+		dataOut.get
+		
+//		dataOut.write(b, 0, b.length);
 //		dataOut.write(count, size, 2);
 	}
 	

@@ -7,4 +7,5 @@ public interface DefaultTypeConst {
 	public static final int type_int = -4;
 	public static final int type_long = -5;
 	public static final int type_string = -6;
+	public static final int type_arraylist = -7;
 }

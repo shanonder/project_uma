@@ -4,12 +4,19 @@ package app.uma.net.socket;
 	 * 此类由CodeGenerateUtil自动生成
 	 */
 import java.util.HashMap;
+import app.uma.net.socket.enums.ClassTypeEnum;
 	public class DataHash{
 
 	public static HashMap<Integer,String>Type2Class;
 	public static HashMap<String,Integer>Class2Type;
 	static{
 		Type2Class = new HashMap<>();
+		Class2Type = new HashMap<>();
+		for (ClassTypeEnum ele : ClassTypeEnum.values()) {
+			Type2Class.put(ele.getType(),ele.getRefClass());
+			Class2Type.put(ele.getRefClass(),ele.getType());
+		}
+
 		Type2Class.put(1, "app.uma.net.socket.data.AttributesData");
 		Type2Class.put(2, "app.uma.net.socket.data.ItemData");
 		Type2Class.put(3, "app.uma.net.socket.data.EquipData");
@@ -17,7 +24,7 @@ import java.util.HashMap;
 		Type2Class.put(5, "app.uma.net.socket.data.GridData");
 		Type2Class.put(6, "app.uma.net.socket.data.RoleData");
 
-		Class2Type = new HashMap<>();
+
 		Class2Type.put("app.uma.net.socket.data.AttributesData", 1);
 		Class2Type.put("app.uma.net.socket.data.ItemData", 2);
 		Class2Type.put("app.uma.net.socket.data.EquipData", 3);

@@ -117,6 +117,10 @@ public class MsgBodyWrap {
 	public void writeAMFObject(Object data) throws IOException {
 		AMFUtil.instance.encodeObject(dataOut,data);
 	}
+	
+	public void writeArrayList(ArrayList<?> array) throws Exception{
+		ArrayUtil.write(dataOut , array);
+	}
 
 	public byte[] toByteArray() {
 		return this.out.toByteArray();
@@ -125,6 +129,7 @@ public class MsgBodyWrap {
 	public Object readAmfObject() throws Exception{
 		return AMFUtil.instance.decodeObject(dataIn);
 	}
+	
 	
 	
 	

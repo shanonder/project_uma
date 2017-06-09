@@ -38,6 +38,7 @@ public class JavaDataHashBuilder extends JavaFileWriter {
 		String dir = props.getPath() + outPack.replace(".", "/") + "/";
 		String packageinfo = "package " + outPack + ";\r\n\r\n";
 		addImport("java.util.HashMap");
+		addImport("app.uma.net.socket.enums.ClassTypeEnum");
 		classInfo.append("\t/**\r\n\t * 此类由").append(config.getAppName()).append("自动生成\r\n");
 		if(getDesc() != null){
 			classInfo.append("\t * " + getDesc() + "\r\n" );
@@ -54,10 +55,19 @@ public class JavaDataHashBuilder extends JavaFileWriter {
 		.append("{\r\n");
 		classInfo.append("\n\tpublic static HashMap<Integer,String>Type2Class;");
 		classInfo.append("\n\tpublic static HashMap<String,Integer>Class2Type;");
+		
+		
+		
 		classInfo.append("\n\tstatic{\n");
 		classInfo.append("\t\tType2Class = new HashMap<>();\n");
+		classInfo.append("\t\tClass2Type = new HashMap<>();\n");
+		classInfo.append("\t\tfor (ClassTypeEnum ele : ClassTypeEnum.values()) {\n");
+		classInfo.append("\t\t\tType2Class.put(ele.getType(),ele.getRefClass());\n");
+		classInfo.append("\t\t\tClass2Type.put(ele.getRefClass(),ele.getType());\n");
+		classInfo.append("\t\t}\n\n");
+		
 		classInfo.append(t2c);
-		classInfo.append("\n\t\tClass2Type = new HashMap<>();\n");
+		classInfo.append("\n\n");
 		classInfo.append(c2t);
 		classInfo.append("\t}\n");
 		
