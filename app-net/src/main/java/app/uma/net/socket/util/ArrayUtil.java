@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 import app.uma.net.socket.DataHash;
 import app.uma.net.socket.consts.DefaultTypeConst;
@@ -28,6 +29,7 @@ public class ArrayUtil {
 			Class<?> clazz= ele.getClass();
 			int type = DataHash.Class2Type.get(clazz.getName());
 			dataOut.writeShort(type);
+
 			if(type == DefaultTypeConst.type_boolean){
 				dataOut.writeBoolean((boolean) ele);
 			}

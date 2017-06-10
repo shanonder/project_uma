@@ -1,10 +1,10 @@
 package app.uma.net.socket.data;
 
-import java.io.Serializable;
-import java.io.DataOutputStream;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
-import app.uma.net.socket.data.AttributesData;
+
 import app.uma.net.socket.util.ArrayUtil;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
@@ -40,5 +40,7 @@ public class EquipData extends ItemData implements Serializable{
 		data.attributes = ArrayUtil.read(in);
 		return data;
 	}
+	
+
 
 }

@@ -28,6 +28,7 @@ public class DataTest {
 //		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		OutputStream os = new FileOutputStream(file);
 		DataOutputStream out = new DataOutputStream(os);
+		DataOutputStream dataOut = new DataOutputStream(os);
 		System.out.println(objects.get(0).getClass().getName());
 //		System.out.println(objects.get(1).getClass().getName());
 		System.out.println(objects.get(2).getClass().getName());
@@ -37,6 +38,7 @@ public class DataTest {
 		out.writeBoolean(true);
 		ArrayUtil.write(out, objects);
 		EquipData.write(out, null);
+		ArrayUtil.write(dataOut, objects);
 		os.close();
 		
 		InputStream in = new FileInputStream(file);
