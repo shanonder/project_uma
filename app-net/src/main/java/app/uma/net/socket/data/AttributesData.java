@@ -24,7 +24,7 @@ public class AttributesData implements Serializable{
 		this.value=value;
 	}
 
-	public static void write(DataOutputStream out,AttributesData data) throws Exception{
+	public static void write(DataOutputStream out , AttributesData data) throws Exception{
 		out.writeInt(data.cfgId);
 		out.writeLong(data.value);
 	}
