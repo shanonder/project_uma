@@ -26,7 +26,7 @@ public class GridData implements Serializable{
 		this.item=item;
 	}
 
-	public static void write(DataOutputStream out,GridData data) throws Exception{
+	public static void write(DataOutputStream out , GridData data) throws Exception{
 		out.writeShort(data.index);
 		DataUtil.write( out , data.item);
 	}

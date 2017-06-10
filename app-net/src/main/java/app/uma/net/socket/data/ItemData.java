@@ -38,7 +38,7 @@ public class ItemData implements Serializable{
 		this.createTime=createTime;
 	}
 
-	public static void write(DataOutputStream out,ItemData data) throws Exception{
+	public static void write(DataOutputStream out , ItemData data) throws Exception{
 		out.writeUTF(data.insId == null ?"" : data.insId);
 		out.writeInt(data.cfgId);
 		out.writeUTF(data.type == null ?"" : data.type);

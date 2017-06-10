@@ -15,6 +15,7 @@ import app.uma.generate.config.GeneralBeans;
 import app.uma.generate.properties.CodeProperties;
 import app.uma.generate.properties.Config;
 
+@Deprecated
 public class AsClassTemplete {
 	
 	private static final Logger log = LoggerFactory.getLogger(AsClassTemplete.class);

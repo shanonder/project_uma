@@ -67,7 +67,7 @@ public class JavaDataBuilder extends JavaFileWriter{
 		classInfo.append(fields);
 		classInfo.append(methods);
 //		=======================write==========================
-		classInfo.append("\n\tpublic static void write(DataOutputStream out,"+ codeName + " data) throws Exception{\n");
+		classInfo.append("\n\tpublic static void write(DataOutputStream out , "+ codeName + " data) throws Exception{\n");
 		if(node.getParent() != null){
 			classInfo.append("\t\t" + node.getParent() + ".write( out , data );\n");
 		}

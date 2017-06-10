@@ -176,7 +176,7 @@ public class JavaFileWriter {
 
 		if(cvo.type.contains("[]")){
 			addImport("app.uma.net.socket.util.ArrayUtil");
-			builder.append("\t\tArrayUtil.write(out,"+ key + ");\r\n");
+			builder.append("\t\tArrayUtil.write( out , "+ key + ");\r\n");
 		}
 		else if(cvo.type.equalsIgnoreCase("boolean")){
 			builder.append("\t\tout.writeBoolean(" + key + ");\r\n");

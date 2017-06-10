@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import app.uma.generate.builder.HashManager;
 import app.uma.generate.builder.ICodeBuilder;
 import app.uma.generate.config.GeneralBeans;
 import app.uma.generate.node.DataOptNode;

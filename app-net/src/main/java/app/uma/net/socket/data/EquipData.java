@@ -27,10 +27,10 @@ public class EquipData extends ItemData implements Serializable{
 		this.attributes=attributes;
 	}
 
-	public static void write(DataOutputStream out,EquipData data) throws Exception{
+	public static void write(DataOutputStream out , EquipData data) throws Exception{
 		ItemData.write( out , data );
 		out.writeInt(data.strenthLv);
-		ArrayUtil.write(out,data.attributes);
+		ArrayUtil.write( out , data.attributes);
 	}
 
 	@SuppressWarnings("unchecked")

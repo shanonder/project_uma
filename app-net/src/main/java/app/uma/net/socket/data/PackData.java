@@ -34,10 +34,10 @@ public class PackData implements Serializable{
 		this.itemList=itemList;
 	}
 
-	public static void write(DataOutputStream out,PackData data) throws Exception{
+	public static void write(DataOutputStream out , PackData data) throws Exception{
 		out.writeShort(data.type);
 		out.writeShort(data.openLength);
-		ArrayUtil.write(out,data.itemList);
+		ArrayUtil.write( out , data.itemList);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -55,13 +55,13 @@ public class RoleData implements Serializable{
 		this.attributes=attributes;
 	}
 
-	public static void write(DataOutputStream out,RoleData data) throws Exception{
+	public static void write(DataOutputStream out , RoleData data) throws Exception{
 		out.writeUTF(data.insId == null ?"" : data.insId);
 		out.writeInt(data.cfgId);
 		out.writeUTF(data.name == null ?"" : data.name);
 		out.writeInt(data.level);
 		out.writeLong(data.exp);
-		ArrayUtil.write(out,data.attributes);
+		ArrayUtil.write( out , data.attributes);
 	}
 
 	@SuppressWarnings("unchecked")
