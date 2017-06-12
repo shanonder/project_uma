@@ -21,6 +21,8 @@ public class AsDataBuilder extends AsFileWriter{
 	protected StringBuilder writes;
 	protected StringBuilder reads;
 	
+	
+	
 	public AsDataBuilder(){
 		super();
 		encodes = new StringBuilder();
@@ -82,18 +84,18 @@ public class AsDataBuilder extends AsFileWriter{
 		.append("\t\t}\r\n");
 //		function encode
 		classInfo
-		.append("\n\t\tpublic static function read(bytes :ByteArray , item : "+node.getName()+"):" + node.getName() + "{\n");
+		.append("\n\t\tpublic static function read(bytes :ByteArray , data : "+node.getName()+"):" + node.getName() + "{\n");
 		if(node.getParent()!= null){
-			classInfo.append("\t\t\t"+ node.getParent() + ".read(bytes , item);\n");
+			classInfo.append("\t\t\t"+ node.getParent() + ".read(bytes , data);\n");
 		}
 		classInfo.append(reads);
-		classInfo.append("\t\t\treturn item;\n");
+		classInfo.append("\t\t\treturn data;\n");
 		classInfo.append("\t\t}\n");
 //		function decode
 		classInfo
-		.append("\n\t\tpublic static function write(bytes :ByteArray , item : "+node.getName()+"):ByteArray{\n");
+		.append("\n\t\tpublic static function write(bytes :ByteArray , data : "+node.getName()+"):ByteArray{\n");
 		if(node.getParent()!= null){
-			classInfo.append("\t\t\t"+ node.getParent() + ".write(bytes , item);\n");
+			classInfo.append("\t\t\t"+ node.getParent() + ".write(bytes , data);\n");
 		}
 		classInfo.append(writes);
 		classInfo.append("\t\t\treturn bytes;\n");
@@ -121,8 +123,8 @@ public class AsDataBuilder extends AsFileWriter{
 		String type = typeTrans(cvo.type);
 		fields.append(getPublicFieldStr(cvo.key, type, cvo.desc));
 //		writes.append(cvo,)
-		addWrite(cvo,writes,"item");
-		addRead(cvo,reads,"item");
+		addWrite(cvo,writes,"data");
+		addRead(cvo,reads,"data");
 	}
 	
 	

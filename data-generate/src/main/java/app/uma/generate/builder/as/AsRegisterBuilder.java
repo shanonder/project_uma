@@ -79,13 +79,9 @@ public class AsRegisterBuilder extends AsFileWriter {
 		regists.append("\t\t\tregisterClassAlias(\"").append(props.getPackData()).append(".").append(name).append("\",").append(name).append(");\r\n");
 	}
 
-
-
 	public String getMd5() {
 		return md5;
 	}
-
-
 
 	public void setMd5(String md5) {
 		this.md5 = md5;

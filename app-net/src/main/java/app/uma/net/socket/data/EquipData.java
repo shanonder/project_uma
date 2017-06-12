@@ -1,14 +1,14 @@
 package app.uma.net.socket.data;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.Serializable;
+import java.io.DataOutputStream;
+import java.io.DataInputStream;
 import java.util.ArrayList;
-
+import app.uma.net.socket.data.AttributesData;
 import app.uma.net.socket.util.ArrayUtil;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:9ff1b2f52a6c4f172053a9e30951340
+	 * md5:f67d8abd5c0270cf2983938580c6b3f7
 	 */
 public class EquipData extends ItemData implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -40,7 +40,5 @@ public class EquipData extends ItemData implements Serializable{
 		data.attributes = ArrayUtil.read(in);
 		return data;
 	}
-	
-
 
 }

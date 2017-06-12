@@ -4,10 +4,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.List;
 
 import app.uma.net.socket.DataHash;
-import app.uma.net.socket.consts.DefaultTypeConst;
 import app.uma.net.socket.enums.ClassTypeEnum;
 
 public class ArrayUtil {
@@ -30,19 +28,26 @@ public class ArrayUtil {
 			int type = DataHash.Class2Type.get(clazz.getName());
 			dataOut.writeShort(type);
 
-			if(type == DefaultTypeConst.type_boolean){
+			if(type == ClassTypeEnum.t_boolean.getType()){
 				dataOut.writeBoolean((boolean) ele);
 			}
-			else if(type == DefaultTypeConst.type_int){
-				dataOut.writeInt((int) ele);
+			if(type == ClassTypeEnum.t_byte.getType()){
+				dataOut.writeByte((int) ele);
 			}
-			else if(type == DefaultTypeConst.type_long){
-				dataOut.writeLong((long) ele);
-			}
-			else if(type == DefaultTypeConst.type_short){
+			else if(type == ClassTypeEnum.t_short.getType()){
 				dataOut.writeShort((short) ele);
 			}
-			else if(type == DefaultTypeConst.type_string){
+			else if(type == ClassTypeEnum.t_int.getType()){
+				dataOut.writeInt((int) ele);
+			}
+			else if(type == ClassTypeEnum.t_double.getType()){
+				dataOut.writeDouble((long) ele);
+			}
+			else if(type == ClassTypeEnum.t_long.getType()){
+				dataOut.writeLong((long) ele);
+			}
+
+			else if(type == ClassTypeEnum.t_string.getType()){
 				dataOut.writeUTF((String)ele);
 			}else{
 				Method method = clazz.getMethod("write", DataOutputStream.class, clazz);  
@@ -84,6 +89,9 @@ public class ArrayUtil {
 			else if(type == ClassTypeEnum.t_int.getType()){
 				int value = input.readInt();
 				item.add(index, value);
+			}
+			else if(type == ClassTypeEnum.t_double.getType()){
+				item.add(index,input.readDouble());
 			}
 			else if(type == ClassTypeEnum.t_long.getType()){
 				item.add(index,input.readLong());

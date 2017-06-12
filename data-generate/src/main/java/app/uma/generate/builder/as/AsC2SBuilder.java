@@ -46,7 +46,7 @@ public class AsC2SBuilder extends AsFileWriter {
 		classInfo.append("\t\tpublic function "+codeName+"(");
 		classInfo.append(params);
 		classInfo.append("){\r\n")
-		.append("\t\t\tsuper("+node.getCmd() + ");\r\n")
+		.append("\t\t\tsuper(" + node.getCmd() + ");\r\n")
 		.append(constructs)
 		.append("\t\t}");
 		classInfo.append(fields);

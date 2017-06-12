@@ -133,7 +133,8 @@ public class AsFileWriter {
 			builder.append("bytes.readObject();\r\n");
 		}
 		else if(cvo.type.contains("[]")){//todo
-			builder.append("bytes.readObject();\r\n");
+			addImport("com.icday.util.ArrayUtil");
+			builder.append("ArrayUtil.read(bytes);\r\n");
 		}
 		else if(cvo.type.equalsIgnoreCase("int")){
 			builder.append("bytes.readInt();\r\n");
@@ -153,8 +154,8 @@ public class AsFileWriter {
 		else if(cvo.type.equalsIgnoreCase("AMF")){
 			builder.append("bytes.readObject();\r\n");
 		}else{
-			logger.warn("unknown type " + cvo.type);
-			builder.append("bytes.readObject();\r\n");
+			addImport("com.icday.util.SocketDataUtil");
+			builder.append("SocketDataUtil.read(bytes);\r\n");
 		}
 	}
 	
@@ -166,29 +167,32 @@ public class AsFileWriter {
 			target = target + ".";
 		}
 		
+		target = target + cvo.key;
+		
 		if(cvo.type.contains("[]")){//todo
-			builder.append("\t\t\tbytes.writeObject(" + target + cvo.key+");\r\n");
+			addImport("com.icday.util.ArrayUtil");
+			builder.append("\t\t\tArrayUtil.write(bytes ," + target+");\r\n");
 		}
 		
 		else if(cvo.type.equalsIgnoreCase("int")){
-			builder.append("\t\t\tbytes.writeInt(" + target + cvo.key+");\r\n");
+			builder.append("\t\t\tbytes.writeInt(" + target+");\r\n");
 		}
 		else if(cvo.type.equalsIgnoreCase("double")){
-			builder.append("\t\t\tbytes.writeDouble(" + target +cvo.key+");\r\n");
+			builder.append("\t\t\tbytes.writeDouble(" + target+");\r\n");
 		}
 		else if(cvo.type.equalsIgnoreCase("long")){
-			builder.append("\t\t\tbytes.writeDouble(" + target +cvo.key+");\r\n");
+			builder.append("\t\t\tbytes.writeDouble(" + target+");\r\n");
 		}
 		else if(cvo.type.equalsIgnoreCase("Short")){
-			builder.append("\t\t\tbytes.writeShort(" + target +cvo.key+");\r\n");
+			builder.append("\t\t\tbytes.writeShort(" + target+");\r\n");
 		}
 		else if(cvo.type.equalsIgnoreCase("String")){
-			builder.append("\t\t\tbytes.writeUTF(" + target +cvo.key)
-			.append(" == null ?").append("\"\" : ").append(target  + cvo.key).append(");\r\n");
+			builder.append("\t\t\tbytes.writeUTF(" + target)
+			.append(" == null ?").append("\"\" : ").append(target).append(");\r\n");
 		}
 		else{
-			logger.warn("unknown type " + cvo.type);
-			builder.append("\t\t\tbytes.writeObject(" + target +cvo.key+");\r\n");
+			addImport("com.icday.util.SocketDataUtil");
+			builder.append("\t\t\tSocketDataUtil.write(bytes , " + target+");\r\n");
 		}
 	}
 }
