@@ -29,7 +29,7 @@ public class JavaS2CBuilder extends JavaFileWriter {
 	private void writeConstructs(CellVO cvo){
 		constructs.append("\t\t");
 		if(cvo.type.contains("[]")){
-			constructs.append("output.writeAMFObject(");
+			constructs.append("output.writeArrayList(");
 			constructs.append(cvo.key).append(" == null ? ").append("new ArrayList<>() : ").append(cvo.key).append(");\r\n");
 		}
 		else if(cvo.type.contains("List")){
@@ -60,7 +60,7 @@ public class JavaS2CBuilder extends JavaFileWriter {
 			constructs.append("output.writeAMFObject(");
 			constructs.append(cvo.key).append(" == null ? ").append("new Object() : ").append(cvo.key).append(");\r\n");
 		}else{
-			constructs.append("output.writeAMFObject(");
+			constructs.append("output.writeData(");
 			constructs.append(cvo.key).append(" == null ? ").append("new Object() : ").append(cvo.key).append(");\r\n");
 		}
 		

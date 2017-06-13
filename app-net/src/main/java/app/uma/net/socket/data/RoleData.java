@@ -8,11 +8,7 @@ import app.uma.net.socket.data.AttributesData;
 import app.uma.net.socket.util.ArrayUtil;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-<<<<<<< HEAD
 	 * md5:ac352a15447c1ae09498de3779e371de
-=======
-	 * md5:f67d8abd5c0270cf2983938580c6b3f7
->>>>>>> branch 'master' of https://github.com/shanonder/project_uma.git
 	 */
 public class RoleData implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -21,7 +17,7 @@ public class RoleData implements Serializable{
 	private int serverId;//服务器ID
 	private String name;//姓名
 	private int level;//等级
-	private double exp;//经验
+	private long exp;//经验
 	private ArrayList<AttributesData> attributes;//属性
 	public String getInsId(){
 		return this.insId;
@@ -53,10 +49,10 @@ public class RoleData implements Serializable{
 	public void setLevel(int level){
 		this.level=level;
 	}
-	public double getExp(){
+	public long getExp(){
 		return this.exp;
 	}
-	public void setExp(double exp){
+	public void setExp(long exp){
 		this.exp=exp;
 	}
 	public ArrayList<AttributesData> getAttributes(){
@@ -72,7 +68,7 @@ public class RoleData implements Serializable{
 		out.writeShort(data.serverId);
 		out.writeUTF(data.name == null ?"" : data.name);
 		out.writeInt(data.level);
-		out.writeDouble(data.exp);
+		out.writeLong(data.exp);
 		ArrayUtil.write( out , data.attributes);
 	}
 
@@ -86,7 +82,7 @@ public class RoleData implements Serializable{
 		data.serverId = in.readShort();
 		data.name = in.readUTF();
 		data.level = in.readInt();
-		data.exp = in.readDouble();
+		data.exp = in.readLong();
 		data.attributes = ArrayUtil.read(in);
 		return data;
 	}

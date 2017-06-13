@@ -11,7 +11,7 @@ public class RoleEnterWorldResponse  extends ServerResponse{
 		output.writeInt(mapId);
 		output.writeDouble(posX);
 		output.writeDouble(posY);
-		output.writeAMFObject(role == null ? new Object() : role);
+		output.writeData(role == null ? new Object() : role);
 
 	}
 

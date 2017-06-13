@@ -10,7 +10,7 @@ public class PackAddResponse  extends ServerResponse{
 		super(0x40005 , status);
 		output.writeShort(type);
 		output.writeShort(index);
-		output.writeAMFObject(item == null ? new Object() : item);
+		output.writeData(item == null ? new Object() : item);
 
 	}
 

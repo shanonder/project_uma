@@ -23,7 +23,7 @@ public class RoleVO {
 	public RoleData toMsg(){
 		RoleData roleData = new RoleData();
 		roleData.setName(name);
-		roleData.setCfgId(db.getProfession());
+		roleData.setProfId(db.getProfession());
 		roleData.setExp(db.getExp());
 		roleData.setInsId(db.getId());
 		roleData.setLevel(db.getLevel());

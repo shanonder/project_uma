@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import app.uma.net.socket.decodes.AMFUtil;
 import app.uma.net.socket.util.ArrayUtil;
+import app.uma.net.socket.util.DataUtil;
 
 /**
  * 封装了消息体(内容,不包括消息号),用于封装从客户端读取到的数据，或者发送到客户端的数据
@@ -54,6 +55,10 @@ public class MsgBodyWrap {
 		return ArrayUtil.read(dataIn);
 	}
 
+	public boolean readBoolean() throws IOException {
+		return dataIn.readBoolean();
+	}
+	
 	public short readShort() throws IOException {
 		return dataIn.readShort();
 	}
@@ -76,6 +81,10 @@ public class MsgBodyWrap {
 
 	public String readUTF() throws IOException {
 		return dataIn.readUTF();
+	}
+	
+	public <E> E readData() throws Exception {
+		return DataUtil.read(dataIn);
 	}
 
 	public void writeByte(int value) throws IOException {
@@ -114,21 +123,18 @@ public class MsgBodyWrap {
 		dataOut.writeUTF(value != null? value : "");
 	}
 	
-	public void writeAMFObject(Object data) throws IOException {
-		AMFUtil.instance.encodeObject(dataOut,data);
-	}
-	
 	public void writeArrayList(ArrayList<?> array) throws Exception{
 		ArrayUtil.write(dataOut , array);
+	}
+	
+	public <E> void writeData(E data) throws Exception{
+		DataUtil.write(dataOut, data);
 	}
 
 	public byte[] toByteArray() {
 		return this.out.toByteArray();
 	}
 	
-	public Object readAmfObject() throws Exception{
-		return AMFUtil.instance.decodeObject(dataIn);
-	}
 	
 	
 	

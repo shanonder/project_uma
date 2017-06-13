@@ -61,10 +61,6 @@ public class ClientRequest{
 		return msgBody.readUTF();
 	}
 	
-	public Object getAMFObject() throws Exception {
-		return msgBody.readAmfObject();
-	}
-	
 	public void relese(){
 		if(msgBody!=null){
 			msgBody.close();

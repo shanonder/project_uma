@@ -9,7 +9,7 @@ import app.uma.net.socket.data.PackData;
 public class PackInitResponse  extends ServerResponse{
 	public PackInitResponse(int status , ArrayList<PackData> packs) throws Exception{
 		super(0x40001 , status);
-		output.writeAMFObject(packs == null ? new ArrayList<>() : packs);
+		output.writeArrayList(packs == null ? new ArrayList<>() : packs);
 
 	}
 
