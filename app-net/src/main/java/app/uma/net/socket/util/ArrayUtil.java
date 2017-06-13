@@ -4,7 +4,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.List;
 
 import app.uma.net.socket.DataHash;
 import app.uma.net.socket.consts.DefaultTypeConst;
@@ -82,8 +81,7 @@ public class ArrayUtil {
 				item.add(index,input.readShort());
 			}
 			else if(type == ClassTypeEnum.t_int.getType()){
-				int value = input.readInt();
-				item.add(index, value);
+				item.add(index, input.readInt());
 			}
 			else if(type == ClassTypeEnum.t_long.getType()){
 				item.add(index,input.readLong());

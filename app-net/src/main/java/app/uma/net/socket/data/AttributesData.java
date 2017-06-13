@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 import java.io.DataInputStream;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:9ff1b2f52a6c4f172053a9e30951340
+	 * md5:ac352a15447c1ae09498de3779e371de
 	 */
 public class AttributesData implements Serializable{
 	private static final long serialVersionUID = 1L;

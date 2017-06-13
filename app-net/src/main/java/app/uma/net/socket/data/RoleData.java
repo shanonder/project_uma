@@ -8,12 +8,13 @@ import app.uma.net.socket.data.AttributesData;
 import app.uma.net.socket.util.ArrayUtil;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:9ff1b2f52a6c4f172053a9e30951340
+	 * md5:ac352a15447c1ae09498de3779e371de
 	 */
 public class RoleData implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String insId;//唯一ID
-	private int cfgId;//配置表ID
+	private int profId;//职业ID
+	private int serverId;//服务器ID
 	private String name;//姓名
 	private int level;//等级
 	private long exp;//经验
@@ -24,11 +25,17 @@ public class RoleData implements Serializable{
 	public void setInsId(String insId){
 		this.insId=insId;
 	}
-	public int getCfgId(){
-		return this.cfgId;
+	public int getProfId(){
+		return this.profId;
 	}
-	public void setCfgId(int cfgId){
-		this.cfgId=cfgId;
+	public void setProfId(int profId){
+		this.profId=profId;
+	}
+	public int getServerId(){
+		return this.serverId;
+	}
+	public void setServerId(int serverId){
+		this.serverId=serverId;
 	}
 	public String getName(){
 		return this.name;
@@ -57,7 +64,8 @@ public class RoleData implements Serializable{
 
 	public static void write(DataOutputStream out , RoleData data) throws Exception{
 		out.writeUTF(data.insId == null ?"" : data.insId);
-		out.writeInt(data.cfgId);
+		out.writeInt(data.profId);
+		out.writeShort(data.serverId);
 		out.writeUTF(data.name == null ?"" : data.name);
 		out.writeInt(data.level);
 		out.writeLong(data.exp);
@@ -67,7 +75,8 @@ public class RoleData implements Serializable{
 	@SuppressWarnings("unchecked")
 	public static RoleData read(DataInputStream in , RoleData data) throws Exception{
 		data.insId = in.readUTF();
-		data.cfgId = in.readInt();
+		data.profId = in.readInt();
+		data.serverId = in.readShort();
 		data.name = in.readUTF();
 		data.level = in.readInt();
 		data.exp = in.readLong();
