@@ -31,6 +31,9 @@ public class AttributesData implements Serializable{
 
 	@SuppressWarnings("unchecked")
 	public static AttributesData read(DataInputStream in , AttributesData data) throws Exception{
+		if(data == null){
+			data = new AttributesData();
+		}
 		data.cfgId = in.readInt();
 		data.value = in.readDouble();
 		return data;

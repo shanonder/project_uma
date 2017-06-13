@@ -9,15 +9,24 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import app.uma.net.socket.data.AttributesData;
 import app.uma.net.socket.data.EquipData;
+import app.uma.net.socket.data.ItemData;
 import app.uma.net.socket.util.ArrayUtil;
+import app.uma.net.socket.util.DataUtil;
 
 public class DataTest {
 	
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception{
 		EquipData equipData = new EquipData();
-		
+		equipData.setInsId("12312312");
+		ArrayList<AttributesData> attris = new ArrayList<>();
+		AttributesData ad = new AttributesData();
+		ad.setCfgId(1);
+		ad.setValue(2);
+		attris.add(ad);
+		equipData.setAttributes(attris);
 		ArrayList<EquipData> objects = new ArrayList<>();
 		objects.add(equipData);
 		objects.add(null);
@@ -27,18 +36,10 @@ public class DataTest {
 		
 //		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		OutputStream os = new FileOutputStream(file);
-		DataOutputStream out = new DataOutputStream(os);
 		DataOutputStream dataOut = new DataOutputStream(os);
-		System.out.println(objects.get(0).getClass().getName());
-//		System.out.println(objects.get(1).getClass().getName());
-		System.out.println(objects.get(2).getClass().getName());
-		System.out.println(objects.get(3).getClass().getName());
-//		System.out.println(objects.get(4).getClass().getName());
-		
-		out.writeBoolean(true);
-		ArrayUtil.write(out, objects);
-		EquipData.write(out, null);
 		ArrayUtil.write(dataOut, objects);
+		DataUtil.write(dataOut, null);
+		DataUtil.write(dataOut, equipData);
 		os.close();
 		
 		InputStream in = new FileInputStream(file);
@@ -49,6 +50,9 @@ public class DataTest {
 		System.out.println(newArr.get(2).getClass().getName());
 		System.out.println(newArr.get(3).getClass().getName());
 //		System.out.println(newArr.get(4).getClass().getName());
-		
+//		ArrayUtil.read(dis);
+		ItemData itemData = DataUtil.read(dis);
+		System.out.println(itemData != null?itemData.toString():"null");
+		System.out.println(DataUtil.read(dis).toString());
 	}
 }

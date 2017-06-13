@@ -66,6 +66,9 @@ public class RoleData implements Serializable{
 
 	@SuppressWarnings("unchecked")
 	public static RoleData read(DataInputStream in , RoleData data) throws Exception{
+		if(data == null){
+			data = new RoleData();
+		}
 		data.insId = in.readUTF();
 		data.cfgId = in.readInt();
 		data.name = in.readUTF();

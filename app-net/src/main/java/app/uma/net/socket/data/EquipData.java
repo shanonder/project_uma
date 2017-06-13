@@ -35,6 +35,9 @@ public class EquipData extends ItemData implements Serializable{
 
 	@SuppressWarnings("unchecked")
 	public static EquipData read(DataInputStream in , EquipData data) throws Exception{
+		if(data == null){
+			data = new EquipData();
+		}
 		ItemData.read( in , data );
 		data.strenthLv = in.readInt();
 		data.attributes = ArrayUtil.read(in);

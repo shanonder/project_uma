@@ -47,6 +47,9 @@ public class ItemData implements Serializable{
 
 	@SuppressWarnings("unchecked")
 	public static ItemData read(DataInputStream in , ItemData data) throws Exception{
+		if(data == null){
+			data = new ItemData();
+		}
 		data.insId = in.readUTF();
 		data.cfgId = in.readInt();
 		data.type = in.readUTF();

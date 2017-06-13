@@ -42,6 +42,9 @@ public class PackData implements Serializable{
 
 	@SuppressWarnings("unchecked")
 	public static PackData read(DataInputStream in , PackData data) throws Exception{
+		if(data == null){
+			data = new PackData();
+		}
 		data.type = in.readShort();
 		data.openLength = in.readShort();
 		data.itemList = ArrayUtil.read(in);

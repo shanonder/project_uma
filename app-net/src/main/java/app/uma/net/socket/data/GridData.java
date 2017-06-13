@@ -33,6 +33,9 @@ public class GridData implements Serializable{
 
 	@SuppressWarnings("unchecked")
 	public static GridData read(DataInputStream in , GridData data) throws Exception{
+		if(data == null){
+			data = new GridData();
+		}
 		data.index = in.readShort();
 		data.item = DataUtil.read(in);
 		return data;
