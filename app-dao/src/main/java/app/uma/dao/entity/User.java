@@ -16,8 +16,10 @@ public class User {
 	private String id;
 
     private String name;
+    
+    private int antiAddiction;
 
-    private String email;
+//    private String email;
 
 	public String getId() {
 		return id;
@@ -35,13 +37,21 @@ public class User {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public int getAntiAddiction() {
+		return antiAddiction;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setAntiaddiction(int antiAddiction) {
+		this.antiAddiction = antiAddiction;
 	}
+
+//	public String getEmail() {
+//		return email;
+//	}
+//
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
 
 
 }

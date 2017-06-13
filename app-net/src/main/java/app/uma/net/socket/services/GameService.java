@@ -11,6 +11,7 @@ import org.apache.mina.filter.executor.OrderedThreadPoolExecutor;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.SocketSessionConfig;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import app.uma.net.socket.consts.ProtocolConst;
@@ -18,6 +19,7 @@ import app.uma.net.socket.decodes.SocketCodeFactory;
 import app.uma.net.socket.factorys.ServerThreadFactory;
 import app.uma.net.socket.handlers.GameProtocolHandler;
 import app.uma.net.socket.heaps.HeapProcesser;
+import app.uma.net.socket.interfaces.IModuleFacade;
 import app.uma.net.socket.message.MsgDispatcher;
 
 @Service
@@ -31,6 +33,9 @@ public class GameService extends Thread {
 		this.port = port;
 	}
 	
+	@Autowired
+	private IModuleFacade moduleFacade;
+	
 	public void start(){
 		acceptor = new NioSocketAcceptor();
 		acceptor.setBacklog(100);
@@ -42,8 +47,6 @@ public class GameService extends Thread {
 		acceptor.setHandler(new GameProtocolHandler());
 		threadpool = new OrderedThreadPoolExecutor(500);
 		threadpool.setThreadFactory(new ServerThreadFactory("OrderedThreadPool"));
-		
-		MsgDispatcher.getInstance().registProcess(ProtocolConst.HeapRequest, new HeapProcesser());
 		chain.addLast("threadPool", new ExecutorFilter(threadpool));
 		int recsize = 5120;
 		int sendsize = 40480;                                                                                         
@@ -60,14 +63,8 @@ public class GameService extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		startModules();
+		moduleFacade.start();
 	}
 
-//	private void startModules() {
-//		new CreateRoleModule().startup();
-//		new ChatModule().startup();
-//		new SceneModule().startup();
-//		
-//	}
 	
 }

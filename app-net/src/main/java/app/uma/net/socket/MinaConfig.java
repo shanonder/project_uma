@@ -16,7 +16,6 @@ public class MinaConfig {
 	@Bean
 	public LoginService loginService () throws IOException{
 		LoginService ls = new LoginService(3004);
-		ls.start();
 		logger.info("LoginService Start");
 		return ls;
 	}
@@ -24,7 +23,6 @@ public class MinaConfig {
 	@Bean
 	public GameService gameService (){
 		GameService gs = new GameService(3005);
-		gs.start();
 		logger.info("GameService Start");
 		return gs;
 	}

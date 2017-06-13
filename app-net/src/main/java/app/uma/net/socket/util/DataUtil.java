@@ -21,7 +21,6 @@ public class DataUtil {
 		}
 		out.writeBoolean(true);
 		Class<?> clazz = data.getClass();
-		System.out.println(clazz.getName());
 		out.writeShort(DataHash.Class2Type.get(clazz.getName()));
 		Method method = clazz.getMethod("write", DataOutputStream.class, clazz);  
 		method.invoke(null, out , data);

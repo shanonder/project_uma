@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Package {
+public class Pack {
 
 	@Id
 	@GenericGenerator(name = "UUIDGENERATE", strategy = "uuid2")

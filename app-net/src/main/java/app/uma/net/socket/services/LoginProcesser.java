@@ -20,5 +20,4 @@ public class LoginProcesser extends MsgProcessor implements INotAuthProcessor{
 //			gameSession.sendMsg(new LoginGateResponse(101,null,0,null));
 //		}
 	}
-
 }

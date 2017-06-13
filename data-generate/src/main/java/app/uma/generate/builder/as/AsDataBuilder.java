@@ -84,7 +84,8 @@ public class AsDataBuilder extends AsFileWriter{
 		.append("\t\t}\r\n");
 //		function encode
 		classInfo
-		.append("\n\t\tpublic static function read(bytes :ByteArray , data : "+node.getName()+"):" + node.getName() + "{\n");
+		.append("\n\t\tpublic static function read(bytes :ByteArray , data : "+node.getName()+" = null):" + node.getName() + "{\n");
+		classInfo.append("\t\t\tdata ||= new " + node.getName() + "();\n");
 		if(node.getParent()!= null){
 			classInfo.append("\t\t\t"+ node.getParent() + ".read(bytes , data);\n");
 		}
