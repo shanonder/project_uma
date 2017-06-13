@@ -12,13 +12,27 @@ import app.uma.generate.node.DataOptNode;
 public class AsDataHashBuilder extends AsFileWriter{
 	
 	private String md5;
-	private StringBuilder consts = new StringBuilder();
+	private StringBuilder c2ts = new StringBuilder();
+	private StringBuilder t2rs = new StringBuilder();
+	private StringBuilder c2ws = new StringBuilder();
+	
+	protected void reset(){
+		super.reset();
+		c2ts.delete(0, c2ts.length());
+		t2rs.delete(0, t2rs.length());
+		c2ws.delete(0, c2ws.length());
+	}
+	
 	public void addClass(DataOptNode node){
 		addImport(props.getPackData()+"." + node.getName());
-		consts.append("\t\tHASH["+node.getDataId()+"] = "+ node.getName() + ";\n");
+		String type = props.getPackData() + "::" + node.getName();
+		c2ts.append("\t\tClassname2Type[\""+ type + "\"] = " + node.getDataId() + ";\n");
+		c2ws.append("\t\tClassName2Write[\"" + type + "\"] = " + node.getName() + ".write;\n");
+		t2rs.append("\t\tType2Read["+node.getDataId()+"] = " + node.getName() + ".read;\n");
 	}
 	
 	public void frush(){
+		addImport("flash.utils.Dictionary");
 		String fileName = "DataHash";
 		String outPack = props.getPack();
 		String dir = props.getPath() + outPack.replace(".", "/") + "/";
@@ -36,8 +50,12 @@ public class AsDataHashBuilder extends AsFileWriter{
 		.append("{\r\n");
 		
 		//		addStatics
-		classInfo.append("\t\tpublic static const HASH:Array = new Array();\n");
-		classInfo.append(consts);
+		classInfo.append("\t\tpublic static const Classname2Type:Dictionary = new Dictionary();\n");
+		classInfo.append("\t\tpublic static const ClassName2Write:Dictionary = new Dictionary();\n");
+		classInfo.append("\t\tpublic static const Type2Read:Dictionary = new Dictionary();\n\n");
+		classInfo.append(c2ts).append("\n");
+		classInfo.append(c2ws).append("\n");
+		classInfo.append(t2rs).append("\n");
 		//		addConstruct
 		classInfo.append("\t\tpublic function "+fileName+"(");
 		classInfo.append(params);

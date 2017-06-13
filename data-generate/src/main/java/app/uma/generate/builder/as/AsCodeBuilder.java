@@ -60,6 +60,7 @@ public class AsCodeBuilder implements ICodeBuilder {
 			outDirs.add(props.getPath() + props.getPackData().replace(".", "/") + "/");
 			outDirs.add(props.getPath() + props.getPackRequest().replace(".", "/") + "/");
 			outDirs.add(props.getPath() + props.getPackResponse().replace(".", "/") + "/");
+			outDirs.add(props.getPath() + props.getPackConst().replace(".", "/") + "/");
 		}
 		return outDirs;
 	}

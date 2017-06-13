@@ -14,6 +14,8 @@ public class CodeProperties {
 	private String packResponse;
 	
 	private String packData;
+	
+	private String packConst;
 
 	public String getPackRequest() {
 		return packRequest;
@@ -91,6 +93,14 @@ public class CodeProperties {
 
 	public void setPack(String pack) {
 		this.pack = pack;
+	}
+
+	public String getPackConst() {
+		return packConst;
+	}
+
+	public void setPackConst(String packConst) {
+		this.packConst = packConst;
 	}
 
 }

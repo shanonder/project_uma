@@ -5,9 +5,10 @@ public enum ClassTypeEnum {
 	, t_boolean(-2,"java.lang.Boolean")
 	, t_short(-3,"java.lang.Short")
 	, t_int(-4,"java.lang.Integer")
-	, t_long(-5,"java.lang.Long")
-	, t_string(-6,"java.lang.String")
-	, t_array(-7,"java.lang.ArrayList");
+	, t_double(-5,"java.lang.Long")
+	, t_long(-6,"java.lang.Long")
+	, t_string(-7,"java.lang.String")
+	, t_array(-8,"java.lang.ArrayList");
 
 	private int type;
 	private String refClass;

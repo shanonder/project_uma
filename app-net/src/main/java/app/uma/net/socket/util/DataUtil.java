@@ -21,7 +21,7 @@ public class DataUtil {
 		}
 		out.writeBoolean(true);
 		Class<?> clazz = data.getClass();
-		out.writeShort(DataHash.Class2Type.get(clazz));
+		out.writeShort(DataHash.Class2Type.get(clazz.getName()));
 		Method method = clazz.getMethod("write", DataOutputStream.class, clazz);  
 		method.invoke(null, out , data);
 	}
@@ -32,7 +32,8 @@ public class DataUtil {
 		if(notNull == false){
 			return null;
 		}
-		String className = DataHash.Type2Class.get(in.readShort());
+		int type = in.readShort();
+		String className = DataHash.Type2Class.get(type);
 		Class<?> threadClazz = Class.forName(className);
 		Method method = threadClazz.getMethod("read", DataInputStream.class,threadClazz);
 		E data = (E) method.invoke(null, in , threadClazz.newInstance());

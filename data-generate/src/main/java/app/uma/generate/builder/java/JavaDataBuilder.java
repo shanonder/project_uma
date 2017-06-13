@@ -76,6 +76,8 @@ public class JavaDataBuilder extends JavaFileWriter{
 //		=======================read==========================
 		classInfo.append("\n\t@SuppressWarnings(\"unchecked\")\n");
 		classInfo.append("\tpublic static " + codeName + " read(DataInputStream in , "+ codeName +" data) throws Exception{\n");
+		classInfo.append("\t\tif(data == null){\n\t\t\tdata = new " + codeName + "();\n\t\t}\n");
+		
 		if(node.getParent() != null){
 			classInfo.append("\t\t" + node.getParent() + ".read( in , data );\n");
 		}
