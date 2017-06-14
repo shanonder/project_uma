@@ -5,14 +5,14 @@ import java.io.DataOutputStream;
 import java.io.DataInputStream;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:ac352a15447c1ae09498de3779e371de
+	 * md5:6fbd4498441778567949fafa0192e410
 	 */
 public class ItemData implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String insId;//唯一ID
 	private int cfgId;//配置表ID
 	private String type;//分类
-	private long createTime;//创建时间
+	private double createTime;//创建时间
 	public String getInsId(){
 		return this.insId;
 	}
@@ -31,10 +31,10 @@ public class ItemData implements Serializable{
 	public void setType(String type){
 		this.type=type;
 	}
-	public long getCreateTime(){
+	public double getCreateTime(){
 		return this.createTime;
 	}
-	public void setCreateTime(long createTime){
+	public void setCreateTime(double createTime){
 		this.createTime=createTime;
 	}
 
@@ -42,7 +42,7 @@ public class ItemData implements Serializable{
 		out.writeUTF(data.insId == null ?"" : data.insId);
 		out.writeInt(data.cfgId);
 		out.writeUTF(data.type == null ?"" : data.type);
-		out.writeLong(data.createTime);
+		out.writeDouble(data.createTime);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -53,7 +53,7 @@ public class ItemData implements Serializable{
 		data.insId = in.readUTF();
 		data.cfgId = in.readInt();
 		data.type = in.readUTF();
-		data.createTime = in.readLong();
+		data.createTime = in.readDouble();
 		return data;
 	}
 

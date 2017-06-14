@@ -7,7 +7,7 @@ import app.uma.net.socket.data.ItemData;
 import app.uma.net.socket.util.DataUtil;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:ac352a15447c1ae09498de3779e371de
+	 * md5:6fbd4498441778567949fafa0192e410
 	 */
 public class GridData implements Serializable{
 	private static final long serialVersionUID = 1L;

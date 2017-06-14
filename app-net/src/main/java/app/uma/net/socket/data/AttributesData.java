@@ -5,28 +5,28 @@ import java.io.DataOutputStream;
 import java.io.DataInputStream;
 	/**
 	 * 此类由CodeGenerateUtil自动生成
-	 * md5:ac352a15447c1ae09498de3779e371de
+	 * md5:6fbd4498441778567949fafa0192e410
 	 */
 public class AttributesData implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int cfgId;//配置表ID
-	private long value;
+	private double value;
 	public int getCfgId(){
 		return this.cfgId;
 	}
 	public void setCfgId(int cfgId){
 		this.cfgId=cfgId;
 	}
-	public long getValue(){
+	public double getValue(){
 		return this.value;
 	}
-	public void setValue(long value){
+	public void setValue(double value){
 		this.value=value;
 	}
 
 	public static void write(DataOutputStream out , AttributesData data) throws Exception{
 		out.writeInt(data.cfgId);
-		out.writeLong(data.value);
+		out.writeDouble(data.value);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -35,7 +35,7 @@ public class AttributesData implements Serializable{
 			data = new AttributesData();
 		}
 		data.cfgId = in.readInt();
-		data.value = in.readLong();
+		data.value = in.readDouble();
 		return data;
 	}
 

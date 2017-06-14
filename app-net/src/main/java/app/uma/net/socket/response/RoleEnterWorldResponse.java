@@ -8,7 +8,7 @@ import app.uma.net.socket.data.RoleData;
 public class RoleEnterWorldResponse  extends ServerResponse{
 	public RoleEnterWorldResponse(int status , int mapId, double posX, double posY, RoleData role) throws Exception{
 		super(0x30002 , status);
-		output.writeInt(mapId);
+		output.writeShort(mapId);
 		output.writeDouble(posX);
 		output.writeDouble(posY);
 		output.writeData(role == null ? new Object() : role);
