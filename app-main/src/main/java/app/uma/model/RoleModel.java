@@ -39,6 +39,7 @@ public class RoleModel {
 			return;
 		}
 		Role role = new Role();
+//		role.setUid();
 		role.setName(name);
 		role.setProfession(request.getProfId());
 		role.setLevel(1);
