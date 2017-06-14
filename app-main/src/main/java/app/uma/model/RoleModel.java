@@ -30,11 +30,11 @@ public class RoleModel {
 			gameSession.sendMsg(new RoleCreateResponse(202));
 			return;
 		}
-		if(StringUtil.shieldedWordCheck(name)){
+		if(StringUtil.shieldedWordCheck(name) == false){
 			gameSession.sendMsg(new RoleCreateResponse(203));
 			return;
 		}
-		if(roleRepository.hasRole(request.getName())){
+		if(roleRepository.hasRole(request.getName()) != null){
 			gameSession.sendMsg(new RoleCreateResponse(201));
 			return;
 		}

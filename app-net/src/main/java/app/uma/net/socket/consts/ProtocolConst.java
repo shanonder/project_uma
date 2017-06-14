@@ -8,7 +8,7 @@ package app.uma.net.socket.consts;
 	public static int LoginResponse  = 0x10001;
 	public static int HeapRequest  = 0x20000;
 	public static int HeapResponse  = 0x20000;
-	public static int EnterWorldResponse  = 0x30001;
+	public static int EnterWorldResponse  = 0x50001;
 	public static int PackInitRequest  = 0x40001;
 	public static int PackInitResponse  = 0x40001;
 	public static int PackMoveRequest  = 0x40002;

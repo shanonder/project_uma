@@ -1,7 +1,5 @@
 package app.uma.dao.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -12,6 +10,6 @@ import app.uma.dao.entity.User;
 // CRUD refers Create, Read, Update, Delete
 
 public interface IUserRepository extends CrudRepository<User, String> {
-	@Query("select u from User u where u.platId=?2 and u.plat_key=?1")
-	  List<User> getUserById(String platKey , int platId);
+	@Query("select u from User u where u.platId=?2 and u.platKey=?1")
+	  User getUserById(String platKey , int platId);
 }

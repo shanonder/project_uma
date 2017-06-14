@@ -21,21 +21,18 @@ public class UserModel {
 	}
 
 	
-	public UserVO find(String uid) {
-		UserVO user = new UserVO(userRepos.findOne(uid));
-		return user;
+	public UserVO findOrInit(int platId , String platKey ) {
+		User user = userRepos.getUserById(platKey, platId);
+		if(user == null){
+			user = new User();
+			user.setPlatKey(platKey);
+			user.setPlatId(platId);
+//			user.setAntiaddiction(0);
+			userRepos.save(user);
+		}
+		UserVO userVO = new UserVO(user);
+		return userVO;
 	}
 
 
-
-
-	public void init(String uid, int platId) {
-		User user = new User();
-		user.setId(uid);
-		user.setPlatId(platId);
-//		user.setAntiaddiction(0);
-		userRepos.save(user);
-	}
-
-	
 }

@@ -35,7 +35,7 @@ public class MsgDispatcher {
 	
 	public void registProcess(int cmd,MsgProcessor progress){
 		if(getMsgProcessor(cmd) != null){
-			logger.warn("消息号监听重复："+ cmd);
+			logger.warn("消息号监听重复：0x"+ Integer.toHexString(cmd));
 		}
 		processorsMap.put(cmd, progress);
 	}
@@ -48,6 +48,9 @@ public class MsgDispatcher {
 		
 		int msgCode = clientRequest.getCmd();
 		MsgProcessor processor = getMsgProcessor(msgCode);
+		if(processor == null){
+			logger.warn("消息未监听：0x" + Integer.toHexString(msgCode));
+		}
 		if(gameSession.isLogin() || processor instanceof INotAuthProcessor){
 			processor.handle(gameSession, clientRequest);
 		}

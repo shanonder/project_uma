@@ -5,6 +5,6 @@ import app.uma.net.socket.consts.ProtocolConst;
 
 public class RoleCreateModule extends ModuleBase {
 	public void startup(){
-		registProcess(ProtocolConst.LoginRequest,new RoleCreateProcesser());
+		registProcess(ProtocolConst.RoleCreateRequest , new RoleCreateProcesser());
 	}
 }

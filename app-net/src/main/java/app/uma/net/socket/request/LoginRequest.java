@@ -6,32 +6,32 @@ import app.uma.net.socket.decodes.ClientRequest;
  */
 public class LoginRequest{
 	public LoginRequest(ClientRequest request) throws Exception{
-		uid = request.getString();
-		token = request.getString();
 		platId = request.getShort();
+		appkey = request.getString();
+		token = request.getString();
 
 	}
 
-	private String uid;//玩家ID
-	private String token;//通行证
 	private int platId;//登录平台
-	public String getUid(){
-		return this.uid;
+	private String appkey;//玩家appId
+	private String token;//通行证
+	public int getPlatId(){
+		return this.platId;
 	}
-	public void setUid(String uid){
-		this.uid=uid;
+	public void setPlatId(int platId){
+		this.platId=platId;
+	}
+	public String getAppkey(){
+		return this.appkey;
+	}
+	public void setAppkey(String appkey){
+		this.appkey=appkey;
 	}
 	public String getToken(){
 		return this.token;
 	}
 	public void setToken(String token){
 		this.token=token;
-	}
-	public int getPlatId(){
-		return this.platId;
-	}
-	public void setPlatId(int platId){
-		this.platId=platId;
 	}
 
 }

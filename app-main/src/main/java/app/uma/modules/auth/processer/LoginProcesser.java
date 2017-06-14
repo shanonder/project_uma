@@ -1,6 +1,7 @@
 package app.uma.modules.auth.processer;
 
 import app.uma.Application;
+import app.uma.dao.entity.User;
 import app.uma.model.RoleModel;
 import app.uma.model.UserModel;
 import app.uma.net.socket.decodes.ClientRequest;
@@ -25,21 +26,22 @@ public class LoginProcesser extends MsgProcessor implements INotAuthProcessor{
 		}
 		UserModel userModel = Application.context.getBean(UserModel.class);
 		RoleModel roleModel = Application.context.getBean(RoleModel.class);
-		String uid = request.getUid();
-		UserVO user = userModel.find(uid);
-		if(user != null){
+		UserVO userVO = userModel.findOrInit(request.getPlatId() ,request.getAppkey() );
+		if(userVO != null){
 			gameSession.setLogin(true);
-			gameSession.setUser(user);
+			gameSession.setUser(userVO);
+			String uid = userVO.db.getId();
+			User user = userVO.db;
 			RoleVO role = roleModel.getRoleByUid(uid, gameSession);
 			if(role == null){
-				gameSession.sendMsg(new LoginResponse(201, uid, request.getToken(),request.getPlatId()));
+				gameSession.sendMsg(new LoginResponse(201, user.getPlatId(), user.getPlatKey(),request.getToken(),user.getId()));
 			}
 			else{
 				gameSession.setRole(role);
-				gameSession.sendMsg(new LoginResponse(200, uid, request.getToken(),request.getPlatId()));
+				gameSession.sendMsg(new LoginResponse(200, user.getPlatId(), user.getPlatKey(),request.getToken(),user.getId()));
 			}
 		}else{
-			userModel.init(request.getUid(),request.getPlatId());
+			
 		}
 	}
 	private boolean checkToken(LoginRequest request) {
