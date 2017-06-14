@@ -1,9 +1,11 @@
 package app.uma.modules.auth.processer;
 
 import app.uma.Application;
+import app.uma.controller.EnterWorldController;
 import app.uma.dao.entity.User;
 import app.uma.model.RoleModel;
 import app.uma.model.UserModel;
+import app.uma.model.WorldModel;
 import app.uma.net.socket.decodes.ClientRequest;
 import app.uma.net.socket.interfaces.INotAuthProcessor;
 import app.uma.net.socket.message.MsgProcessor;
@@ -14,7 +16,6 @@ import app.uma.vo.RoleVO;
 import app.uma.vo.UserVO;
 
 public class LoginProcesser extends MsgProcessor implements INotAuthProcessor{
-
 
 	@Override
 	public void process(GameSession gameSession, ClientRequest cr) throws Exception {
@@ -39,6 +40,7 @@ public class LoginProcesser extends MsgProcessor implements INotAuthProcessor{
 			else{
 				gameSession.setRole(role);
 				gameSession.sendMsg(new LoginResponse(200, user.getPlatId(), user.getPlatKey(),request.getToken(),user.getId()));
+				EnterWorldController.execute(gameSession);
 			}
 		}else{
 			

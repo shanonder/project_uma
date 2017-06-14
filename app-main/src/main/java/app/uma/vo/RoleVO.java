@@ -9,10 +9,8 @@ import app.uma.net.socket.sessions.GameSession;
 
 public class RoleVO {
 	
-	private String name;
-	
-	private GameSession session;
-	private Role db;
+	public GameSession session;
+	public Role db;
 	public RoleVO(GameSession session , Role db){
 		this.session = session;
 		this.db = db;
@@ -22,7 +20,7 @@ public class RoleVO {
 	
 	public RoleData toMsg(){
 		RoleData roleData = new RoleData();
-		roleData.setName(name);
+		roleData.setName(db.getName());
 		roleData.setProfId(db.getProfession());
 		roleData.setExp(db.getExp());
 		roleData.setInsId(db.getId());

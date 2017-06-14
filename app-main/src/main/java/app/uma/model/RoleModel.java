@@ -10,6 +10,7 @@ import app.uma.net.socket.response.RoleCreateResponse;
 import app.uma.net.socket.sessions.GameSession;
 import app.uma.utils.StringUtil;
 import app.uma.vo.RoleVO;
+import app.uma.vo.UserVO;
 
 @Component
 public class RoleModel {
@@ -24,28 +25,34 @@ public class RoleModel {
 		return new RoleVO(session, role);
 	}
 	
-	public void create(RoleCreateRequest request, GameSession gameSession) throws Exception {
+	public int create(RoleCreateRequest request, GameSession gameSession) throws Exception {
 		String name = request.getName();
+		int state = 200;
 		if(name.length() < 6){
-			gameSession.sendMsg(new RoleCreateResponse(202));
-			return;
+			state = 202;
+			gameSession.sendMsg(new RoleCreateResponse(state));
+			return state;
 		}
 		if(StringUtil.shieldedWordCheck(name) == false){
+			state = 203;
 			gameSession.sendMsg(new RoleCreateResponse(203));
-			return;
+			return state;
 		}
 		if(roleRepository.hasRole(request.getName()) != null){
+			state = 201;
 			gameSession.sendMsg(new RoleCreateResponse(201));
-			return;
+			return state;
 		}
+		UserVO user = gameSession.getUser(UserVO.class);
 		Role role = new Role();
-//		role.setUid();
+		role.setUid(user.db.getId());
 		role.setName(name);
 		role.setProfession(request.getProfId());
 		role.setLevel(1);
 		role.setExp(0);
 		roleRepository.save(role);
-		gameSession.sendMsg(new RoleCreateResponse(200));
+		gameSession.sendMsg(new RoleCreateResponse(state));
+		return state;
 	}
 
 }
