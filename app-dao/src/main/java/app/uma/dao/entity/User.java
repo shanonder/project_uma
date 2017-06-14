@@ -14,7 +14,11 @@ public class User {
 	@GeneratedValue(generator = "UUIDGENERATE")
 	@Column(length = 36)
 	private String id;
-
+	
+	private int platId;
+	
+	private String platKey;
+	
     private String name;
     
     private int antiAddiction;
@@ -43,6 +47,22 @@ public class User {
 
 	public void setAntiaddiction(int antiAddiction) {
 		this.antiAddiction = antiAddiction;
+	}
+
+	public int getPlatId() {
+		return platId;
+	}
+
+	public void setPlatId(int platId) {
+		this.platId = platId;
+	}
+
+	public String getPlatKey() {
+		return platKey;
+	}
+
+	public void setPlatKey(String platKey) {
+		this.platKey = platKey;
 	}
 
 //	public String getEmail() {

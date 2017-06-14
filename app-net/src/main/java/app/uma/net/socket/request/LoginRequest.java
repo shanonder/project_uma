@@ -8,13 +8,13 @@ public class LoginRequest{
 	public LoginRequest(ClientRequest request) throws Exception{
 		uid = request.getString();
 		token = request.getString();
-		platform = request.getString();
+		platId = request.getShort();
 
 	}
 
 	private String uid;//玩家ID
 	private String token;//通行证
-	private String platform;//登录平台
+	private int platId;//登录平台
 	public String getUid(){
 		return this.uid;
 	}
@@ -27,11 +27,11 @@ public class LoginRequest{
 	public void setToken(String token){
 		this.token=token;
 	}
-	public String getPlatform(){
-		return this.platform;
+	public int getPlatId(){
+		return this.platId;
 	}
-	public void setPlatform(String platform){
-		this.platform=platform;
+	public void setPlatId(int platId){
+		this.platId=platId;
 	}
 
 }

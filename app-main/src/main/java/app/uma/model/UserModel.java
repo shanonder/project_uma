@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import app.uma.dao.entity.User;
 import app.uma.dao.repository.IUserRepository;
-import app.uma.net.socket.request.LoginRequest;
 import app.uma.vo.UserVO;
 
 
@@ -28,14 +27,12 @@ public class UserModel {
 	}
 
 
-	public void init(LoginRequest request) {
-		
-	}
 
 
-	public void init(String uid, String platform) {
+	public void init(String uid, int platId) {
 		User user = new User();
 		user.setId(uid);
+		user.setPlatId(platId);
 //		user.setAntiaddiction(0);
 		userRepos.save(user);
 	}

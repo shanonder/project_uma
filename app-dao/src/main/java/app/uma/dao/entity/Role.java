@@ -23,11 +23,13 @@ public class Role {
 	@Column(length = 36)
 	private String uid;
 	
+	private String name;
 	private int profession;
 	
 	private int level;
 	
 	private long exp;
+	
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(updatable = false)
@@ -84,6 +86,14 @@ public class Role {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

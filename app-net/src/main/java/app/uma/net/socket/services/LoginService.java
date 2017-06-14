@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import app.uma.net.socket.decodes.SocketCodeFactory;
 import app.uma.net.socket.factorys.ServerThreadFactory;
 import app.uma.net.socket.handlers.LoginProtocolHandler;
-import app.uma.net.socket.message.MsgDispatcher;
 
 @Service
 public class LoginService {
@@ -26,9 +25,9 @@ public class LoginService {
 	
 	public LoginService(int port){
 		this.port = port;
-		for(UserMsgRegister register :UserMsgRegister.values()){
-			MsgDispatcher.getInstance().registProcess(register.getMsgCode(), register.getMsgProcessor());
-		}
+//		for(UserMsgRegister register :UserMsgRegister.values()){
+//			MsgDispatcher.getInstance().registProcess(register.getMsgCode(), register.getMsgProcessor());
+//		}
 	}
 	
 	private int port = 3004;
