@@ -5,17 +5,26 @@ package app.uma.database;
 	 * md5:118e973092a4297db93b5138bd8547b7
 	 */
 public class DtPack{
-	/**
-	 * 类型
-	 */
-	public int type;
-	/**
-	 * 职业
-	 */
-	public int open;
-	/**
-	 * 资源
-	 */
-	public String max;
+	private int type;//类型
+	private int open;//职业
+	private String max;//资源
+	public int getType(){
+		return this.type;
+	}
+	public void setType(int type){
+		this.type=type;
+	}
+	public int getOpen(){
+		return this.open;
+	}
+	public void setOpen(int open){
+		this.open=open;
+	}
+	public String getMax(){
+		return this.max;
+	}
+	public void setMax(String max){
+		this.max=max;
+	}
 
 }

@@ -12,9 +12,7 @@ public abstract class ModuleBase implements IModule{
 		msgDispatcher = MsgDispatcher.getInstance();
 	}
 	
-	public void startup(){
-		
-	}
+	public abstract void startup();
 	
 	public final void registProcess(int cmd,MsgProcessor progress){
 		msgDispatcher.registProcess(cmd, progress);

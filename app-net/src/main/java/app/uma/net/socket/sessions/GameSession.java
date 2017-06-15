@@ -2,6 +2,7 @@ package app.uma.net.socket.sessions;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+import java.util.ArrayList;
 
 import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.session.AttributeKey;
@@ -21,7 +22,7 @@ public class GameSession {
 	
 	private Object role;
 	
-	private Object pack;
+	private ArrayList<?> pack;
 	
 	private boolean isLogin=false;
 	
@@ -85,17 +86,19 @@ public class GameSession {
 	}
 
 	/**
+	 * @param <T>
 	 * @return the pack
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T getPack(Class<T> t) {
-		return (T)this.pack;
+	public <T> ArrayList<T> getPack(Class<T> t) {
+		return (ArrayList<T>)this.pack;
 	}
 
 	/**
+	 * @param <T>
 	 * @param pack the pack to set
 	 */
-	public void setPack(Object value) {
+	public <T> void setPack(ArrayList<T> value) {
 		this.pack = value;
 	}
 	

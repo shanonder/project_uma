@@ -29,6 +29,8 @@ public class Pack {
 	@Lob
 	private String content;
 	
+	private Integer openLenth;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(updatable = false)
 	@org.hibernate.annotations.CreationTimestamp
@@ -76,5 +78,21 @@ public class Pack {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Integer getOpenLenth() {
+		return openLenth;
+	}
+
+	public void setOpenLenth(Integer openLenth) {
+		this.openLenth = openLenth;
 	}
 }

@@ -5,13 +5,19 @@ package app.uma.database;
 	 * md5:d92a192408e60dcf8d9d634132445f05
 	 */
 public class DtConfig{
-	/**
-	 * DESC
-	 */
-	public String key;
-	/**
-	 * DESC
-	 */
-	public String value;
+	private String key;//DESC
+	private String value;//DESC
+	public String getKey(){
+		return this.key;
+	}
+	public void setKey(String key){
+		this.key=key;
+	}
+	public String getValue(){
+		return this.value;
+	}
+	public void setValue(String value){
+		this.value=value;
+	}
 
 }

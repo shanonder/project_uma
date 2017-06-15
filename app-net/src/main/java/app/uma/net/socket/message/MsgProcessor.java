@@ -10,14 +10,14 @@ public abstract class MsgProcessor {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MsgProcessor.class);
 	
-	public void handle(GameSession gameSession,ClientRequest request){
+	public void handle(GameSession gameSession,ClientRequest cr){
 		try {
-			process(gameSession,request);
+			process(gameSession,cr);
 		} catch (Exception e) {
-			logger.error("消息处理出错，msg code:"+request.getCmd());
+			logger.error("消息处理出错，msg code:"+cr.getCmd());
 			e.printStackTrace();
 		}
 	}
 	
-	public abstract void process(GameSession gameSession,ClientRequest request)throws Exception;
+	public abstract void process(GameSession gameSession,ClientRequest cr)throws Exception;
 }

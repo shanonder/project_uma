@@ -9,5 +9,10 @@ import app.uma.dao.entity.Pack;
 
 public interface IPackRepository extends CrudRepository<Pack, String> {
 	@Query("select p from Pack p where p.roleId=?")
-	  List<Pack> getPacks(String rid);
+	List<Pack> getPacks(String rid);
+
+	@Query("select p from Pack p where p.roleId=?1 and type=?2")
+	Pack getPack(String rid , int type);
+
+	Pack findByRoleIdAndType(String roleId, int type);
 }
