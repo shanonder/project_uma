@@ -1,5 +1,5 @@
 "id","name","type","source","quality"
-"String","String","int","String","int"
+"int","String","int","String","int"
 "","","","",""
 "1","Item1","1","s_item_1","1"
 "2","Item2","1","s_item_2","2"

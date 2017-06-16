@@ -2,12 +2,12 @@ package app.uma.database;
 
 	/**
 	 * 此类由ExcelToCodeTool自动生成
-	 * md5:118e973092a4297db93b5138bd8547b7
+	 * md5:f60afe4dfc1fa19f467091d4f227be0e
 	 */
 public class DtPack{
 	private int type;//类型
 	private int open;//职业
-	private String max;//资源
+	private int max;//资源
 	public int getType(){
 		return this.type;
 	}
@@ -20,10 +20,10 @@ public class DtPack{
 	public void setOpen(int open){
 		this.open=open;
 	}
-	public String getMax(){
+	public int getMax(){
 		return this.max;
 	}
-	public void setMax(String max){
+	public void setMax(int max){
 		this.max=max;
 	}
 

@@ -12,12 +12,11 @@ import app.uma.model.WorldModel;
 import app.uma.net.socket.sessions.GameSession;
 
 public class EnterWorldController {
-	public static void execute(GameSession session){
+	public static void execute(GameSession session) throws Exception{
 		WorldModel worldModel = Application.context.getBean(WorldModel.class);
 		worldModel.enterWorld(session);
 		
 		PackModel packModel = Application.context.getBean(PackModel.class);
 		packModel.init(session);
-		
 	}
 }
