@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -15,12 +16,12 @@ import org.hibernate.annotations.GenericGenerator;
 public class Role {
 	
 	@Id
-	@GenericGenerator(name = "UUIDGENERATE", strategy = "uuid2")
-	@GeneratedValue(generator = "UUIDGENERATE")
-	@Column(length = 36)
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
+	@Column(length = 32)
 	private String id;
 	
-	@Column(length = 36)
+	@Column(length = 32)
 	private String uid;
 	
 	private String name;
@@ -31,6 +32,9 @@ public class Role {
 	private long exp;
 	
 	
+    @Lob
+    private String extContent;
+    
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(updatable = false)
 	@org.hibernate.annotations.CreationTimestamp
@@ -102,6 +106,14 @@ public class Role {
 
 	public void setUid(String uid) {
 		this.uid = uid;
+	}
+
+	public String getExtContent() {
+		return extContent;
+	}
+
+	public void setExtContent(String extContent) {
+		this.extContent = extContent;
 	}
 
 	

@@ -5,7 +5,6 @@ import app.uma.controller.EnterWorldController;
 import app.uma.dao.entity.User;
 import app.uma.model.RoleModel;
 import app.uma.model.UserModel;
-import app.uma.model.WorldModel;
 import app.uma.net.socket.decodes.ClientRequest;
 import app.uma.net.socket.interfaces.INotAuthProcessor;
 import app.uma.net.socket.message.MsgProcessor;
@@ -27,7 +26,7 @@ public class LoginProcesser extends MsgProcessor implements INotAuthProcessor{
 		}
 		UserModel userModel = Application.context.getBean(UserModel.class);
 		RoleModel roleModel = Application.context.getBean(RoleModel.class);
-		UserVO userVO = userModel.findOrInit(request.getPlatId() ,request.getAppkey() );
+		UserVO userVO = userModel.findOrInit(request.getPlatId() ,request.getServerId(), request.getOpenId());
 		if(userVO != null){
 			gameSession.setLogin(true);
 			gameSession.setUser(userVO);
@@ -35,11 +34,11 @@ public class LoginProcesser extends MsgProcessor implements INotAuthProcessor{
 			User user = userVO.db;
 			RoleVO role = roleModel.getRoleByUid(uid, gameSession);
 			if(role == null){
-				gameSession.sendMsg(new LoginResponse(201, user.getPlatId(), user.getPlatKey(),request.getToken(),user.getId()));
+				gameSession.sendMsg(new LoginResponse(201, user.getPlatId(), user.getServerId(), user.getOpenId(), request.getToken(),user.getId()));
 			}
 			else{
 				gameSession.setRole(role);
-				gameSession.sendMsg(new LoginResponse(200, user.getPlatId(), user.getPlatKey(),request.getToken(),user.getId()));
+				gameSession.sendMsg(new LoginResponse(200, user.getPlatId(), user.getServerId(), user.getOpenId(), request.getToken(),user.getId()));
 				EnterWorldController.execute(gameSession);
 			}
 		}else{

@@ -1,27 +1,46 @@
 package app.uma.dao.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
 	@Id
-	@GenericGenerator(name = "UUIDGENERATE", strategy = "uuid2")
-	@GeneratedValue(generator = "UUIDGENERATE")
-	@Column(length = 36)
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
+	@Column(length = 32)
 	private String id;
 	
 	private int platId;
 	
-	private String platKey;
+	private String openId;
+	
+	private int serverId;
 	
     private String name;
     
     private int antiAddiction;
+    
+    @Lob
+    private String extContent;
+    
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(updatable = false)
+	@org.hibernate.annotations.CreationTimestamp
+	private Date createTime;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@org.hibernate.annotations.UpdateTimestamp
+	private Date updateTime;
 
 //    private String email;
 
@@ -57,21 +76,43 @@ public class User {
 		this.platId = platId;
 	}
 
-	public String getPlatKey() {
-		return platKey;
+	public int getServerId() {
+		return serverId;
 	}
 
-	public void setPlatKey(String platKey) {
-		this.platKey = platKey;
+	public void setServerId(int serverId) {
+		this.serverId = serverId;
 	}
 
-//	public String getEmail() {
-//		return email;
-//	}
-//
-//	public void setEmail(String email) {
-//		this.email = email;
-//	}
+	public String getOpenId() {
+		return openId;
+	}
 
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
 
+	public String getExtContent() {
+		return extContent;
+	}
+
+	public void setExtContent(String extContent) {
+		this.extContent = extContent;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 }

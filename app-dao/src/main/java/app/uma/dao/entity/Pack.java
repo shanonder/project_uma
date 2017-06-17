@@ -16,12 +16,12 @@ import org.hibernate.annotations.GenericGenerator;
 public class Pack {
 
 	@Id
-	@GenericGenerator(name = "UUIDGENERATE", strategy = "uuid2")
-	@GeneratedValue(generator = "UUIDGENERATE")
-	@Column(length = 36)
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
+	@Column(length = 32)
 	private String id;
 
-	@Column(length = 36)
+	@Column(length = 32)
 	private String roleId;
 
 	private Integer type;

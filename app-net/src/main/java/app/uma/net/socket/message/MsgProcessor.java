@@ -14,7 +14,7 @@ public abstract class MsgProcessor {
 		try {
 			process(gameSession,cr);
 		} catch (Exception e) {
-			logger.error("消息处理出错，msg code:"+cr.getCmd());
+			logger.error("消息处理出错，msg code: 0x"+Integer.toHexString(cr.getCmd()));
 			e.printStackTrace();
 		}
 	}

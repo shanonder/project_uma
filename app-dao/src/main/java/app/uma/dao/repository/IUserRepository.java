@@ -10,6 +10,8 @@ import app.uma.dao.entity.User;
 // CRUD refers Create, Read, Update, Delete
 
 public interface IUserRepository extends CrudRepository<User, String> {
-	@Query("select u from User u where u.platId=?2 and u.platKey=?1")
-	  User getUserById(String platKey , int platId);
+//	@Query("select u from User u where u.platId=?1 and u.serverId=?2 and u.openId=?3")
+//	  User getUserById( int platId ,int serverId , String openId);
+	@Query("select u from User u where u.platId=?1 and u.serverId=?2 and u.openId=?3")
+	User findByPlatIdAndServerIdAndOpenId(int platId ,int serverId , String openId);
 }

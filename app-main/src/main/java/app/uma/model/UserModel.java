@@ -21,13 +21,13 @@ public class UserModel {
 	}
 
 	
-	public UserVO findOrInit(int platId , String platKey ) {
-		User user = userRepos.getUserById(platKey, platId);
+	public UserVO findOrInit(int platId , int serverId, String openId ) {
+		User user = userRepos.findByPlatIdAndServerIdAndOpenId(platId, serverId , openId);
 		if(user == null){
 			user = new User();
-			user.setPlatKey(platKey);
 			user.setPlatId(platId);
-//			user.setAntiaddiction(0);
+			user.setServerId(serverId);
+			user.setOpenId(openId);
 			userRepos.save(user);
 		}
 		UserVO userVO = new UserVO(user);

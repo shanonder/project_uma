@@ -20,9 +20,9 @@ public class Item {
 	// private Integer id;
 
 	@Id
-	@GenericGenerator(name = "UUIDGENERATE", strategy = "uuid2")
-	@GeneratedValue(generator = "UUIDGENERATE")
-	@Column(length = 36)
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
+	@Column(length = 32)
 	private String id;
 
 	private Integer sourceId;

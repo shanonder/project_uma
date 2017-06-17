@@ -7,13 +7,15 @@ import app.uma.net.socket.decodes.ClientRequest;
 public class LoginRequest{
 	public LoginRequest(ClientRequest request) throws Exception{
 		platId = request.getShort();
-		appkey = request.getString();
+		serverId = request.getInt();
+		openId = request.getString();
 		token = request.getString();
 
 	}
 
 	private int platId;//登录平台
-	private String appkey;//玩家appId
+	private int serverId;//服务器ID
+	private String openId;//玩家第三方ID
 	private String token;//通行证
 	public int getPlatId(){
 		return this.platId;
@@ -21,11 +23,17 @@ public class LoginRequest{
 	public void setPlatId(int platId){
 		this.platId=platId;
 	}
-	public String getAppkey(){
-		return this.appkey;
+	public int getServerId(){
+		return this.serverId;
 	}
-	public void setAppkey(String appkey){
-		this.appkey=appkey;
+	public void setServerId(int serverId){
+		this.serverId=serverId;
+	}
+	public String getOpenId(){
+		return this.openId;
+	}
+	public void setOpenId(String openId){
+		this.openId=openId;
 	}
 	public String getToken(){
 		return this.token;
