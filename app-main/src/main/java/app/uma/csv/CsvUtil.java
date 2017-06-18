@@ -6,34 +6,44 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import app.uma.config.AppDirProperties;
 import app.uma.utils.StringUtil;
 import au.com.bytecode.opencsv.CSVReader;
 
-@Component
 public class CsvUtil {
-	static {
-		datas = new HashMap<>();
-	}
-	public static HashMap<String, ArrayList<?>> datas;
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static ArrayList<?> getCsv(String name , Class<?> cls) throws  Exception{
+
+private static final Logger log = LoggerFactory.getLogger(CsvUtil.class);
+public HashMap<String, ArrayList<?>> datas;
+	public CsvUtil() {
+			datas = new HashMap<>();
+	}
+	
+	@Autowired
+	private AppDirProperties appDirProperties;
+	
+	@SuppressWarnings("unchecked")
+	public <E> ArrayList<E> getCsv(String name , Class<E> cls) throws  Exception{
 		String key = null;
 		if(name.contains(".dat")){
 			key = name;
 		}else{
 			key = name + ".dat";
 		}
-		ArrayList list = datas.get(key);
+		ArrayList<E> list = (ArrayList<E>) datas.get(key);
 		if(datas.get(key) != null){
 			return list;
 		}
 		list = new ArrayList<>();
-		File file = new File("C:/workspaces/wp_spring/project_uma/app-main/assets/csvs/" + key );
+		log.info(appDirProperties.getCsv());
+		File file = new File(appDirProperties.getCsv() + key );
 
 		FileReader fReader = new FileReader(file);
+		@SuppressWarnings("resource")
 		CSVReader csvReader = new CSVReader(fReader); 
 		String[] props = csvReader.readNext();
 		ArrayList<String> functions = new ArrayList<>();
@@ -45,6 +55,7 @@ public class CsvUtil {
 			}
 		}
 		String[] types = csvReader.readNext();
+		@SuppressWarnings("unused")
 		String[] keys = csvReader.readNext();
 		String[] strs = null;
 		while((strs = csvReader.readNext()) != null){
@@ -72,7 +83,7 @@ public class CsvUtil {
 						mtd.invoke(data,b);
 					}
 				}
-				list.add(data);
+				list.add((E) data);
 			}  
 		}
 		return list; 

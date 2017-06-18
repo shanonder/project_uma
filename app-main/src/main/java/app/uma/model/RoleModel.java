@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 
 import app.uma.dao.entity.Role;
 import app.uma.dao.repository.IRoleRepository;
+import app.uma.modules.role.create.RoleCreateProcesser;
+import app.uma.net.socket.consts.ProtocolConst;
 import app.uma.net.socket.request.RoleCreateRequest;
 import app.uma.net.socket.response.RoleCreateResponse;
 import app.uma.net.socket.sessions.GameSession;
@@ -13,10 +15,16 @@ import app.uma.vo.RoleVO;
 import app.uma.vo.UserVO;
 
 @Component
-public class RoleModel {
+public class RoleModel extends ModelBase {
 
 	@Autowired
 	private IRoleRepository roleRepository;
+	
+	@Override
+	protected void initCfg() {
+		
+	}
+	
 	public RoleVO getRoleByUid(String uid , GameSession session) {
 		Role role = roleRepository.getRoleByUid(uid);
 		if(role == null){
@@ -28,7 +36,7 @@ public class RoleModel {
 	public int create(RoleCreateRequest request, GameSession gameSession) throws Exception {
 		String name = request.getName();
 		int state = 200;
-		if(name.length() < 6){
+		if(name.getBytes().length < 6){
 			state = 202;
 			gameSession.sendMsg(new RoleCreateResponse(state));
 			return state;
@@ -55,4 +63,10 @@ public class RoleModel {
 		return state;
 	}
 
+	@Autowired
+	private RoleCreateProcesser roleCreateProcesser;
+	@Override
+	public void registProsesser() {
+		registProcess(ProtocolConst.RoleCreateRequest , roleCreateProcesser);
+	}
 }

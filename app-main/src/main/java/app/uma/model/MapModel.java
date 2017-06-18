@@ -6,6 +6,18 @@
  */
 package app.uma.model;
 
-public class MapModel {
+public class MapModel extends ModelBase {
+
+	@Override
+	protected void initCfg() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void registProsesser() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

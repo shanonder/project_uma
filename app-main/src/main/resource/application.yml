@@ -1,6 +1,10 @@
+app: 
+  config: 
+    dir: 
+      csv: C:/workspaces/wp_spring/project_uma/app-main/assets/csvs/
+
 server: 
   port: 9222
-
 spring: 
   jpa:
     hibernate:

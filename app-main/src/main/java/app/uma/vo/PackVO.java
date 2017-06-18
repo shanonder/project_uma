@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import app.uma.Application;
 import app.uma.dao.entity.Pack;
 import app.uma.database.DtPack;
@@ -73,17 +76,28 @@ public class PackVO {
 	
 
 
-	public static PackVO init(Pack db , DtPack cfg){
+	public static PackVO init(Pack db , DtPack cfg) throws Exception{
 		PackVO vo = new PackVO();
 		vo.db = db;
 		vo.cfg = cfg;
-		String itemStr = vo.getDb().getContent();
-		String[] items = itemStr.split(";");
-		for(String ele : items){
-			String[] e = ele.split("-");
-			ItemModel itemModel = Application.context.getBean(ItemModel.class);
-			ItemVO itemVO = itemModel.genItemByInsId(e[1]);
-			vo.setItem(Integer.parseInt(e[0]), itemVO);
+		String contentStr = vo.getDb().getContent();
+		if(contentStr != null){
+			JSONObject jsonObject = new JSONObject();
+			Iterator itera = jsonObject.keys();  
+			while(itera.hasNext()){
+				String key = (String)itera.next();
+				Object value =jsonObject.getString(key);
+				ItemModel itemModel = Application.context.getBean(ItemModel.class);
+				ItemVO itemVO =itemModel.getItem(value);
+			}
+//			String[] items = contentStr.split(";");
+//			for(String ele : items){
+//				String[] e = ele.split("-");
+//				ItemModel itemModel = Application.context.getBean(ItemModel.class);
+//				ItemVO itemVO = itemModel.genItemByInsId(e[1]);
+//				
+//				vo.setItem(Integer.parseInt(e[0]), itemVO);
+//			}
 		}
 		return vo;
 	}

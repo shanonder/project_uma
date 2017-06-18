@@ -4,30 +4,44 @@ import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import app.uma.modules.IModule;
-import app.uma.modules.auth.AuthModule;
-import app.uma.modules.role.create.RoleCreateModule;
-import app.uma.net.socket.consts.ProtocolConst;
-import app.uma.net.socket.heaps.HeapProcesser;
+import app.uma.model.ItemModel;
+import app.uma.model.ModelBase;
+import app.uma.model.PackModel;
+import app.uma.model.UserModel;
 import app.uma.net.socket.interfaces.IModuleFacade;
-import app.uma.net.socket.message.MsgDispatcher;
 
 public class ModuleFacade implements IModuleFacade {
 
 	private static final Logger log = LoggerFactory.getLogger(ModuleFacade.class);
-	private ArrayList<IModule> modules;
+	private ArrayList<ModelBase> models;
+	
 	public ModuleFacade() {
-		modules = new ArrayList<>();
-		modules.add(new AuthModule());
-		modules.add(new RoleCreateModule());
+		models = new ArrayList<>();
 	}
+	
+	@Autowired
+	ItemModel itemModel;
+	
+	@Autowired
+	PackModel packModel;
+	
+	@Autowired
+	UserModel userModel;
+	
 	@Override
 	public void start() {
-		MsgDispatcher.getInstance().registProcess(ProtocolConst.HeapRequest, new HeapProcesser());
+		models.add(userModel);
+		models.add(itemModel);
+		models.add(packModel);
 		
-		for(IModule module : modules){
-			module.startup();
+		for (ModelBase model:models) {
+			model.initCfgs();
+		}
+		
+		for(ModelBase model : models){
+			model.registProsesser();
 		}
 	}
 

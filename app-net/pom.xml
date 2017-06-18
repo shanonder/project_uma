@@ -52,12 +52,16 @@
 			<artifactId>mina-integration-spring</artifactId>
 			<version>1.1.7</version>
 		</dependency>
+
+
 		<!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
 		<dependency>
 			<groupId>org.ow2.asm</groupId>
 			<artifactId>asm</artifactId>
 			<version>6.0_ALPHA</version>
 		</dependency>
+
+
 
 		<!-- BlazeDS -->
 		<!-- <dependency> -->

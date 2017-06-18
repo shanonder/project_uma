@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import app.uma.net.socket.decodes.ClientRequest;
 import app.uma.net.socket.interfaces.INotAuthProcessor;
@@ -14,24 +15,12 @@ import app.uma.net.socket.sessions.GameSession;
  * 消息分发器，根据消息号，找到相应的消息处理器
  *
  */
+@Component
 public class MsgDispatcher {
 
 	private static final Logger logger = LoggerFactory.getLogger(MsgDispatcher.class);
 	
 	private Map<Integer, MsgProcessor> processorsMap = new HashMap<Integer, MsgProcessor>();
-	
-	private static MsgDispatcher instance;
-	public static MsgDispatcher getInstance() {
-		// TODO Auto-generated method stub
-		if(instance == null){
-			instance = new MsgDispatcher();
-		}
-		return instance;
-	}
-
-	public MsgDispatcher(){
-		
-	}
 	
 	public void registProcess(int cmd,MsgProcessor progress){
 		if(getMsgProcessor(cmd) != null){

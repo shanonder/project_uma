@@ -1,6 +1,8 @@
 package app.uma.modules.auth.processer;
 
-import app.uma.Application;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import app.uma.controller.EnterWorldController;
 import app.uma.dao.entity.User;
 import app.uma.model.RoleModel;
@@ -14,8 +16,13 @@ import app.uma.net.socket.sessions.GameSession;
 import app.uma.vo.RoleVO;
 import app.uma.vo.UserVO;
 
+@Component
 public class LoginProcesser extends MsgProcessor implements INotAuthProcessor{
 
+	@Autowired
+	private UserModel userModel;
+	@Autowired
+	private RoleModel roleModel;
 	@Override
 	public void process(GameSession gameSession, ClientRequest cr) throws Exception {
 		LoginRequest request = new LoginRequest(cr);
@@ -24,8 +31,8 @@ public class LoginProcesser extends MsgProcessor implements INotAuthProcessor{
 			gameSession.close();
 			return;
 		}
-		UserModel userModel = Application.context.getBean(UserModel.class);
-		RoleModel roleModel = Application.context.getBean(RoleModel.class);
+//		UserModel userModel = Application.context.getBean(UserModel.class);
+//		RoleModel roleModel = Application.context.getBean(RoleModel.class);
 		UserVO userVO = userModel.findOrInit(request.getPlatId() ,request.getServerId(), request.getOpenId());
 		if(userVO != null){
 			gameSession.setLogin(true);

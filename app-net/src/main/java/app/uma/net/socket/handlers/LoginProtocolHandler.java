@@ -5,14 +5,19 @@ import org.apache.log4j.Logger;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import app.uma.net.socket.decodes.ClientRequest;
 import app.uma.net.socket.message.MsgDispatcher;
 import app.uma.net.socket.sessions.GameSession;
 
+@Component
 public class LoginProtocolHandler extends IoHandlerAdapter {
 	private final Logger logger = Logger.getLogger(getClass());
 
+	@Autowired
+	MsgDispatcher msgDispatcher;
 	@Override
 	public void sessionOpened(IoSession session) {
 		new GameSession(session);
@@ -25,7 +30,7 @@ public class LoginProtocolHandler extends IoHandlerAdapter {
 		if (gs == null) {
 			return;
 		}
-		MsgDispatcher.getInstance().dispatchMsg(gs,clientRequest);
+		msgDispatcher.dispatchMsg(gs,clientRequest);
 	}
 
 	@Override

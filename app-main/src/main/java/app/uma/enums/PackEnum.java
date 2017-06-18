@@ -1,7 +1,7 @@
 package app.uma.enums;
 
 public enum PackEnum {
-	BAG(0),EQUIP(1),DEPOT(3);
+	BAG(0),EQUIP(1),DEPOT(2);
 	
 	private int type;
 	private PackEnum(int type) {

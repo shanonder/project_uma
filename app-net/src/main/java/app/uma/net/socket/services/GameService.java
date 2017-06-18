@@ -32,6 +32,8 @@ public class GameService extends Thread {
 	
 	@Autowired
 	private IModuleFacade moduleFacade;
+	@Autowired
+	GameProtocolHandler gameProtocolHandler;
 	
 	public void start(){
 		acceptor = new NioSocketAcceptor();
@@ -41,7 +43,7 @@ public class GameService extends Thread {
         DefaultIoFilterChainBuilder chain = acceptor.getFilterChain();
 		acceptor.getFilterChain().addLast("logger", new LoggingFilter());
 		acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new SocketCodeFactory()));
-		acceptor.setHandler(new GameProtocolHandler());
+		acceptor.setHandler(gameProtocolHandler);
 		threadpool = new OrderedThreadPoolExecutor(500);
 		threadpool.setThreadFactory(new ServerThreadFactory("OrderedThreadPool"));
 		chain.addLast("threadPool", new ExecutorFilter(threadpool));
