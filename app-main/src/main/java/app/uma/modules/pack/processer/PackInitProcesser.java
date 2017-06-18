@@ -18,7 +18,6 @@ public class PackInitProcesser extends MsgProcessor {
 		PackInitRequest request = new PackInitRequest(cr);
 		ArrayList<PackVO> packVOs = gameSession.getPack(PackVO.class);
 		if(packVOs == null){
-			
 		}
 	}
 
