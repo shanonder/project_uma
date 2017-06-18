@@ -62,7 +62,6 @@ public class ItemModel extends ModelBase{
 	
 	@Override
 	public void registProsesser() {
-		// TODO Auto-generated method stub
 		
 	}
 }

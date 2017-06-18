@@ -74,12 +74,21 @@ public class PackModel extends ModelBase{
 			e.printStackTrace();
 		}
 	}
-
+	
+	@Autowired
+	PackInitProcesser packInitProcesser;
+	@Autowired
+	PackMoveProcesser packMoveProcesser;
+	@Autowired
+	PackDeleteProcesser packDeleteProcesser;
+	@Autowired
+	PackSellProcesser packSellProcesser;
+	
 	@Override
 	public void registProsesser() {
-		registProcess(ProtocolConst.PackInitRequest, new PackInitProcesser());
-		registProcess(ProtocolConst.PackMoveRequest, new PackMoveProcesser());
-		registProcess(ProtocolConst.PackDeleteRequest, new PackDeleteProcesser());
-		registProcess(ProtocolConst.PackSellRequest, new PackSellProcesser());
+		registProcess(ProtocolConst.PackInitRequest, packInitProcesser);
+		registProcess(ProtocolConst.PackMoveRequest, packMoveProcesser);
+		registProcess(ProtocolConst.PackDeleteRequest, packDeleteProcesser);
+		registProcess(ProtocolConst.PackSellRequest, packSellProcesser);
 	}
 }
