@@ -39,7 +39,6 @@ public HashMap<String, ArrayList<?>> datas;
 			return list;
 		}
 		list = new ArrayList<>();
-		log.info(appDirProperties.getCsv());
 		File file = new File(appDirProperties.getCsv() + key );
 
 		FileReader fReader = new FileReader(file);

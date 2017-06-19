@@ -6,6 +6,9 @@
  */
 package app.uma.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MapModel extends ModelBase {
 
 	@Override

@@ -46,7 +46,7 @@ public class RoleModel extends ModelBase {
 			gameSession.sendMsg(new RoleCreateResponse(203));
 			return state;
 		}
-		if(roleRepository.hasRole(request.getName()) != null){
+		if(roleRepository.findOneByRoleName(request.getName()) != null){
 			state = 201;
 			gameSession.sendMsg(new RoleCreateResponse(201));
 			return state;
@@ -59,6 +59,7 @@ public class RoleModel extends ModelBase {
 		role.setLevel(1);
 		role.setExp(0);
 		roleRepository.save(role);
+		gameSession.setRole(getRoleByUid(user.db.getId(), gameSession));
 		gameSession.sendMsg(new RoleCreateResponse(state));
 		return state;
 	}
