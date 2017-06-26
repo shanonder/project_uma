@@ -11,11 +11,12 @@ public class ItemModel extends ModelBase{
 
 
 	@Override
-	protected void initCfg(){
-	}
-	
-	@Override
 	public void registProsesser() {
+		
+	}
+
+	@Override
+	public void startup() {
 		
 	}
 }

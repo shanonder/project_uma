@@ -20,10 +20,6 @@ public class RoleModel extends ModelBase {
 	@Autowired
 	private IRoleRepository roleRepository;
 	
-	@Override
-	protected void initCfg() {
-		
-	}
 	
 	public RoleVO getRoleByUid(String uid , GameSession session) {
 		Role role = roleRepository.getRoleByUid(uid);
@@ -67,5 +63,11 @@ public class RoleModel extends ModelBase {
 	@Override
 	public void registProsesser() {
 		registProcess(ProtocolConst.RoleCreateRequest , RoleCreateProcesser.class);
+	}
+
+	@Override
+	public void startup() {
+		// TODO Auto-generated method stub
+		
 	}
 }

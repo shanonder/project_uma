@@ -24,23 +24,10 @@ public abstract class ModelBase{
 	@Autowired
 	private MsgDispatcher msgDispatcher;
 	
-	private boolean isInit;
-	final public void initCfgs(){
-		if(isInit){
-			return;
-		}
-		isInit = true;
-		initCfg();
-		
-	}
 	
-	final public void startup(){
-		registProsesser();
-	}
 	
 
-
-	protected abstract void initCfg();
+	public abstract void startup();
 	public abstract void registProsesser();
 	
 	public final void registProcess(int cmd,MsgProcessor progress){

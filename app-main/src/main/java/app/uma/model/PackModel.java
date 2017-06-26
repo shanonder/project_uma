@@ -1,12 +1,10 @@
 package app.uma.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import app.uma.csv.CsvUtil;
 import app.uma.dao.entity.Pack;
 import app.uma.dao.repository.IPackRepository;
 import app.uma.database.DtPack;
@@ -28,11 +26,11 @@ public class PackModel extends ModelBase{
 
 	@Autowired
 	private IPackRepository packRepository;
-	@Autowired
-	private CsvUtil csvUtil;
+
 	@Autowired
 	private PackFactory packFactory;
-	private HashMap<Integer,DtPack> dtPackMap;
+	
+
 
 
 	public PackModel(){
@@ -45,7 +43,7 @@ public class PackModel extends ModelBase{
 		ArrayList<PackVO> packVOs = new ArrayList<>();
 		ArrayList<PackData> packDatas = new ArrayList<>();
 		for(PackEnum packEnum : PackEnum.values()){
-			DtPack dt = dtPackMap.get(packEnum.getType());
+			DtPack dt = packFactory.getDtPackMap().get(packEnum.getType());
 			Pack pack = packRepository.findByRoleIdAndType(rid, packEnum.getType());
 			if(pack == null){
 				pack = new Pack();
@@ -62,20 +60,6 @@ public class PackModel extends ModelBase{
 		session.sendMsg(new PackInitResponse(200, packDatas));
 	}
 
-	@Override
-	protected void initCfg() {
-		dtPackMap = new HashMap<>();
-		
-		try {
-			ArrayList<DtPack> list;
-			list = csvUtil.getCsv("pack.dat",DtPack.class);
-			for (DtPack dt : list){
-				dtPackMap.put(dt.getType(), dt);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 	
 	@Override
@@ -84,5 +68,10 @@ public class PackModel extends ModelBase{
 		registProcess(ProtocolConst.PackMoveRequest, PackMoveProcesser.class);
 		registProcess(ProtocolConst.PackDeleteRequest, PackDeleteProcesser.class);
 		registProcess(ProtocolConst.PackSellRequest, PackSellProcesser.class);
+	}
+
+	@Override
+	public void startup() {
+		
 	}
 }

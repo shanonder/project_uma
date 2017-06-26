@@ -39,7 +39,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>cz.advel.jbullet</groupId>
+			<artifactId>jbullet</artifactId>
+			<version>20101010-1</version>
+		</dependency>
 <!-- https://mvnrepository.com/artifact/net.sf.opencsv/opencsv -->
 <dependency>
     <groupId>net.sf.opencsv</groupId>

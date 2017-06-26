@@ -33,9 +33,6 @@ public class ModuleFacade implements IModuleFacade {
 		}
 		
 		for (Class<ModelBase> cls:models) {
-			Application.context.getBean(cls).initCfgs();
-		}
-		for (Class<ModelBase> cls:models) {
 			Application.context.getBean(cls).startup();
 		}
 	}

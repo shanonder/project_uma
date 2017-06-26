@@ -18,9 +18,7 @@ public class UserModel extends ModelBase{
 
 	@Autowired
 	private IUserRepository userRepos;
-	private HashMap<String, UserVO> users;
 	public UserModel() {
-		users = new HashMap<String, UserVO>();
 	}
 
 	
@@ -39,15 +37,18 @@ public class UserModel extends ModelBase{
 
 
 
-	@Override
-	protected void initCfg() {
-		
-	}
 
 	@Override
 	public void registProsesser() {
 		registProcess(ProtocolConst.HeapRequest, HeapProcesser.class);
 		registProcess(ProtocolConst.LoginRequest, LoginProcesser.class);
+		
+	}
+
+
+	@Override
+	public void startup() {
+		// TODO Auto-generated method stub
 		
 	}
 
