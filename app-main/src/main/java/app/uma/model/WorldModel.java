@@ -10,6 +10,7 @@ import app.uma.vo.SceneVO;
 
 @Component
 public class WorldModel extends ModelBase {
+//	private 
 	private HashMap<Integer, SceneVO> scene;
 	public void add(Role role){
 		role.getSceneId();

@@ -13,7 +13,7 @@ import app.uma.generate.config.GeneralBeans;
 
 @SpringBootApplication
 @EnableScheduling
-public class Application {
+public class ProtocolGen {
 	private static final Logger log = LoggerFactory.getLogger(GeneralBeans.class);
 	private static ApplicationContext context;
 	
@@ -24,7 +24,7 @@ public class Application {
 	
 	
 	public static void main(String[] args) throws Exception {
-		context =SpringApplication.run(Application.class, args);
+		context =SpringApplication.run(ProtocolGen.class, args);
 		log.info("SpringStartComplete...");
 		GenerateBuilder genAction = context.getBean(GenerateBuilder.class);
 		genAction.init();

@@ -16,12 +16,14 @@ import net.sf.json.JSONObject;
 @Component
 public class ItemFactory implements Ifactory{
 	
+	@Autowired
+	private CsvUtil csvUtil;
+	
 	private HashMap<Integer,DtItem> itemMap;
 	public DtItem getCfg(int cfgId){
 		return itemMap.get(cfgId);
 	}
-	@Autowired
-	private CsvUtil csvUtil;
+
 	
 
 	public ItemVO getItemByJson(JSONObject value) {
