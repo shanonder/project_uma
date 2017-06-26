@@ -23,11 +23,12 @@ public class PackFactory implements Ifactory {
 		String contentStr = vo.getDb().getContent();
 		if(contentStr != null){
 			JSONObject itemMap = JSONObject.fromObject(contentStr);
-			Iterator itera = itemMap.keys();  
+			Iterator<?> itera = itemMap.keys();  
 			while(itera.hasNext()){
 				String key = (String)itera.next();
 				JSONObject value = itemMap.getJSONObject(key);
 				ItemVO itemVO =itemFactory.getItemByJson(value);
+				vo.setItem(Integer.parseInt(key), itemVO);
 			}
 		}
 		return vo;

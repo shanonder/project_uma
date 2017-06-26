@@ -24,7 +24,7 @@ public class PackVO {
 	
 	public PackVO(Pack db , DtPack cfg) {
 		this.db = db;
-		this.cfg = cfg;
+		this.setCfg(cfg);
 		itemdataMap = new HashMap<>();
 	}
 
@@ -61,7 +61,6 @@ public class PackVO {
 	}
 	
 	public void updateDataContent(){
-		String content = "";
 		Iterator<Entry<Integer, ItemVO>> iter = itemdataMap.entrySet().iterator();
 		JsonObject json = new JsonObject();
 		while (iter.hasNext()) {			
@@ -72,6 +71,14 @@ public class PackVO {
 	
 	public void save(){
 		
+	}
+
+	public DtPack getCfg() {
+		return cfg;
+	}
+
+	public void setCfg(DtPack cfg) {
+		this.cfg = cfg;
 	}
 
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import app.uma.dao.entity.User;
 import app.uma.dao.repository.IUserRepository;
 import app.uma.modules.auth.processer.LoginProcesser;
-import app.uma.modules.role.create.RoleCreateProcesser;
 import app.uma.net.socket.consts.ProtocolConst;
 import app.uma.net.socket.heaps.HeapProcesser;
 import app.uma.vo.UserVO;

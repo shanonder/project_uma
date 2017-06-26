@@ -1,9 +1,7 @@
 package app.uma.vo;
 
-import app.uma.dao.entity.Item;
 import app.uma.database.DtItem;
 import app.uma.net.socket.data.ItemData;
-import net.sf.json.JSON;
 
 public class ItemVO {
 //	private Item db;

@@ -6,6 +6,8 @@
  */
 package app.uma.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import app.uma.Application;
@@ -15,6 +17,10 @@ import app.uma.net.socket.message.MsgProcessor;
 import app.uma.net.socket.sessions.GameSession;
 
 public abstract class ModelBase{
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(ModelBase.class);
+
 	@Autowired
 	private MsgDispatcher msgDispatcher;
 	
@@ -42,9 +48,14 @@ public abstract class ModelBase{
 	}
 	
 	public final void registProcess(int cmd,Class<? extends MsgProcessor> proClass){
-		msgDispatcher.registProcess(cmd, Application.context.getBean(proClass));
+		MsgProcessor processor = Application.context.getBean(proClass);
+		if(processor == null){
+			log.warn("regist error: " + proClass.getName());
+			return;
+		}
+		msgDispatcher.registProcess(cmd, processor);
 	}
-	public final void dispatchMsg( GameSession gameSession,ClientRequest clientRequest){
+	public final void dispatchMsg( GameSession gameSession , ClientRequest clientRequest){
 		msgDispatcher.dispatchMsg(gameSession, clientRequest);
 	}
 	

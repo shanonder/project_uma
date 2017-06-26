@@ -45,10 +45,12 @@ public class ModuleFacade implements IModuleFacade {
 	@SuppressWarnings("unchecked")
 	private void addModel(Class<? extends ModelBase> cls){
 		models.add((Class<ModelBase>) cls);
+		log.info("model regist success: " + cls.getName());
 	}
 	@SuppressWarnings("unchecked")
 	private void addFactory(Class<? extends Ifactory> cls){
 		factorys.add((Class<Ifactory>) cls);
+		log.info("factory regist success: " + cls.getName());
 	}
 
 
@@ -58,7 +60,6 @@ public class ModuleFacade implements IModuleFacade {
 		addModel(ItemModel.class);
 		addModel(PackModel.class);
 		addModel(MapModel.class);
-		
 		addFactory(ItemFactory.class);
 	}
 

@@ -6,8 +6,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import app.uma.config.AppDirProperties;
@@ -17,7 +15,7 @@ import au.com.bytecode.opencsv.CSVReader;
 public class CsvUtil {
 
 
-private static final Logger log = LoggerFactory.getLogger(CsvUtil.class);
+//private static final Logger log = LoggerFactory.getLogger(CsvUtil.class);
 public HashMap<String, ArrayList<?>> datas;
 	public CsvUtil() {
 			datas = new HashMap<>();
