@@ -41,7 +41,6 @@ public class UserModel extends ModelBase{
 
 	@Override
 	protected void initCfg() {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -47,10 +47,10 @@ public abstract class ModelBase{
 		msgDispatcher.registProcess(cmd, progress);
 	}
 	
-	public final void registProcess(int cmd,Class<? extends MsgProcessor> proClass){
-		MsgProcessor processor = Application.context.getBean(proClass);
+	public final void registProcess(int cmd,Class<? extends MsgProcessor> procClass){
+		MsgProcessor processor = Application.context.getBean(procClass);
 		if(processor == null){
-			log.warn("regist error: " + proClass.getName());
+			log.warn("regist error: " + procClass.getName());
 			return;
 		}
 		msgDispatcher.registProcess(cmd, processor);
