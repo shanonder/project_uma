@@ -6,29 +6,29 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import app.uma.csv.CsvUtil;
-import app.uma.database.DtScene;
+import app.uma.database.SceneCfg;
 
 public class SceneFactory implements Ifactory {
 	@Autowired
 	private CsvUtil csvUtil;
-	private HashMap<Integer, DtScene> cfg;
+	private HashMap<Integer, SceneCfg> cfg;
 	@Override
 	public void initCfgs() {
 		setCfg(new HashMap<>());
-		ArrayList<DtScene> scenes;
+		ArrayList<SceneCfg> scenes;
 		try {
-			scenes = csvUtil.getCsv("scene.dat",DtScene.class);
-			for(DtScene dtscene : scenes ){
+			scenes = csvUtil.getCsv("scene.dat",SceneCfg.class);
+			for(SceneCfg dtscene : scenes ){
 				getCfg().put(dtscene.getId(), dtscene);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
 	}
-	public HashMap<Integer, DtScene> getCfg() {
+	public HashMap<Integer, SceneCfg> getCfg() {
 		return cfg;
 	}
-	public void setCfg(HashMap<Integer, DtScene> cfg) {
+	public void setCfg(HashMap<Integer, SceneCfg> cfg) {
 		this.cfg = cfg;
 	}
 

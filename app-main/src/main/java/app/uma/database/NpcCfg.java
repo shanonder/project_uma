@@ -2,16 +2,16 @@ package app.uma.database;
 
 	/**
 	 * 此类由ExcelToCodeTool自动生成
-	 * md5:6d78a9109303095455318d17a7276f20
+	 * md5:d05fb7b90cb5d7cd1e1e5270e9f48843
 	 */
-public class DtScene{
-	private int id;//id
-	private int type;//类型
+public class NpcCfg{
+	private String id;//DESC
+	private int type;//DESC
 	private String source;//DESC
-	public int getId(){
+	public String getId(){
 		return this.id;
 	}
-	public void setId(int id){
+	public void setId(String id){
 		this.id=id;
 	}
 	public int getType(){

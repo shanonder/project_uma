@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class CodeProperties {
 	private String path;
+	
+	private String pathExcel;
 
 	private String pack;
 
@@ -16,11 +18,23 @@ public class CodeProperties {
 	private String packData;
 	
 	private String packConst;
+	
+	private String packXls;
+	
+	
 
 	public String getPackRequest() {
 		return packRequest;
 	}
 
+	public String getPathExcel() {
+		return pathExcel;
+	}
+
+	public void setPathExcel(String pathExcel) {
+		this.pathExcel = pathExcel;
+	}
+	
 	public void setPackRequest(String packRequest) {
 		this.packRequest = packRequest;
 	}
@@ -101,6 +115,14 @@ public class CodeProperties {
 
 	public void setPackConst(String packConst) {
 		this.packConst = packConst;
+	}
+
+	public String getPackXls() {
+		return packXls;
+	}
+
+	public void setPackXls(String packXls) {
+		this.packXls = packXls;
 	}
 
 }

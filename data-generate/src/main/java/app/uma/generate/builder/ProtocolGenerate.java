@@ -14,7 +14,7 @@ import app.uma.generate.properties.Config;
 import app.uma.utils.CreateFileUtil;
 
 @Component
-public class GenerateBuilder {
+public class ProtocolGenerate {
 
 	@Autowired
 	private Config config;
@@ -38,7 +38,7 @@ public class GenerateBuilder {
 	private JavaCodeBuilder javaCodeBuilder;
 
 	private ArrayList<ICodeBuilder> builders;
-	public GenerateBuilder(){
+	public ProtocolGenerate(){
 		builders = new ArrayList<>();
 	}
 

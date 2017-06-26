@@ -4,7 +4,7 @@ package app.uma.database;
 	 * 此类由ExcelToCodeTool自动生成
 	 * md5:3243be523f1d245d058961182a5692b8
 	 */
-public class DtItem{
+public class ItemCfg{
 	private int id;//ID
 	private String name;//名字
 	private int type;//类型

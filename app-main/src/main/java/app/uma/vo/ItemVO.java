@@ -1,13 +1,13 @@
 package app.uma.vo;
 
-import app.uma.database.DtItem;
+import app.uma.database.ItemCfg;
 import app.uma.net.socket.data.ItemData;
 
 public class ItemVO {
 //	private Item db;
-	private DtItem cfg;
+	private ItemCfg cfg;
 	
-	public ItemVO(DtItem cfg) {
+	public ItemVO(ItemCfg cfg) {
 //		this.db = db;
 		this.cfg = cfg;
 	}

@@ -8,13 +8,13 @@ import java.util.Map.Entry;
 import com.google.gson.JsonObject;
 
 import app.uma.dao.entity.Pack;
-import app.uma.database.DtPack;
+import app.uma.database.PackCfg;
 import app.uma.net.socket.data.GridData;
 import app.uma.net.socket.data.PackData;
 
 public class PackVO {
 	private Pack db;
-	private DtPack cfg;
+	private PackCfg cfg;
 
 	private HashMap<Integer, ItemVO> itemdataMap;
 
@@ -22,7 +22,7 @@ public class PackVO {
 		itemdataMap = new HashMap<>();
 	}
 	
-	public PackVO(Pack db , DtPack cfg) {
+	public PackVO(Pack db , PackCfg cfg) {
 		this.db = db;
 		this.setCfg(cfg);
 		itemdataMap = new HashMap<>();
@@ -73,11 +73,11 @@ public class PackVO {
 		
 	}
 
-	public DtPack getCfg() {
+	public PackCfg getCfg() {
 		return cfg;
 	}
 
-	public void setCfg(DtPack cfg) {
+	public void setCfg(PackCfg cfg) {
 		this.cfg = cfg;
 	}
 

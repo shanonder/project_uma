@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import app.uma.dao.entity.Pack;
 import app.uma.dao.repository.IPackRepository;
-import app.uma.database.DtPack;
+import app.uma.database.PackCfg;
 import app.uma.enums.PackEnum;
 import app.uma.factory.PackFactory;
 import app.uma.modules.pack.processer.PackDeleteProcesser;
@@ -43,16 +43,16 @@ public class PackModel extends ModelBase{
 		ArrayList<PackVO> packVOs = new ArrayList<>();
 		ArrayList<PackData> packDatas = new ArrayList<>();
 		for(PackEnum packEnum : PackEnum.values()){
-			DtPack dt = packFactory.getDtPackMap().get(packEnum.getType());
+			PackCfg cfg = packFactory.getDtPackMap().get(packEnum.getType());
 			Pack pack = packRepository.findByRoleIdAndType(rid, packEnum.getType());
 			if(pack == null){
 				pack = new Pack();
 				pack.setRoleId(rid);
 				pack.setType(packEnum.getType());
-				pack.setOpenLenth(dt.getOpen());
+				pack.setOpenLenth(cfg.getOpen());
 				packRepository.save(pack);
 			}
-			PackVO vo = packFactory.initPack(pack, dt);
+			PackVO vo = packFactory.initPack(pack, cfg);
 			packVOs.add(vo);
 			packDatas.add(vo.toMsg());
 		}
