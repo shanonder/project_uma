@@ -46,15 +46,10 @@ public class UserModel extends ModelBase{
 		
 	}
 
-	@Autowired
-	private HeapProcesser heapProcesser;
-
-	@Autowired
-	private LoginProcesser loginProcesser;
 	@Override
 	public void registProsesser() {
-		registProcess(ProtocolConst.HeapRequest, heapProcesser);
-		registProcess(ProtocolConst.LoginRequest, loginProcesser);
+		registProcess(ProtocolConst.HeapRequest, HeapProcesser.class);
+		registProcess(ProtocolConst.LoginRequest, LoginProcesser.class);
 		
 	}
 

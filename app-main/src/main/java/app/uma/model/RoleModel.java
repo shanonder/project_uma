@@ -64,10 +64,8 @@ public class RoleModel extends ModelBase {
 		return state;
 	}
 
-	@Autowired
-	private RoleCreateProcesser roleCreateProcesser;
 	@Override
 	public void registProsesser() {
-		registProcess(ProtocolConst.RoleCreateRequest , roleCreateProcesser);
+		registProcess(ProtocolConst.RoleCreateRequest , RoleCreateProcesser.class);
 	}
 }

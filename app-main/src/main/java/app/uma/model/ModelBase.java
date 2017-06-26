@@ -8,6 +8,7 @@ package app.uma.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import app.uma.Application;
 import app.uma.net.socket.decodes.ClientRequest;
 import app.uma.net.socket.message.MsgDispatcher;
 import app.uma.net.socket.message.MsgProcessor;
@@ -38,6 +39,10 @@ public abstract class ModelBase{
 	
 	public final void registProcess(int cmd,MsgProcessor progress){
 		msgDispatcher.registProcess(cmd, progress);
+	}
+	
+	public final void registProcess(int cmd,Class<? extends MsgProcessor> proClass){
+		msgDispatcher.registProcess(cmd, Application.context.getBean(proClass));
 	}
 	public final void dispatchMsg( GameSession gameSession,ClientRequest clientRequest){
 		msgDispatcher.dispatchMsg(gameSession, clientRequest);

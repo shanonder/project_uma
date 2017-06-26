@@ -11,6 +11,7 @@ import app.uma.dao.entity.Pack;
 import app.uma.dao.repository.IPackRepository;
 import app.uma.database.DtPack;
 import app.uma.enums.PackEnum;
+import app.uma.factory.PackFactory;
 import app.uma.modules.pack.processer.PackDeleteProcesser;
 import app.uma.modules.pack.processer.PackInitProcesser;
 import app.uma.modules.pack.processer.PackMoveProcesser;
@@ -29,6 +30,8 @@ public class PackModel extends ModelBase{
 	private IPackRepository packRepository;
 	@Autowired
 	private CsvUtil csvUtil;
+	@Autowired
+	private PackFactory packFactory;
 	private HashMap<Integer,DtPack> dtPackMap;
 
 
@@ -51,7 +54,7 @@ public class PackModel extends ModelBase{
 				pack.setOpenLenth(dt.getOpen());
 				packRepository.save(pack);
 			}
-			PackVO vo = PackVO.init(pack , dt);
+			PackVO vo = packFactory.initPack(pack, dt);
 			packVOs.add(vo);
 			packDatas.add(vo.toMsg());
 		}
@@ -74,20 +77,12 @@ public class PackModel extends ModelBase{
 		}
 	}
 	
-	@Autowired
-	PackInitProcesser packInitProcesser;
-	@Autowired
-	PackMoveProcesser packMoveProcesser;
-	@Autowired
-	PackDeleteProcesser packDeleteProcesser;
-	@Autowired
-	PackSellProcesser packSellProcesser;
 	
 	@Override
 	public void registProsesser() {
-		registProcess(ProtocolConst.PackInitRequest, packInitProcesser);
-		registProcess(ProtocolConst.PackMoveRequest, packMoveProcesser);
-		registProcess(ProtocolConst.PackDeleteRequest, packDeleteProcesser);
-		registProcess(ProtocolConst.PackSellRequest, packSellProcesser);
+		registProcess(ProtocolConst.PackInitRequest, PackInitProcesser.class);
+		registProcess(ProtocolConst.PackMoveRequest, PackMoveProcesser.class);
+		registProcess(ProtocolConst.PackDeleteRequest, PackDeleteProcesser.class);
+		registProcess(ProtocolConst.PackSellRequest, PackSellProcesser.class);
 	}
 }

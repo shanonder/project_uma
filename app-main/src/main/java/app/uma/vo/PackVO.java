@@ -5,13 +5,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
+import com.google.gson.JsonObject;
 
-import app.uma.Application;
 import app.uma.dao.entity.Pack;
 import app.uma.database.DtPack;
-import app.uma.model.ItemModel;
 import app.uma.net.socket.data.GridData;
 import app.uma.net.socket.data.PackData;
 
@@ -22,6 +19,12 @@ public class PackVO {
 	private HashMap<Integer, ItemVO> itemdataMap;
 
 	public PackVO() {
+		itemdataMap = new HashMap<>();
+	}
+	
+	public PackVO(Pack db , DtPack cfg) {
+		this.db = db;
+		this.cfg = cfg;
 		itemdataMap = new HashMap<>();
 	}
 
@@ -60,48 +63,15 @@ public class PackVO {
 	public void updateDataContent(){
 		String content = "";
 		Iterator<Entry<Integer, ItemVO>> iter = itemdataMap.entrySet().iterator();
-		while (iter.hasNext()) {
-			if(content.equals("") == false){
-				content += "-";
-			}
-			Entry<Integer, ItemVO> entry = iter.next();
-			int index = entry.getKey();
-			ItemVO item = entry.getValue();
-			GridData gridData = new GridData();
-			content += Integer.toString(index) + ";" + item.getDb().getId();
+		JsonObject json = new JsonObject();
+		while (iter.hasNext()) {			
 		}
-		db.setContent(content);
+		
+		db.setContent(json.toString());
 	}
 	
-	
-
-
-	public static PackVO init(Pack db , DtPack cfg) throws Exception{
-		PackVO vo = new PackVO();
-		vo.db = db;
-		vo.cfg = cfg;
-		String contentStr = vo.getDb().getContent();
-		if(contentStr != null){
-			JSONObject jsonObject = new JSONObject();
-			Iterator itera = jsonObject.keys();  
-			while(itera.hasNext()){
-				String key = (String)itera.next();
-				Object value =jsonObject.getString(key);
-				ItemModel itemModel = Application.context.getBean(ItemModel.class);
-				ItemVO itemVO =itemModel.getItem(value);
-			}
-//			String[] items = contentStr.split(";");
-//			for(String ele : items){
-//				String[] e = ele.split("-");
-//				ItemModel itemModel = Application.context.getBean(ItemModel.class);
-//				ItemVO itemVO = itemModel.genItemByInsId(e[1]);
-//				
-//				vo.setItem(Integer.parseInt(e[0]), itemVO);
-//			}
-		}
-		return vo;
+	public void save(){
+		
 	}
-
-
 
 }
