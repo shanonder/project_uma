@@ -9,20 +9,30 @@ import java.io.DataInputStream;
 	 */
 public class AttributesData implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private int cfgId;//配置表ID
+	/**
+	 * 配置表ID
+	 */
+	private int cfgId;
+
 	private double value;
+
+	/**
+	 * 配置表ID
+	 */
 	public int getCfgId(){
 		return this.cfgId;
 	}
 	public void setCfgId(int cfgId){
 		this.cfgId=cfgId;
 	}
+
 	public double getValue(){
 		return this.value;
 	}
 	public void setValue(double value){
 		this.value=value;
 	}
+
 
 	public static void write(DataOutputStream out , AttributesData data) throws Exception{
 		out.writeInt(data.cfgId);

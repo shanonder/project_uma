@@ -12,20 +12,36 @@ import app.uma.net.socket.util.ArrayUtil;
 	 */
 public class EquipData extends ItemData implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private int strenthLv;//唯一ID
-	private ArrayList<AttributesData> attributes;//属性
+	/**
+	 * 唯一ID
+	 */
+	private int strenthLv;
+
+	/**
+	 * 属性
+	 */
+	private ArrayList<AttributesData> attributes;
+
+	/**
+	 * 唯一ID
+	 */
 	public int getStrenthLv(){
 		return this.strenthLv;
 	}
 	public void setStrenthLv(int strenthLv){
 		this.strenthLv=strenthLv;
 	}
+
+	/**
+	 * 属性
+	 */
 	public ArrayList<AttributesData> getAttributes(){
 		return this.attributes;
 	}
 	public void setAttributes(ArrayList<AttributesData> attributes){
 		this.attributes=attributes;
 	}
+
 
 	public static void write(DataOutputStream out , EquipData data) throws Exception{
 		ItemData.write( out , data );

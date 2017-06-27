@@ -18,8 +18,8 @@ public class SceneFactory implements Ifactory {
 		ArrayList<SceneCfg> scenes;
 		try {
 			scenes = csvUtil.getCsv("scene.dat",SceneCfg.class);
-			for(SceneCfg dtscene : scenes ){
-				getCfg().put(dtscene.getId(), dtscene);
+			for(SceneCfg sceneCfg : scenes ){
+				getCfg().put(sceneCfg.getId(), sceneCfg);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

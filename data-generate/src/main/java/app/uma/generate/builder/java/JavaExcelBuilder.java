@@ -62,7 +62,7 @@ public class JavaExcelBuilder extends JavaFileWriter{
 		//build fields
 		String type = typeTrans(cvo.type);
 		fields.append(getFieldStr(cvo.key, type, cvo.desc));
-		methods.append(getMethodStr(cvo.key, type));
+		methods.append(getMethodStr(cvo.key, type , cvo.desc));
 //		fields.append(getPublicFieldStr(cvo.key, type, cvo.desc));
 	}
 }

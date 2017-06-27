@@ -24,7 +24,7 @@ public class JavaDataBuilder extends JavaFileWriter{
 	private void optCell(CellVO cvo) {
 		String type = typeTrans(cvo.type);
 		fields.append(getFieldStr(cvo.key, type, cvo.desc));
-		methods.append(getMethodStr(cvo.key, type));
+		methods.append(getMethodStr(cvo.key, type ,cvo.desc));
 		addWrite(cvo,writes,"data");
 		addRead(cvo,reads,"data");
 	}

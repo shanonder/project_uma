@@ -9,34 +9,66 @@ import java.io.DataInputStream;
 	 */
 public class ItemData implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private String insId;//唯一ID
-	private int cfgId;//配置表ID
-	private String type;//分类
-	private double createTime;//创建时间
+	/**
+	 * 唯一ID
+	 */
+	private String insId;
+
+	/**
+	 * 配置表ID
+	 */
+	private int cfgId;
+
+	/**
+	 * 分类
+	 */
+	private String type;
+
+	/**
+	 * 创建时间
+	 */
+	private double createTime;
+
+	/**
+	 * 唯一ID
+	 */
 	public String getInsId(){
 		return this.insId;
 	}
 	public void setInsId(String insId){
 		this.insId=insId;
 	}
+
+	/**
+	 * 配置表ID
+	 */
 	public int getCfgId(){
 		return this.cfgId;
 	}
 	public void setCfgId(int cfgId){
 		this.cfgId=cfgId;
 	}
+
+	/**
+	 * 分类
+	 */
 	public String getType(){
 		return this.type;
 	}
 	public void setType(String type){
 		this.type=type;
 	}
+
+	/**
+	 * 创建时间
+	 */
 	public double getCreateTime(){
 		return this.createTime;
 	}
 	public void setCreateTime(double createTime){
 		this.createTime=createTime;
 	}
+
 
 	public static void write(DataOutputStream out , ItemData data) throws Exception{
 		out.writeUTF(data.insId == null ?"" : data.insId);
