@@ -2,28 +2,23 @@ package app.uma.database;
 
 	/**
 	 * 此类由ExcelToCodeTool自动生成
-	 * md5:696520213cb96fa54ca52a8cc733d65b
+	 * md5:7c1b8066ed241e35583e5cad55bb3831
 	 */
-public class SceneCfg{
+public class MonsterCfg{
 	/**
 	 * 配置ID
 	 */
 	private int id;
 
 	/**
-	 * 地图类型：1. 野外; 2. 副本 
+	 * npc类型
 	 */
 	private int type;
 
 	/**
-	 * 资源键
+	 * 资源key
 	 */
 	private String source;
-
-	/**
-	 * 地图名称
-	 */
-	private String name;
 
 	/**
 	 * 配置ID
@@ -36,7 +31,7 @@ public class SceneCfg{
 	}
 
 	/**
-	 * 地图类型：1. 野外; 2. 副本 
+	 * npc类型
 	 */
 	public int getType(){
 		return this.type;
@@ -46,23 +41,13 @@ public class SceneCfg{
 	}
 
 	/**
-	 * 资源键
+	 * 资源key
 	 */
 	public String getSource(){
 		return this.source;
 	}
 	public void setSource(String source){
 		this.source=source;
-	}
-
-	/**
-	 * 地图名称
-	 */
-	public String getName(){
-		return this.name;
-	}
-	public void setName(String name){
-		this.name=name;
 	}
 
 

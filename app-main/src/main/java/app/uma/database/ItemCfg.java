@@ -2,7 +2,7 @@ package app.uma.database;
 
 	/**
 	 * 此类由ExcelToCodeTool自动生成
-	 * md5:3243be523f1d245d058961182a5692b8
+	 * md5:d3c1d98c003661310974b76a92875222
 	 */
 public class ItemCfg{
 	/**
@@ -21,7 +21,7 @@ public class ItemCfg{
 	private int type;
 
 	/**
-	 * DESC
+	 * 资源路径
 	 */
 	private String source;
 
@@ -61,7 +61,7 @@ public class ItemCfg{
 	}
 
 	/**
-	 * DESC
+	 * 资源路径
 	 */
 	public String getSource(){
 		return this.source;

@@ -3,7 +3,7 @@ package app.uma.vo;
 import app.uma.database.ItemCfg;
 import app.uma.net.socket.data.ItemData;
 
-public class ItemVO {
+public class ItemVO{
 //	private Item db;
 	private ItemCfg cfg;
 	

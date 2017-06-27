@@ -2,7 +2,7 @@ package app.uma.database;
 
 	/**
 	 * 此类由ExcelToCodeTool自动生成
-	 * md5:f60afe4dfc1fa19f467091d4f227be0e
+	 * md5:118e973092a4297db93b5138bd8547b7
 	 */
 public class PackCfg{
 	/**
@@ -18,7 +18,7 @@ public class PackCfg{
 	/**
 	 * 资源
 	 */
-	private int max;
+	private String max;
 
 	/**
 	 * 类型
@@ -43,10 +43,10 @@ public class PackCfg{
 	/**
 	 * 资源
 	 */
-	public int getMax(){
+	public String getMax(){
 		return this.max;
 	}
-	public void setMax(int max){
+	public void setMax(String max){
 		this.max=max;
 	}
 

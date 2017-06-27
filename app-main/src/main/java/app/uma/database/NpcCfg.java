@@ -2,36 +2,36 @@ package app.uma.database;
 
 	/**
 	 * 此类由ExcelToCodeTool自动生成
-	 * md5:d05fb7b90cb5d7cd1e1e5270e9f48843
+	 * md5:b5f2ca7d3788bf78cd1b9af8e624d968
 	 */
 public class NpcCfg{
 	/**
-	 * DESC
+	 * 配置ID
 	 */
-	private String id;
+	private int id;
 
 	/**
-	 * DESC
+	 * npc类型
 	 */
 	private int type;
 
 	/**
-	 * DESC
+	 * 资源key
 	 */
 	private String source;
 
 	/**
-	 * DESC
+	 * 配置ID
 	 */
-	public String getId(){
+	public int getId(){
 		return this.id;
 	}
-	public void setId(String id){
+	public void setId(int id){
 		this.id=id;
 	}
 
 	/**
-	 * DESC
+	 * npc类型
 	 */
 	public int getType(){
 		return this.type;
@@ -41,7 +41,7 @@ public class NpcCfg{
 	}
 
 	/**
-	 * DESC
+	 * 资源key
 	 */
 	public String getSource(){
 		return this.source;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import app.uma.csv.CsvUtil;
 import app.uma.database.ItemCfg;
-import app.uma.enums.ItemTypeEnum;
+import app.uma.enums.ItemEnum;
 import app.uma.vo.EquipVO;
 import app.uma.vo.ItemVO;
 import net.sf.json.JSONObject;
@@ -30,7 +30,7 @@ public class ItemFactory implements Ifactory{
 		int type = value.getInt("type");
 		ItemCfg dtItem = getCfg(value.getInt("cfgId"));
 		ItemVO itemVO;
-		if(type == ItemTypeEnum.EQUIP.getType()){
+		if(type == ItemEnum.EQUIP.getType()){
 			itemVO = new EquipVO(dtItem);
 		}
 		else{
@@ -44,8 +44,8 @@ public class ItemFactory implements Ifactory{
 		ArrayList<ItemCfg> items;
 		try {
 			items = csvUtil.getCsv("item.dat",ItemCfg.class);
-			for(ItemCfg item : items ){
-				itemMap.put(item.getId(), item);
+			for(ItemCfg itemCfg : items ){
+				itemMap.put(itemCfg.getId(), itemCfg);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

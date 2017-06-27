@@ -7,12 +7,16 @@ import org.slf4j.LoggerFactory;
 
 import app.uma.factory.Ifactory;
 import app.uma.factory.ItemFactory;
+import app.uma.factory.MonsterFactory;
+import app.uma.factory.PackFactory;
+import app.uma.factory.SceneFactory;
 import app.uma.model.ItemModel;
 import app.uma.model.MapModel;
 import app.uma.model.ModelBase;
 import app.uma.model.PackModel;
 import app.uma.model.RoleModel;
 import app.uma.model.UserModel;
+import app.uma.model.WorldModel;
 import app.uma.net.socket.interfaces.IModuleFacade;
 
 public class ModuleFacade implements IModuleFacade {
@@ -57,7 +61,11 @@ public class ModuleFacade implements IModuleFacade {
 		addModel(ItemModel.class);
 		addModel(PackModel.class);
 		addModel(MapModel.class);
+		addModel(WorldModel.class);
 		addFactory(ItemFactory.class);
+		addFactory(PackFactory.class);
+		addFactory(SceneFactory.class);
+		addFactory(MonsterFactory.class);
 	}
 
 }
