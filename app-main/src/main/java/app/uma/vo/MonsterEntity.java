@@ -2,7 +2,8 @@ package app.uma.vo;
 
 import app.uma.database.MonsterCfg;
 import app.uma.enums.SceneEntityEnum;
-import app.uma.modules.scene.IAIEntity;
+import app.uma.modules.ai.interfaces.IAIEntity;
+import app.uma.modules.ai.interfaces.IAIProxy;
 import app.uma.modules.scene.ISceneEntity;
 
 public class MonsterEntity implements ISceneEntity ,IAIEntity {
@@ -66,4 +67,16 @@ public class MonsterEntity implements ISceneEntity ,IAIEntity {
 		this.cfg = cfg;
 	}
 
+
+	private IAIProxy aiProxy;
+	
+	@Override
+	public void setAIProxy(IAIProxy aiProxy) {
+		this.aiProxy = aiProxy;
+	}
+
+	@Override
+	public IAIProxy getAIProxy() {
+		return aiProxy;
+	}
 }

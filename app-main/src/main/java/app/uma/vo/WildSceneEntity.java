@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import app.uma.Application;
 import app.uma.factory.MonsterFactory;
 import app.uma.factory.SceneFactory;
+import app.uma.modules.ai.AIWildMonsterProxy;
 
 public class WildSceneEntity extends SceneEntity {
 	
@@ -15,7 +16,10 @@ public class WildSceneEntity extends SceneEntity {
 	public void run() {
 		SceneFactory sceneFactory = Application.context.getBean(SceneFactory.class);
 		MonsterFactory monsterFactory = Application.context.getBean(MonsterFactory.class);
-		addEntity(monsterFactory.initMonster(1,3,5));
+		MonsterEntity monsterEntity = monsterFactory.initMonster(1,3,5);
+		monsterEntity.setAIProxy(new AIWildMonsterProxy(monsterEntity));
+		addEntity(monsterEntity);
+		monsterEntity.getAIProxy().awake();
 	}
 
 	@Override

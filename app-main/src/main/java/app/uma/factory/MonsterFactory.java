@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import app.uma.csv.CsvUtil;
 import app.uma.database.MonsterCfg;
-import app.uma.modules.scene.ISceneEntity;
 import app.uma.vo.MonsterEntity;
 
 @Component
@@ -31,7 +30,7 @@ public class MonsterFactory implements Ifactory {
 		}		
 	}
 
-	public ISceneEntity initMonster(int cfgId, double posX, double posY) {
+	public MonsterEntity initMonster(int cfgId, double posX, double posY) {
 		
 		MonsterEntity entity = new MonsterEntity();
 		entity.setInsId(UUID.randomUUID().toString());

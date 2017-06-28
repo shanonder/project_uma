@@ -12,7 +12,6 @@ import app.uma.dao.entity.Role;
 import app.uma.database.SceneCfg;
 import app.uma.enums.SceneEnum;
 import app.uma.factory.SceneFactory;
-import app.uma.modules.scene.ISceneEntity;
 import app.uma.net.socket.sessions.GameSession;
 import app.uma.vo.RoleVO;
 import app.uma.vo.SceneEntity;
