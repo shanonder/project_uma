@@ -23,32 +23,33 @@ public class AStar
 	/**
 	 * 开始算法
 	 */
-	public void start(MapInfo mapInfo)
+	public void start(MapInfo mapInfo ,Node sNode , Node end)
 	{
 		if(mapInfo==null) return;
 		// clean
 		openList.clear();
 		closeList.clear();
 		// 开始搜索
-		openList.add(mapInfo.start);
-		moveNodes(mapInfo);
+		openList.add(sNode);
+		moveNodes(mapInfo , end);
 	}
+	
 
 	/**
 	 * 移动当前结点
 	 */
-	private void moveNodes(MapInfo mapInfo)
+	private void moveNodes(MapInfo mapInfo,Node end)
 	{
 		while (!openList.isEmpty())
 		{
-			if (isCoordInClose(mapInfo.end.point))
+			if (isCoordInClose(end.point))
 			{
-				drawPath(mapInfo.maps, mapInfo.end);
+				drawPath(mapInfo.maps, end);
 				break;
 			}
 			Node current = openList.poll();
 			closeList.add(current);
-			addNeighborNodeInOpen(mapInfo,current);
+			addNeighborNodeInOpen(mapInfo,current , end);
 		}
 	}
 	
@@ -58,7 +59,7 @@ public class AStar
 	private void drawPath(int[][] maps, Node end)
 	{
 		if(end==null||maps==null) return;
-		System.out.println("总代价：" + end.G);
+//		System.out.println("总代价：" + end.G);
 		while (end != null)
 		{
 			Point c = end.point;
@@ -70,36 +71,35 @@ public class AStar
 	/**
 	 * 添加所有邻结点到open表
 	 */
-	private void addNeighborNodeInOpen(MapInfo mapInfo,Node current)
+	private void addNeighborNodeInOpen(MapInfo mapInfo,Node current , Node end)
 	{
 		int x = current.point.x;
 		int y = current.point.y;
 		// 左
-		addNeighborNodeInOpen(mapInfo,current, x - 1, y, DIRECT_VALUE);
+		addNeighborNodeInOpen(mapInfo,current,end, x - 1, y, DIRECT_VALUE);
 		// 上
-		addNeighborNodeInOpen(mapInfo,current, x, y - 1, DIRECT_VALUE);
+		addNeighborNodeInOpen(mapInfo,current,end, x, y - 1, DIRECT_VALUE);
 		// 右
-		addNeighborNodeInOpen(mapInfo,current, x + 1, y, DIRECT_VALUE);
+		addNeighborNodeInOpen(mapInfo,current,end, x + 1, y, DIRECT_VALUE);
 		// 下
-		addNeighborNodeInOpen(mapInfo,current, x, y + 1, DIRECT_VALUE);
+		addNeighborNodeInOpen(mapInfo,current,end, x, y + 1, DIRECT_VALUE);
 		// 左上
-		addNeighborNodeInOpen(mapInfo,current, x - 1, y - 1, OBLIQUE_VALUE);
+		addNeighborNodeInOpen(mapInfo,current,end, x - 1, y - 1, OBLIQUE_VALUE);
 		// 右上
-		addNeighborNodeInOpen(mapInfo,current, x + 1, y - 1, OBLIQUE_VALUE);
+		addNeighborNodeInOpen(mapInfo,current,end, x + 1, y - 1, OBLIQUE_VALUE);
 		// 右下
-		addNeighborNodeInOpen(mapInfo,current, x + 1, y + 1, OBLIQUE_VALUE);
+		addNeighborNodeInOpen(mapInfo,current,end, x + 1, y + 1, OBLIQUE_VALUE);
 		// 左下
-		addNeighborNodeInOpen(mapInfo,current, x - 1, y + 1, OBLIQUE_VALUE);
+		addNeighborNodeInOpen(mapInfo,current,end, x - 1, y + 1, OBLIQUE_VALUE);
 	}
 
 	/**
 	 * 添加一个邻结点到open表
 	 */
-	private void addNeighborNodeInOpen(MapInfo mapInfo,Node current, int x, int y, int value)
+	private void addNeighborNodeInOpen(MapInfo mapInfo,Node current,Node end, int x, int y, int value)
 	{
 		if (canAddNodeToOpen(mapInfo,x, y))
 		{
-			Node end=mapInfo.end;
 			Point point = new Point(x, y);
 			int G = current.G + value; // 计算邻结点的G值
 			Node child = findNodeInOpen(point);
@@ -168,7 +168,7 @@ public class AStar
 	private boolean canAddNodeToOpen(MapInfo mapInfo,int x, int y)
 	{
 		// 是否在地图中
-		if (x < 0 || x >= mapInfo.width || y < 0 || y >= mapInfo.hight) return false;
+		if (x < 0 || x >= mapInfo.width || y < 0 || y >= mapInfo.height) return false;
 		// 判断是否是不可通过的结点
 		if (mapInfo.maps[y][x] == BAR) return false;
 		// 判断结点是否存在close表
@@ -201,3 +201,4 @@ public class AStar
 		return false;
 	}
 }
+

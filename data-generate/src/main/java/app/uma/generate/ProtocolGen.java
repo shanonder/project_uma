@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import app.uma.generate.builder.ProtocolGenerate;
-import app.uma.generate.config.GeneralBeans;
 
 @SpringBootApplication
 @EnableScheduling

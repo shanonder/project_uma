@@ -18,8 +18,11 @@ public class Test
 				{ 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 },
 				{ 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 } 
 				};
-		MapInfo info=new MapInfo(maps,maps[0].length, maps.length,new Node(1, 5), new Node(10, 5));
-		new AStar().start(info);
+		Node sn = new Node(1, 5);
+		Node en = new Node(10, 5);
+		MapInfo info=new MapInfo(maps,maps[0].length, maps.length);
+		AStar aStar = new AStar();
+		aStar.start(info , sn , en);
 		printMap(maps);
 	}
 	
@@ -37,5 +40,4 @@ public class Test
 			System.out.println();
 		}
 	}
-
 }
