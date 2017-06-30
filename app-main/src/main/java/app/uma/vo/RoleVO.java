@@ -3,11 +3,13 @@ package app.uma.vo;
 import java.util.ArrayList;
 
 import app.uma.dao.entity.Role;
+import app.uma.enums.SceneEntityEnum;
+import app.uma.modules.scene.ISceneEntity;
 import app.uma.net.socket.data.AttributesData;
 import app.uma.net.socket.data.RoleData;
 import app.uma.net.socket.sessions.GameSession;
 
-public class RoleVO {
+public class RoleVO implements ISceneEntity{
 	
 	public GameSession session;
 	public Role db;
@@ -48,4 +50,31 @@ public class RoleVO {
 		return session;
 	}
 
+
+
+	@Override
+	public SceneEntityEnum getEType() {
+		return SceneEntityEnum.ROLE;
+	}
+	
+	@Override
+	public String getInsId() {
+		return db.getId();
+	}
+	
+	@Override
+	public int getSceneId(){
+		return db.getSceneId();
+	}
+
+	@Override
+	public double getPosX() {
+		return db.getPosX();
+	}
+
+	@Override
+	public double getPosY() {
+		// TODO Auto-generated method stub
+		return db.getPosY();
+	}
 }

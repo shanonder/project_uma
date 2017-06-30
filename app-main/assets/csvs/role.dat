@@ -1,5 +1,5 @@
 "id","profession","source","gender"
-"String","int","String","int"
+"int","int","String","int"
 "","","",""
 "1","1","role_source_1","1"
 "2","2","role_source_2","1"

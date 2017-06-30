@@ -1,17 +1,15 @@
 package app.uma.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import app.uma.csv.CsvUtil;
 import app.uma.dao.entity.Pack;
 import app.uma.dao.repository.IPackRepository;
-import app.uma.database.DtPack;
+import app.uma.database.PackCfg;
 import app.uma.enums.PackEnum;
+import app.uma.factory.PackFactory;
 import app.uma.modules.pack.processer.PackDeleteProcesser;
 import app.uma.modules.pack.processer.PackInitProcesser;
 import app.uma.modules.pack.processer.PackMoveProcesser;
@@ -28,9 +26,11 @@ public class PackModel extends ModelBase{
 
 	@Autowired
 	private IPackRepository packRepository;
+
 	@Autowired
-	private CsvUtil csvUtil;
-	private HashMap<Integer,DtPack> dtPackMap;
+	private PackFactory packFactory;
+	
+
 
 
 	public PackModel(){
@@ -43,16 +43,16 @@ public class PackModel extends ModelBase{
 		ArrayList<PackVO> packVOs = new ArrayList<>();
 		ArrayList<PackData> packDatas = new ArrayList<>();
 		for(PackEnum packEnum : PackEnum.values()){
-			DtPack dt = dtPackMap.get(packEnum.getType());
+			PackCfg cfg = packFactory.getDtPackMap().get(packEnum.getType());
 			Pack pack = packRepository.findByRoleIdAndType(rid, packEnum.getType());
 			if(pack == null){
 				pack = new Pack();
 				pack.setRoleId(rid);
 				pack.setType(packEnum.getType());
-				pack.setOpenLenth(dt.getOpen());
+				pack.setOpenLenth(cfg.getOpen());
 				packRepository.save(pack);
 			}
-			PackVO vo = PackVO.init(pack , dt);
+			PackVO vo = packFactory.initPack(pack, cfg);
 			packVOs.add(vo);
 			packDatas.add(vo.toMsg());
 		}
@@ -60,35 +60,18 @@ public class PackModel extends ModelBase{
 		session.sendMsg(new PackInitResponse(200, packDatas));
 	}
 
-	@Override
-	protected void initCfg() {
-		dtPackMap = new HashMap<>();
-		
-		try {
-			ArrayList<DtPack> list;
-			list = csvUtil.getCsv("pack.dat",DtPack.class);
-			for (DtPack dt : list){
-				dtPackMap.put(dt.getType(), dt);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
-	@Autowired
-	PackInitProcesser packInitProcesser;
-	@Autowired
-	PackMoveProcesser packMoveProcesser;
-	@Autowired
-	PackDeleteProcesser packDeleteProcesser;
-	@Autowired
-	PackSellProcesser packSellProcesser;
 	
 	@Override
 	public void registProsesser() {
-		registProcess(ProtocolConst.PackInitRequest, packInitProcesser);
-		registProcess(ProtocolConst.PackMoveRequest, packMoveProcesser);
-		registProcess(ProtocolConst.PackDeleteRequest, packDeleteProcesser);
-		registProcess(ProtocolConst.PackSellRequest, packSellProcesser);
+		registProcess(ProtocolConst.PackInitRequest, PackInitProcesser.class);
+		registProcess(ProtocolConst.PackMoveRequest, PackMoveProcesser.class);
+		registProcess(ProtocolConst.PackDeleteRequest, PackDeleteProcesser.class);
+		registProcess(ProtocolConst.PackSellRequest, PackSellProcesser.class);
+	}
+
+	@Override
+	public void startup() {
+		
 	}
 }

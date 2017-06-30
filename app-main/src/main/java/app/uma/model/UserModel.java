@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import app.uma.dao.entity.User;
 import app.uma.dao.repository.IUserRepository;
 import app.uma.modules.auth.processer.LoginProcesser;
-import app.uma.modules.role.create.RoleCreateProcesser;
 import app.uma.net.socket.consts.ProtocolConst;
 import app.uma.net.socket.heaps.HeapProcesser;
 import app.uma.vo.UserVO;
@@ -19,9 +18,7 @@ public class UserModel extends ModelBase{
 
 	@Autowired
 	private IUserRepository userRepos;
-	private HashMap<String, UserVO> users;
 	public UserModel() {
-		users = new HashMap<String, UserVO>();
 	}
 
 	
@@ -40,21 +37,18 @@ public class UserModel extends ModelBase{
 
 
 
+
 	@Override
-	protected void initCfg() {
-		// TODO Auto-generated method stub
+	public void registProsesser() {
+		registProcess(ProtocolConst.HeapRequest, HeapProcesser.class);
+		registProcess(ProtocolConst.LoginRequest, LoginProcesser.class);
 		
 	}
 
-	@Autowired
-	private HeapProcesser heapProcesser;
 
-	@Autowired
-	private LoginProcesser loginProcesser;
 	@Override
-	public void registProsesser() {
-		registProcess(ProtocolConst.HeapRequest, heapProcesser);
-		registProcess(ProtocolConst.LoginRequest, loginProcesser);
+	public void startup() {
+		// TODO Auto-generated method stub
 		
 	}
 

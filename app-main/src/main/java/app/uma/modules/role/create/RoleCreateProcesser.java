@@ -3,7 +3,6 @@ package app.uma.modules.role.create;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import app.uma.Application;
 import app.uma.controller.EnterWorldController;
 import app.uma.model.RoleModel;
 import app.uma.net.socket.decodes.ClientRequest;

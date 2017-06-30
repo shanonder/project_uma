@@ -44,8 +44,7 @@ public class GameProtocolHandler extends IoHandlerAdapter {
 	public void exceptionCaught(IoSession session, Throwable cause) {
 		// close the connection on exceptional situation
 //		logger.warn(cause.getMessage(), cause);
-		//		session.close(true);
-		logger.info("session closed");
 		session.closeNow();
+		logger.info("session closed");
 	}
 }

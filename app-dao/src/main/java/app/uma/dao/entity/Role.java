@@ -31,6 +31,10 @@ public class Role {
 	
 	private long exp;
 	
+	private int sceneId;
+	
+	private double posX;
+	private double posY;
 	
     @Lob
     private String extContent;
@@ -114,6 +118,30 @@ public class Role {
 
 	public void setExtContent(String extContent) {
 		this.extContent = extContent;
+	}
+
+	public double getPosY() {
+		return posY;
+	}
+
+	public void setPosY(double posY) {
+		this.posY = posY;
+	}
+
+	public double getPosX() {
+		return posX;
+	}
+
+	public void setPosX(double posX) {
+		this.posX = posX;
+	}
+
+	public int getSceneId() {
+		return sceneId;
+	}
+
+	public void setSceneId(int sceneId) {
+		this.sceneId = sceneId;
 	}
 
 	

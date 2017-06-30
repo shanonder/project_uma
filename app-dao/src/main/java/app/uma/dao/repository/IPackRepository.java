@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import app.uma.dao.entity.Pack;
 
 public interface IPackRepository extends CrudRepository<Pack, String> {
-	@Query("select p from Pack p where p.roleId=?")
+	@Query("select p from Pack p where p.roleId=?1")
 	List<Pack> getPacks(String rid);
 
 	@Query("select p from Pack p where p.roleId=?1 and type=?2")

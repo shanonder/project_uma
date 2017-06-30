@@ -65,7 +65,7 @@ public class JavaC2SBuilder extends JavaFileWriter {
 		writeConstructs(cvo);
 		String type = typeTrans(cvo.type);
 		fields.append(getFieldStr(cvo.key, type, cvo.desc));
-		methods.append(getMethodStr(cvo.key, type));
+		methods.append(getMethodStr(cvo.key, type , cvo.desc));
 	}
 
 	private void writeConstructs(CellVO cvo){

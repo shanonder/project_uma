@@ -34,6 +34,7 @@ public class LoginProcesser extends MsgProcessor implements INotAuthProcessor{
 //		UserModel userModel = Application.context.getBean(UserModel.class);
 //		RoleModel roleModel = Application.context.getBean(RoleModel.class);
 		UserVO userVO = userModel.findOrInit(request.getPlatId() ,request.getServerId(), request.getOpenId());
+		gameSession.setUser(userVO);
 		if(userVO != null){
 			gameSession.setLogin(true);
 			gameSession.setUser(userVO);

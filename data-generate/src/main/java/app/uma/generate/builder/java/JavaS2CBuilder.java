@@ -12,9 +12,16 @@ import app.uma.generate.node.MsgOptNode;
 @Component
 public class JavaS2CBuilder extends JavaFileWriter {
 
+	private StringBuilder constrDescs;
 	public JavaS2CBuilder(){
 		super();
-
+		constrDescs = new StringBuilder();
+	}
+	
+	@Override
+	protected void reset(){
+		super.reset();
+		constrDescs.delete(0, constrDescs.length());
 	}
 	
 	private void optCell(CellVO cvo) {
@@ -29,12 +36,10 @@ public class JavaS2CBuilder extends JavaFileWriter {
 	private void writeConstructs(CellVO cvo){
 		constructs.append("\t\t");
 		if(cvo.type.contains("[]")){
-			constructs.append("output.writeArrayList(");
-			constructs.append(cvo.key).append(" == null ? ").append("new ArrayList<>() : ").append(cvo.key).append(");\r\n");
+			constructs.append("output.writeArrayList(" + cvo.key + ");\r\n");
 		}
 		else if(cvo.type.contains("List")){
-			constructs.append("output.writeAMFObject(");
-			constructs.append(cvo.key).append(" == null ? ").append("new ArrayList<>() : ").append(cvo.key).append(");\r\n");
+			constructs.append("output.writeArrayList(" + cvo.key + ");\r\n");
 		}
 		else if(cvo.type.equalsIgnoreCase("int")){
 			constructs.append("output.writeInt(");
@@ -56,10 +61,7 @@ public class JavaS2CBuilder extends JavaFileWriter {
 			constructs.append("output.writeUTF(");
 			constructs.append(cvo.key).append(" == null ? ").append("\"\" : ").append(cvo.key).append(");\r\n");
 		}
-		else if(cvo.type.equalsIgnoreCase("AMF")){
-			constructs.append("output.writeAMFObject(");
-			constructs.append(cvo.key).append(" == null ? ").append("new Object() : ").append(cvo.key).append(");\r\n");
-		}else{
+		else{
 			constructs.append("output.writeData(");
 			constructs.append(cvo.key).append(" == null ? ").append("new Object() : ").append(cvo.key).append(");\r\n");
 		}
@@ -78,10 +80,11 @@ public class JavaS2CBuilder extends JavaFileWriter {
 		}
 		
 		File file = new File(dir, fileName + ".java");
-
+		constrDescs.append("\t * @struct int 状态  200 正常\n");
 		params.append("int status ");
 		for(CellVO cvo : node.cells){
 			params.append(", ").append(typeTrans(cvo.type)).append(" ").append(cvo.key);
+			constrDescs.append("\t * @" + cvo.key + " " + cvo.type + " " + (cvo.desc != null?cvo.desc:"") + "\n") ; 
 			optCell(cvo);
 		}
 		classInfo.append(imports);
@@ -92,6 +95,11 @@ public class JavaS2CBuilder extends JavaFileWriter {
 		classInfo.append(" */\r\n");
 		classInfo.append("public class ")
 		.append(fileName).append("  extends ServerResponse").append("{\r\n");
+//		constructDesc
+		classInfo.append("\n\t/**\n");
+		classInfo.append(constrDescs);
+		classInfo.append("\t */\n");
+//		endconstructDesc
 		classInfo.append("\tpublic "+ fileName +"(");
 		classInfo.append(params);
 		classInfo.append(") throws Exception{\r\n");

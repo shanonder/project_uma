@@ -71,28 +71,66 @@ public class JavaFileWriter {
 		}
 		sb.append("\t").append("public ").append(type).append(" ")
 		.append(key).append(";");
-		sb.append("\r\n");
+		sb.append("\r\n\n");
 		return sb.toString();
 	}
 
-	protected String getFieldStr(String field, String type, String cmt) {
+	protected String getFieldStr(String field, String type, String desc) {
 		StringBuilder sb = new StringBuilder();
+		if (desc != null) {
+			sb.append("\t/**\r\n\t * ").append(desc).append("\r\n\t */\r\n");
+		}
 		sb.append("\t").append("private ").append(type).append(" ")
 		.append(field).append(";");
-		if (cmt != null) {
-			sb.append("//").append(cmt);
-		}
-		sb.append("\r\n");
+//		if (cmt != null) {
+//			sb.append("//").append(cmt);
+//		}
+		sb.append("\r\n\n");
 		return sb.toString();
 	}
 
+//	/**
+//	 * 
+//	 * @param type
+//	 * @return
+//	 */
+//	protected String getMethodStr(String field, String type) {
+//		StringBuilder get = new StringBuilder("\tpublic ");
+//		get.append(type).append(" ");
+//		if (type.equals("boolean")) {
+//			get.append(field);
+//		} else {
+//			get.append("get");
+//			get.append(upperFirestChar(field));
+//		}
+//		get.append("(){").append("\r\n\t\treturn this.").append(field)
+//		.append(";\r\n\t}\r\n");
+//		StringBuilder set = new StringBuilder("\tpublic void ");
+//
+//		if (type.equals("boolean")) {
+//			set.append(field);
+//		} else {
+//			set.append("set");
+//			set.append(upperFirestChar(field));
+//		}
+//		set.append("(").append(type).append(" ").append(field)
+//		.append("){\r\n\t\tthis.").append(field).append("=")
+//		.append(field).append(";\r\n\t}\r\n");
+//		get.append(set);
+//		return get.toString();
+//	}
+	
 	/**
 	 * 
 	 * @param type
 	 * @return
 	 */
-	protected String getMethodStr(String field, String type) {
-		StringBuilder get = new StringBuilder("\tpublic ");
+	protected String getMethodStr(String field, String type , String desc) {
+		StringBuilder get = new StringBuilder();
+		if (desc != null) {
+			get.append("\t/**\r\n\t * ").append(desc).append("\r\n\t */\r\n");
+		}
+		get.append("\tpublic ");
 		get.append(type).append(" ");
 		if (type.equals("boolean")) {
 			get.append(field);
@@ -112,7 +150,7 @@ public class JavaFileWriter {
 		}
 		set.append("(").append(type).append(" ").append(field)
 		.append("){\r\n\t\tthis.").append(field).append("=")
-		.append(field).append(";\r\n\t}\r\n");
+		.append(field).append(";\r\n\t}\r\n\n");
 		get.append(set);
 		return get.toString();
 	}

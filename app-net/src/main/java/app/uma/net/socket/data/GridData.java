@@ -11,20 +11,36 @@ import app.uma.net.socket.util.DataUtil;
 	 */
 public class GridData implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private int index;//序号
-	private ItemData item;//唯一ID
+	/**
+	 * 序号
+	 */
+	private int index;
+
+	/**
+	 * 唯一ID
+	 */
+	private ItemData item;
+
+	/**
+	 * 序号
+	 */
 	public int getIndex(){
 		return this.index;
 	}
 	public void setIndex(int index){
 		this.index=index;
 	}
+
+	/**
+	 * 唯一ID
+	 */
 	public ItemData getItem(){
 		return this.item;
 	}
 	public void setItem(ItemData item){
 		this.item=item;
 	}
+
 
 	public static void write(DataOutputStream out , GridData data) throws Exception{
 		out.writeShort(data.index);

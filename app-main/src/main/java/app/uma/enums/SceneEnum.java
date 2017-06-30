@@ -1,10 +1,9 @@
 package app.uma.enums;
 
-public enum ItemTypeEnum {
-	EQUIP(1),CONSUMABLES(2);
-	
+public enum SceneEnum {
+	WILD(1),DUNGEON(2);
 	private int type;
-	private ItemTypeEnum(int type) {
+	private SceneEnum(int type) {
 		this.setType(type);
 	}
 	public int getType() {

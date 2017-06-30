@@ -6,15 +6,19 @@
  */
 package app.uma.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MapModel extends ModelBase {
 
+
 	@Override
-	protected void initCfg() {
+	public void registProsesser() {
 		
 	}
 
 	@Override
-	public void registProsesser() {
+	public void startup() {
 		
 	}
 

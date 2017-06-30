@@ -10,12 +10,20 @@ public class PackInitRequest{
 
 	}
 
-	private int type;//包裹类型
+	/**
+	 * 包裹类型
+	 */
+	private int type;
+
+	/**
+	 * 包裹类型
+	 */
 	public int getType(){
 		return this.type;
 	}
 	public void setType(int type){
 		this.type=type;
 	}
+
 
 }

@@ -11,19 +11,35 @@ public class RoleCreateRequest{
 
 	}
 
-	private String name;//角色姓名
-	private int profId;//职业id
+	/**
+	 * 角色姓名
+	 */
+	private String name;
+
+	/**
+	 * 职业id
+	 */
+	private int profId;
+
+	/**
+	 * 角色姓名
+	 */
 	public String getName(){
 		return this.name;
 	}
 	public void setName(String name){
 		this.name=name;
 	}
+
+	/**
+	 * 职业id
+	 */
 	public int getProfId(){
 		return this.profId;
 	}
 	public void setProfId(int profId){
 		this.profId=profId;
 	}
+
 
 }

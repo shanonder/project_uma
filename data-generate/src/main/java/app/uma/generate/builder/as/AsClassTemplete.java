@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import app.uma.generate.config.GeneralBeans;
 import app.uma.generate.properties.CodeProperties;
 import app.uma.generate.properties.Config;
-
+@SuppressWarnings("unused")
 @Deprecated
 public class AsClassTemplete {
 	
@@ -36,6 +36,7 @@ public class AsClassTemplete {
 	
 	private String name;
 	private String pack;
+	
 	private String desc;
 	
 	

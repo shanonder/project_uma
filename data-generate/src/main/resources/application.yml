@@ -5,12 +5,16 @@ config:
 assets: 
   data: 
     root: C:/workspaces/datas/
+    sXlsOutPath: C:/workspaces/wp_spring/project_uma/app-main/assets/csvs/
+    cXlsOutPath: C:/workspaces/wp_web/app_cdn/datas/csvs/
     
 code: 
   java: 
     lang: java
     path: C:/workspaces/wp_spring/project_uma/app-net/src/main/java/
     pack: app.uma.net.socket
+    pathExcel: C:/workspaces/wp_spring/project_uma/app-main/src/main/java/
+    packXls: app.uma.database
     packRequest: app.uma.net.socket.request
     packResponse: app.uma.net.socket.response
     packData: app.uma.net.socket.data
@@ -25,6 +29,8 @@ code:
   as: 
     lang: as
     path: C:/workspaces/wp_as/as_uma/src/
+    pathExcel: C:/workspaces/wp_as/as_uma/src/
+    packXls: com.icday.database.csvs
     pack: com.icday.database.net
     packRequest: com.icday.database.net.request
     packResponse: com.icday.database.net.response

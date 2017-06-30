@@ -20,10 +20,6 @@ public class RoleModel extends ModelBase {
 	@Autowired
 	private IRoleRepository roleRepository;
 	
-	@Override
-	protected void initCfg() {
-		
-	}
 	
 	public RoleVO getRoleByUid(String uid , GameSession session) {
 		Role role = roleRepository.getRoleByUid(uid);
@@ -46,7 +42,7 @@ public class RoleModel extends ModelBase {
 			gameSession.sendMsg(new RoleCreateResponse(203));
 			return state;
 		}
-		if(roleRepository.hasRole(request.getName()) != null){
+		if(roleRepository.findOneByRoleName(request.getName()) != null){
 			state = 201;
 			gameSession.sendMsg(new RoleCreateResponse(201));
 			return state;
@@ -59,14 +55,19 @@ public class RoleModel extends ModelBase {
 		role.setLevel(1);
 		role.setExp(0);
 		roleRepository.save(role);
+		gameSession.setRole(getRoleByUid(user.db.getId(), gameSession));
 		gameSession.sendMsg(new RoleCreateResponse(state));
 		return state;
 	}
 
-	@Autowired
-	private RoleCreateProcesser roleCreateProcesser;
 	@Override
 	public void registProsesser() {
-		registProcess(ProtocolConst.RoleCreateRequest , roleCreateProcesser);
+		registProcess(ProtocolConst.RoleCreateRequest , RoleCreateProcesser.class);
+	}
+
+	@Override
+	public void startup() {
+		// TODO Auto-generated method stub
+		
 	}
 }
