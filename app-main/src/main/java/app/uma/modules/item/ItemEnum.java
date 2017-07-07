@@ -1,9 +1,10 @@
-package app.uma.enums;
+package app.uma.modules.item;
 
-public enum SceneEntityEnum {
-	ROLE(1),MONSTER(2),NPC(3),ITEM(4),MONEY(5),BUFF(6);
+public enum ItemEnum {
+	EQUIP(1),CONSUMABLES(2);
+	
 	private int type;
-	private SceneEntityEnum(int type) {
+	private ItemEnum(int type) {
 		this.setType(type);
 	}
 	public int getType() {

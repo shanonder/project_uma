@@ -9,7 +9,6 @@ import app.uma.base.ModelBase;
 import app.uma.dao.entity.Pack;
 import app.uma.dao.repository.IPackRepository;
 import app.uma.database.PackCfg;
-import app.uma.enums.PackEnum;
 import app.uma.modules.pack.processer.PackDeleteProcesser;
 import app.uma.modules.pack.processer.PackInitProcesser;
 import app.uma.modules.pack.processer.PackMoveProcesser;

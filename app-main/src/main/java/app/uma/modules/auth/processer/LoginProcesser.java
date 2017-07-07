@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import app.uma.controller.EnterWorldController;
 import app.uma.dao.entity.User;
-import app.uma.model.UserModel;
+import app.uma.modules.auth.UserModel;
 import app.uma.modules.auth.UserVO;
 import app.uma.modules.role.RoleModel;
 import app.uma.modules.role.RoleVO;

@@ -7,8 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import app.uma.base.Ifactory;
 import app.uma.base.ModelBase;
-import app.uma.model.UserModel;
-import app.uma.model.WorldModel;
+import app.uma.modules.auth.UserModel;
 import app.uma.modules.item.ItemFactory;
 import app.uma.modules.item.ItemModel;
 import app.uma.modules.npc.MonsterFactory;
@@ -17,6 +16,7 @@ import app.uma.modules.pack.PackModel;
 import app.uma.modules.role.RoleModel;
 import app.uma.modules.scene.MapModel;
 import app.uma.modules.scene.SceneFactory;
+import app.uma.modules.scene.WorldModel;
 import app.uma.modules.task.TaskFactory;
 import app.uma.modules.task.TaskModel;
 import app.uma.net.socket.interfaces.IModuleFacade;

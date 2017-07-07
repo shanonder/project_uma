@@ -1,10 +1,9 @@
-package app.uma.enums;
+package app.uma.modules.scene;
 
-public enum PackEnum {
-	BAG(0),EQUIP(1),DEPOT(2);
-	
+public enum SceneEnum {
+	WILD(1),DUNGEON(2);
 	private int type;
-	private PackEnum(int type) {
+	private SceneEnum(int type) {
 		this.setType(type);
 	}
 	public int getType() {

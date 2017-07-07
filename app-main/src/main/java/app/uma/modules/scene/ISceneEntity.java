@@ -1,7 +1,5 @@
 package app.uma.modules.scene;
 
-import app.uma.enums.SceneEntityEnum;
-
 public interface ISceneEntity {
 	
 	public String getInsId();
