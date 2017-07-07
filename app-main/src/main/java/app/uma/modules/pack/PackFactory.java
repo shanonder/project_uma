@@ -12,8 +12,7 @@ import app.uma.csv.CsvUtil;
 import app.uma.dao.entity.Pack;
 import app.uma.database.PackCfg;
 import app.uma.modules.item.ItemFactory;
-import app.uma.vo.ItemVO;
-import app.uma.vo.PackVO;
+import app.uma.modules.item.ItemVO;
 import net.sf.json.JSONObject;
 
 @Component

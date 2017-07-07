@@ -1,4 +1,4 @@
-package app.uma.vo;
+package app.uma.modules.auth;
 
 import app.uma.dao.entity.User;
 

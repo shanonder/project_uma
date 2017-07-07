@@ -1,9 +1,8 @@
-package app.uma.vo;
+package app.uma.modules.scene;
 
 import java.util.HashMap;
 
 import app.uma.database.SceneCfg;
-import app.uma.modules.scene.ISceneEntity;
 
 public abstract class SceneEntity {
 	private SceneCfg cfg;

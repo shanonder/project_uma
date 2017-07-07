@@ -14,12 +14,11 @@ import app.uma.modules.pack.processer.PackDeleteProcesser;
 import app.uma.modules.pack.processer.PackInitProcesser;
 import app.uma.modules.pack.processer.PackMoveProcesser;
 import app.uma.modules.pack.processer.PackSellProcesser;
+import app.uma.modules.role.RoleVO;
 import app.uma.net.socket.consts.ProtocolConst;
 import app.uma.net.socket.data.PackData;
 import app.uma.net.socket.response.PackInitResponse;
 import app.uma.net.socket.sessions.GameSession;
-import app.uma.vo.PackVO;
-import app.uma.vo.RoleVO;
 
 @Component
 public class PackModel extends ModelBase{

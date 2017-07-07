@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import app.uma.base.Ifactory;
 import app.uma.csv.CsvUtil;
 import app.uma.database.MonsterCfg;
-import app.uma.vo.MonsterEntity;
 
 @Component
 public class MonsterFactory implements Ifactory {

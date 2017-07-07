@@ -12,10 +12,10 @@ import app.uma.base.ModelBase;
 import app.uma.dao.entity.Role;
 import app.uma.database.SceneCfg;
 import app.uma.enums.SceneEnum;
+import app.uma.modules.role.RoleVO;
+import app.uma.modules.scene.SceneEntity;
 import app.uma.modules.scene.SceneFactory;
 import app.uma.net.socket.sessions.GameSession;
-import app.uma.vo.RoleVO;
-import app.uma.vo.SceneEntity;
 
 @Component
 public class WorldModel extends ModelBase {

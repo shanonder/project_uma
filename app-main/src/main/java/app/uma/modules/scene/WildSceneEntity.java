@@ -1,12 +1,12 @@
-package app.uma.vo;
+package app.uma.modules.scene;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import app.uma.Application;
 import app.uma.modules.ai.AIWildMonsterProxy;
+import app.uma.modules.npc.MonsterEntity;
 import app.uma.modules.npc.MonsterFactory;
-import app.uma.modules.scene.SceneFactory;
 
 public class WildSceneEntity extends SceneEntity {
 	

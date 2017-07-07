@@ -1,4 +1,4 @@
-package app.uma.vo;
+package app.uma.modules.role;
 
 import java.util.ArrayList;
 

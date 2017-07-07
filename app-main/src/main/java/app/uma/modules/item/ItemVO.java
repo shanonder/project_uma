@@ -1,4 +1,4 @@
-package app.uma.vo;
+package app.uma.modules.item;
 
 import app.uma.database.ItemCfg;
 import app.uma.net.socket.data.ItemData;

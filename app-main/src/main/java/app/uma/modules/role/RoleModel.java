@@ -6,14 +6,13 @@ import org.springframework.stereotype.Component;
 import app.uma.base.ModelBase;
 import app.uma.dao.entity.Role;
 import app.uma.dao.repository.IRoleRepository;
+import app.uma.modules.auth.UserVO;
 import app.uma.modules.role.create.RoleCreateProcesser;
 import app.uma.net.socket.consts.ProtocolConst;
 import app.uma.net.socket.request.RoleCreateRequest;
 import app.uma.net.socket.response.RoleCreateResponse;
 import app.uma.net.socket.sessions.GameSession;
 import app.uma.utils.StringUtil;
-import app.uma.vo.RoleVO;
-import app.uma.vo.UserVO;
 
 @Component
 public class RoleModel extends ModelBase {

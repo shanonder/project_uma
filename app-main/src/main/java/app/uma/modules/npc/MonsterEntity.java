@@ -1,4 +1,4 @@
-package app.uma.vo;
+package app.uma.modules.npc;
 
 import app.uma.database.MonsterCfg;
 import app.uma.enums.SceneEntityEnum;

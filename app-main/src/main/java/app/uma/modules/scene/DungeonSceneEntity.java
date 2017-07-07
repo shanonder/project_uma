@@ -1,4 +1,4 @@
-package app.uma.vo;
+package app.uma.modules.scene;
 
 public class DungeonSceneEntity extends SceneEntity {
 
