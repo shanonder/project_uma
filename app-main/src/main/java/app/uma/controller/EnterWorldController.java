@@ -7,8 +7,8 @@
 package app.uma.controller;
 
 import app.uma.Application;
-import app.uma.model.PackModel;
 import app.uma.model.WorldModel;
+import app.uma.modules.pack.PackModel;
 import app.uma.net.socket.sessions.GameSession;
 
 public class EnterWorldController {

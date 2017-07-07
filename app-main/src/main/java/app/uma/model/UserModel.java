@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import app.uma.base.ModelBase;
 import app.uma.dao.entity.User;
 import app.uma.dao.repository.IUserRepository;
 import app.uma.modules.auth.processer.LoginProcesser;

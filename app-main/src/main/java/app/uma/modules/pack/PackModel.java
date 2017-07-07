@@ -1,15 +1,15 @@
-package app.uma.model;
+package app.uma.modules.pack;
 
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import app.uma.base.ModelBase;
 import app.uma.dao.entity.Pack;
 import app.uma.dao.repository.IPackRepository;
 import app.uma.database.PackCfg;
 import app.uma.enums.PackEnum;
-import app.uma.factory.PackFactory;
 import app.uma.modules.pack.processer.PackDeleteProcesser;
 import app.uma.modules.pack.processer.PackInitProcesser;
 import app.uma.modules.pack.processer.PackMoveProcesser;

@@ -1,6 +1,8 @@
-package app.uma.model;
+package app.uma.modules.item;
 
 import org.springframework.stereotype.Component;
+
+import app.uma.base.ModelBase;
 
 
 @Component

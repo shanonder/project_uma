@@ -5,18 +5,20 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import app.uma.factory.Ifactory;
-import app.uma.factory.ItemFactory;
-import app.uma.factory.MonsterFactory;
-import app.uma.factory.PackFactory;
-import app.uma.factory.SceneFactory;
-import app.uma.model.ItemModel;
-import app.uma.model.MapModel;
-import app.uma.model.ModelBase;
-import app.uma.model.PackModel;
-import app.uma.model.RoleModel;
+import app.uma.base.Ifactory;
+import app.uma.base.ModelBase;
 import app.uma.model.UserModel;
 import app.uma.model.WorldModel;
+import app.uma.modules.item.ItemFactory;
+import app.uma.modules.item.ItemModel;
+import app.uma.modules.npc.MonsterFactory;
+import app.uma.modules.pack.PackFactory;
+import app.uma.modules.pack.PackModel;
+import app.uma.modules.role.RoleModel;
+import app.uma.modules.scene.MapModel;
+import app.uma.modules.scene.SceneFactory;
+import app.uma.modules.task.TaskFactory;
+import app.uma.modules.task.TaskModel;
 import app.uma.net.socket.interfaces.IModuleFacade;
 
 public class ModuleFacade implements IModuleFacade {
@@ -62,10 +64,13 @@ public class ModuleFacade implements IModuleFacade {
 		addModel(PackModel.class);
 		addModel(MapModel.class);
 		addModel(WorldModel.class);
+		addModel(TaskModel.class);
+		
 		addFactory(ItemFactory.class);
 		addFactory(PackFactory.class);
 		addFactory(SceneFactory.class);
 		addFactory(MonsterFactory.class);
+		addFactory(TaskFactory.class);
 	}
 
 }

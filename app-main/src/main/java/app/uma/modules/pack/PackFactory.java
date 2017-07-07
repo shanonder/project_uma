@@ -1,4 +1,4 @@
-package app.uma.factory;
+package app.uma.modules.pack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,9 +7,11 @@ import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import app.uma.base.Ifactory;
 import app.uma.csv.CsvUtil;
 import app.uma.dao.entity.Pack;
 import app.uma.database.PackCfg;
+import app.uma.modules.item.ItemFactory;
 import app.uma.vo.ItemVO;
 import app.uma.vo.PackVO;
 import net.sf.json.JSONObject;

@@ -4,9 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import app.uma.Application;
-import app.uma.factory.MonsterFactory;
-import app.uma.factory.SceneFactory;
 import app.uma.modules.ai.AIWildMonsterProxy;
+import app.uma.modules.npc.MonsterFactory;
+import app.uma.modules.scene.SceneFactory;
 
 public class WildSceneEntity extends SceneEntity {
 	

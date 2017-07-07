@@ -47,7 +47,7 @@ public class MonsterCfg{
 		return this.source;
 	}
 	public void setSource(String source){
-		this.source = source;
+		this.source=source;
 	}
 
 

@@ -1,8 +1,9 @@
-package app.uma.model;
+package app.uma.modules.role;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import app.uma.base.ModelBase;
 import app.uma.dao.entity.Role;
 import app.uma.dao.repository.IRoleRepository;
 import app.uma.modules.role.create.RoleCreateProcesser;
