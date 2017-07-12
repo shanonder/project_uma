@@ -2,7 +2,7 @@ package app.uma.database;
 
 	/**
 	 * 此类由ExcelToCodeTool自动生成
-	 * md5:696520213cb96fa54ca52a8cc733d65b
+	 * md5:1071b8573da2fa96d63f97703411d3ec
 	 */
 public class SceneCfg{
 	/**
