@@ -1,4 +1,4 @@
-package app.uma.model;
+package app.uma.modules.scene;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -8,13 +8,11 @@ import java.util.Map.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import app.uma.base.ModelBase;
 import app.uma.dao.entity.Role;
 import app.uma.database.SceneCfg;
-import app.uma.enums.SceneEnum;
-import app.uma.factory.SceneFactory;
+import app.uma.modules.role.RoleVO;
 import app.uma.net.socket.sessions.GameSession;
-import app.uma.vo.RoleVO;
-import app.uma.vo.SceneEntity;
 
 @Component
 public class WorldModel extends ModelBase {

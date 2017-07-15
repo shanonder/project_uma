@@ -1,4 +1,4 @@
-package app.uma.factory;
+package app.uma.base;
 
 public interface Ifactory {
 	

@@ -1,25 +1,23 @@
-package app.uma.model;
+package app.uma.modules.pack;
 
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import app.uma.base.ModelBase;
 import app.uma.dao.entity.Pack;
 import app.uma.dao.repository.IPackRepository;
 import app.uma.database.PackCfg;
-import app.uma.enums.PackEnum;
-import app.uma.factory.PackFactory;
 import app.uma.modules.pack.processer.PackDeleteProcesser;
 import app.uma.modules.pack.processer.PackInitProcesser;
 import app.uma.modules.pack.processer.PackMoveProcesser;
 import app.uma.modules.pack.processer.PackSellProcesser;
+import app.uma.modules.role.RoleVO;
 import app.uma.net.socket.consts.ProtocolConst;
 import app.uma.net.socket.data.PackData;
 import app.uma.net.socket.response.PackInitResponse;
 import app.uma.net.socket.sessions.GameSession;
-import app.uma.vo.PackVO;
-import app.uma.vo.RoleVO;
 
 @Component
 public class PackModel extends ModelBase{

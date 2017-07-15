@@ -5,16 +5,16 @@ import org.springframework.stereotype.Component;
 
 import app.uma.controller.EnterWorldController;
 import app.uma.dao.entity.User;
-import app.uma.model.RoleModel;
-import app.uma.model.UserModel;
+import app.uma.modules.auth.UserModel;
+import app.uma.modules.auth.UserVO;
+import app.uma.modules.role.RoleModel;
+import app.uma.modules.role.RoleVO;
 import app.uma.net.socket.decodes.ClientRequest;
 import app.uma.net.socket.interfaces.INotAuthProcessor;
 import app.uma.net.socket.message.MsgProcessor;
 import app.uma.net.socket.request.LoginRequest;
 import app.uma.net.socket.response.LoginResponse;
 import app.uma.net.socket.sessions.GameSession;
-import app.uma.vo.RoleVO;
-import app.uma.vo.UserVO;
 
 @Component
 public class LoginProcesser extends MsgProcessor implements INotAuthProcessor{

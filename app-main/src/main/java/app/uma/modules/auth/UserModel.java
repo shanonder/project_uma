@@ -1,4 +1,6 @@
-package app.uma.model;
+package app.uma.modules.auth;
+
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -6,7 +8,6 @@ import org.springframework.stereotype.Component;
 import app.uma.base.ModelBase;
 import app.uma.dao.entity.User;
 import app.uma.dao.repository.IUserRepository;
-import app.uma.modules.auth.UserVO;
 import app.uma.modules.auth.processer.LoginProcesser;
 import app.uma.net.socket.consts.ProtocolConst;
 import app.uma.net.socket.heaps.HeapProcesser;

@@ -1,10 +1,10 @@
-package app.uma.vo;
+package app.uma.modules.role;
 
 import java.util.ArrayList;
 
 import app.uma.dao.entity.Role;
-import app.uma.enums.SceneEntityEnum;
 import app.uma.modules.scene.ISceneEntity;
+import app.uma.modules.scene.SceneEntityEnum;
 import app.uma.net.socket.data.AttributesData;
 import app.uma.net.socket.data.RoleData;
 import app.uma.net.socket.sessions.GameSession;

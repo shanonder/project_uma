@@ -1,10 +1,10 @@
-package app.uma.vo;
+package app.uma.modules.npc;
 
 import app.uma.database.MonsterCfg;
-import app.uma.enums.SceneEntityEnum;
 import app.uma.modules.ai.interfaces.IAIEntity;
 import app.uma.modules.ai.interfaces.IAIProxy;
 import app.uma.modules.scene.ISceneEntity;
+import app.uma.modules.scene.SceneEntityEnum;
 
 public class MonsterEntity implements ISceneEntity ,IAIEntity {
 	

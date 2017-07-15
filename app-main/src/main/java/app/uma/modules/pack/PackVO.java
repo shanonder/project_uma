@@ -1,4 +1,4 @@
-package app.uma.vo;
+package app.uma.modules.pack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
 
 import app.uma.dao.entity.Pack;
 import app.uma.database.PackCfg;
+import app.uma.modules.item.ItemVO;
 import app.uma.net.socket.data.GridData;
 import app.uma.net.socket.data.PackData;
 

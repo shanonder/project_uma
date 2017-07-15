@@ -4,7 +4,7 @@
  * date: 2017年6月18日 下午12:47:32
  *
  */
-package app.uma.model;
+package app.uma.base;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
