@@ -2,11 +2,9 @@ package app.uma.modules.task;
 
 import java.util.ArrayList;
 
-import app.uma.database.TaskCfg;
-
 public class TaskVO {
 
-	private ArrayList<TaskCfg> list;
+	private ArrayList<TaskNode> taskNodes;
 
 	private int id;
 	
@@ -22,10 +20,10 @@ public class TaskVO {
 		this.id=id;
 	}
 	public TaskVO() {
-		list = new ArrayList<>();
+		taskNodes = new ArrayList<>();
 	}
-	public void addCfg(TaskCfg cfg) {
-		list.add(cfg);
+	public void addNode(TaskNode node) {
+		taskNodes.add(node);
 	}
 	
 	public void setName(String name) {
