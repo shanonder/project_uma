@@ -13,17 +13,17 @@ import app.uma.modules.item.ItemVO;
 import app.uma.net.socket.data.GridData;
 import app.uma.net.socket.data.PackData;
 
-public class PackVO {
+public class PackEntity {
 	private Pack db;
 	private PackCfg cfg;
 
 	private HashMap<Integer, ItemVO> itemdataMap;
 
-	public PackVO() {
+	public PackEntity() {
 		itemdataMap = new HashMap<>();
 	}
 	
-	public PackVO(Pack db , PackCfg cfg) {
+	public PackEntity(Pack db , PackCfg cfg) {
 		this.db = db;
 		this.setCfg(cfg);
 		itemdataMap = new HashMap<>();

@@ -38,7 +38,7 @@ public class PackModel extends ModelBase{
 	public void init(GameSession session) throws Exception {
 		RoleVO role = session.getRole(RoleVO.class);
 		String rid = role.db.getId();
-		ArrayList<PackVO> packVOs = new ArrayList<>();
+		ArrayList<PackEntity> packVOs = new ArrayList<>();
 		ArrayList<PackData> packDatas = new ArrayList<>();
 		for(PackEnum packEnum : PackEnum.values()){
 			PackCfg cfg = packFactory.getDtPackMap().get(packEnum.getType());
@@ -50,7 +50,7 @@ public class PackModel extends ModelBase{
 				pack.setOpenLenth(cfg.getOpen());
 				packRepository.save(pack);
 			}
-			PackVO vo = packFactory.initPack(pack, cfg);
+			PackEntity vo = packFactory.initPack(pack, cfg);
 			packVOs.add(vo);
 			packDatas.add(vo.toMsg());
 		}
