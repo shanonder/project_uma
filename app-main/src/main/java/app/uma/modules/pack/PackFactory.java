@@ -26,8 +26,7 @@ public class PackFactory implements Ifactory {
 	public void initCfgs() {
 		setDtPackMap(new HashMap<>());
 		try {
-			ArrayList<PackCfg> list;
-			list = csvUtil.getCsv("pack.dat",PackCfg.class);
+			ArrayList<PackCfg> list = csvUtil.getCsv("pack.dat",PackCfg.class);
 			for (PackCfg dt : list){
 				getDtPackMap().put(dt.getType(), dt);
 			}
