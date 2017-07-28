@@ -23,6 +23,8 @@ public class LoginProcesser extends MsgProcessor implements INotAuthProcessor{
 	private UserModel userModel;
 	@Autowired
 	private RoleModel roleModel;
+	@Autowired
+	private EnterWorldController enterWorldController;
 	@Override
 	public void process(GameSession gameSession, ClientRequest cr) throws Exception {
 		LoginRequest request = new LoginRequest(cr);
@@ -47,7 +49,7 @@ public class LoginProcesser extends MsgProcessor implements INotAuthProcessor{
 			else{
 				gameSession.setRole(role);
 				gameSession.sendMsg(new LoginResponse(200, user.getPlatId(), user.getServerId(), user.getOpenId(), request.getToken(),user.getId()));
-				EnterWorldController.execute(gameSession);
+				enterWorldController.execute(gameSession);
 			}
 		}else{
 			

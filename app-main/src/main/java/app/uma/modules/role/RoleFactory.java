@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import app.uma.base.Ifactory;
 import app.uma.csv.CsvUtil;
-import app.uma.database.ItemCfg;
 import app.uma.database.RoleCfg;
 
 public class RoleFactory implements Ifactory {

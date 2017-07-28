@@ -15,13 +15,15 @@ public class RoleCreateProcesser extends MsgProcessor {
 
 	@Autowired
 	private RoleModel roleModel;
+	@Autowired
+	private EnterWorldController enterWorldController;
 	@Override
 	public void process(GameSession gameSession, ClientRequest cr) throws Exception {
 		RoleCreateRequest request = new RoleCreateRequest(cr);
 //		RoleModel roleModel = Application.context.getBean(RoleModel.class);
 		int state = roleModel.create(request, gameSession);
 		if(state == 200){
-			EnterWorldController.execute(gameSession);
+			enterWorldController.execute(gameSession);
 		}
 	}
 

@@ -6,17 +6,24 @@
  */
 package app.uma.controller;
 
-import app.uma.Application;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import app.uma.modules.pack.PackModel;
+import app.uma.modules.role.RoleVO;
 import app.uma.modules.scene.WorldModel;
 import app.uma.net.socket.sessions.GameSession;
 
+@Component
 public class EnterWorldController {
-	public static void execute(GameSession session) throws Exception{
-		WorldModel worldModel = Application.context.getBean(WorldModel.class);
+	@Autowired
+	private WorldModel worldModel;
+	
+	@Autowired
+	private PackModel packModel;
+	public void execute(GameSession session) throws Exception{
 		worldModel.enterWorld(session);
+		packModel.getBySession(session);
 		
-		PackModel packModel = Application.context.getBean(PackModel.class);
-		packModel.init(session);
 	}
 }

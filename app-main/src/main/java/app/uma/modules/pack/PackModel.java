@@ -35,7 +35,7 @@ public class PackModel extends ModelBase{
 		
 	}
 	
-	public void init(GameSession session) throws Exception {
+	public void getBySession(GameSession session) throws Exception {
 		RoleVO role = session.getRole(RoleVO.class);
 		String rid = role.db.getId();
 		ArrayList<PackVO> packVOs = new ArrayList<>();
