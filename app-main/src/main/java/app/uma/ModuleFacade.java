@@ -70,7 +70,7 @@ public class ModuleFacade implements IModuleFacade {
 		addFactory(PackFactory.class);
 		addFactory(SceneFactory.class);
 		addFactory(MonsterFactory.class);
-		addFactory(TaskFactory.class);
+//		addFactory(TaskFactory.class);
 	}
 
 }

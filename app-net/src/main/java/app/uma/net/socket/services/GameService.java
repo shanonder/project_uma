@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import app.uma.net.socket.decodes.SocketCodeFactory;
 import app.uma.net.socket.factorys.ServerThreadFactory;
-import app.uma.net.socket.handlers.GameProtocolHandler;
+import app.uma.net.socket.handlers.AppSocketIoHandler;
 import app.uma.net.socket.interfaces.IModuleFacade;
 
 @Service
@@ -33,7 +33,7 @@ public class GameService extends Thread {
 	@Autowired
 	private IModuleFacade moduleFacade;
 	@Autowired
-	GameProtocolHandler gameProtocolHandler;
+	AppSocketIoHandler gameProtocolHandler;
 	
 	public void start(){
 		acceptor = new NioSocketAcceptor();

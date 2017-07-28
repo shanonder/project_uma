@@ -13,11 +13,11 @@ import app.uma.net.socket.heaps.HeapProcesser;
 
 
 @Component
-public class UserModel extends ModelBase{
+public class AUserModel extends ModelBase{
 
 	@Autowired
 	private IUserRepository userRepos;
-	public UserModel() {
+	public AUserModel() {
 	}
 
 	

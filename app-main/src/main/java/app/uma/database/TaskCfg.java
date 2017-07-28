@@ -2,7 +2,7 @@ package app.uma.database;
 
 	/**
 	 * 此类由ExcelToCodeTool自动生成
-	 * md5:89a6da506b39596d2455db215821e268
+	 * md5:3900224f6a98db0644f517aeedffd7b1
 	 */
 public class TaskCfg{
 	/**
@@ -16,44 +16,19 @@ public class TaskCfg{
 	private String name;
 
 	/**
-	 * 任务类型
+	 * 完成参数
 	 */
-	private int type;
+	private String params;
 
 	/**
-	 * 任务组
+	 * 奖励
 	 */
-	private int groupId;
-
-	/**
-	 * 成功奖励
-	 */
-	private String sucReward;
+	private String reward;
 
 	/**
 	 * 完成后的后续任务
 	 */
-	private int sucNext;
-
-	/**
-	 * 成功参数
-	 */
-	private String sucParams;
-
-	/**
-	 * 失败奖励
-	 */
-	private String failReward;
-
-	/**
-	 * 失败参数
-	 */
-	private String failParams;
-
-	/**
-	 * 失败的后续任务
-	 */
-	private int failNext;
+	private int next;
 
 	/**
 	 * 配置ID
@@ -76,83 +51,33 @@ public class TaskCfg{
 	}
 
 	/**
-	 * 任务类型
+	 * 完成参数
 	 */
-	public int getType(){
-		return this.type;
+	public String getParams(){
+		return this.params;
 	}
-	public void setType(int type){
-		this.type=type;
+	public void setParams(String params){
+		this.params=params;
 	}
 
 	/**
-	 * 任务组
+	 * 奖励
 	 */
-	public int getGroupId(){
-		return this.groupId;
+	public String getReward(){
+		return this.reward;
 	}
-	public void setGroupId(int groupId){
-		this.groupId=groupId;
-	}
-
-	/**
-	 * 成功奖励
-	 */
-	public String getSucReward(){
-		return this.sucReward;
-	}
-	public void setSucReward(String sucReward){
-		this.sucReward=sucReward;
+	public void setReward(String reward){
+		this.reward=reward;
 	}
 
 	/**
 	 * 完成后的后续任务
 	 */
-	public int getSucNext(){
-		return this.sucNext;
+	public int getNext(){
+		return this.next;
 	}
-	public void setSucNext(int sucNext){
-		this.sucNext=sucNext;
-	}
-
-	/**
-	 * 成功参数
-	 */
-	public String getSucParams(){
-		return this.sucParams;
-	}
-	public void setSucParams(String sucParams){
-		this.sucParams=sucParams;
-	}
-
-	/**
-	 * 失败奖励
-	 */
-	public String getFailReward(){
-		return this.failReward;
-	}
-	public void setFailReward(String failReward){
-		this.failReward=failReward;
-	}
-
-	/**
-	 * 失败参数
-	 */
-	public String getFailParams(){
-		return this.failParams;
-	}
-	public void setFailParams(String failParams){
-		this.failParams=failParams;
-	}
-
-	/**
-	 * 失败的后续任务
-	 */
-	public int getFailNext(){
-		return this.failNext;
-	}
-	public void setFailNext(int failNext){
-		this.failNext=failNext;
+	public void setNext(int next){
+		this.next=next;
 	}
 
 

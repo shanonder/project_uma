@@ -12,7 +12,7 @@ import app.uma.net.socket.message.MsgDispatcher;
 import app.uma.net.socket.sessions.GameSession;
 
 @Component
-public class GameProtocolHandler extends IoHandlerAdapter {
+public class AppSocketIoHandler extends IoHandlerAdapter {
 	private final Logger logger = Logger.getLogger(getClass());
 	
 	@Autowired

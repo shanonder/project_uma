@@ -1,25 +1,30 @@
 package app.uma.net.websocket.config;
 
+
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.simp.config.MessageBrokerRegistry;
-import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
-import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
-import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
-@Configuration
-@EnableWebSocketMessageBroker
-public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
+import app.uma.net.socket.handlers.AppWebSocketHandler;
 
-    @Override
-    public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/respon");
-        config.setApplicationDestinationPrefixes("/request");
-    }
-    
-    @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/uma-websocket").setAllowedOrigins("http://localhost:9900",
-        		"http://localhost:8999").withSockJS();
-    }
 
+@Configuration  
+@EnableWebMvc  
+@EnableWebSocket  
+public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer{  
+  
+    @Override  
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {  
+        registry.addHandler(systemWebSocketHandler(),"/ws").setAllowedOrigins("*");  
+    }  
+      
+    @Bean  
+    public WebSocketHandler systemWebSocketHandler(){  
+        return new AppWebSocketHandler();  
+    }  
 }
