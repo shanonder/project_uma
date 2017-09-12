@@ -27,5 +27,12 @@ public class MinaConfig {
 		return gs;
 	}
 	
+//	@Bean
+//	public GameService webSocketService(){
+//		GameService gs = new GameService(3006);
+//		logger.info("GameService Start");
+//		return gs;
+//	}
+	
 	
 }
