@@ -1,21 +1,28 @@
 package app.uma.net.socket.sessions;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.session.AttributeKey;
 import org.apache.mina.core.session.IoSession;
+import org.springframework.web.socket.BinaryMessage;
+import org.springframework.web.socket.WebSocketSession;
 
+import app.uma.net.ISession;
 import app.uma.net.socket.interfaces.ResponseMsg;
 /**
  * 游戏中的session回话，封装了mina的session
  *
  */
-public class GameSession {
+public class GameSession implements ISession{
 
 	private IoSession session;
+	private WebSocketSession wsSession;
+	
 	private String address;
 	
 	private Object user;
@@ -27,11 +34,20 @@ public class GameSession {
 	private boolean isLogin=false;
 	
 	private static final AttributeKey KEY_PLAYER_SESSION = new AttributeKey(GameSession.class, "user.session");
-	
+
+	private static final ConcurrentHashMap<String,GameSession> wsMap = new ConcurrentHashMap<>();
 	public GameSession(IoSession session){
 		this.session = session;
 		this.session.setAttribute(KEY_PLAYER_SESSION, this);
 		SocketAddress socketaddress = session.getRemoteAddress();
+		InetSocketAddress s = (InetSocketAddress) socketaddress;
+		address = s.getAddress().getHostAddress();
+	}
+	
+	public GameSession(WebSocketSession wsSession){
+		this.wsSession = wsSession;
+		wsMap.put(wsSession.getId(),this);
+		SocketAddress socketaddress = wsSession.getRemoteAddress();
 		InetSocketAddress s = (InetSocketAddress) socketaddress;
 		address = s.getAddress().getHostAddress();
 	}
@@ -41,16 +57,28 @@ public class GameSession {
 		return (GameSession) playerObj;
 	}
 	
+	public static GameSession getInstance(WebSocketSession session) {
+		return wsMap.get(session.getId());
+	}
+	
 	/**
 	 * 发送消息给客户端
 	 * @param msg
 	 * @return
 	 */
 	public WriteFuture sendMsg(ResponseMsg msg) {
-		if (session == null || !session.isConnected() || session.isClosing()) {
-			return null;
+		if (session != null && session.isConnected() && !session.isClosing()) {
+			return session.write(msg);
 		}
-		return session.write(msg);
+		else if (wsSession != null && wsSession.isOpen()) {
+			try {
+				wsSession.sendMessage(new BinaryMessage(msg.entireMsg().buf()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+
 	}
 	
 	public String getAddress(){
