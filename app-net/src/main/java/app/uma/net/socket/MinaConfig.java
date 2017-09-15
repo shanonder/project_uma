@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 import app.uma.net.socket.services.GameService;
 import app.uma.net.socket.services.LoginService;
+import app.uma.net.socket.services.ModuleService;
 
 @Configuration
 public class MinaConfig {
@@ -21,9 +22,23 @@ public class MinaConfig {
 	}
 	
 	@Bean
-	public GameService gameService (){
+	public GameService gameService(){
 		GameService gs = new GameService(3005);
 		logger.info("GameService Start");
+		return gs;
+	}
+	
+//	@Bean
+//	public WebSocketService webSocketService(){
+//		WebSocketService gs = new WebSocketService(3006);
+//		logger.info("WebSocketService Start");
+//		return gs;
+//	}
+	
+	@Bean
+	public ModuleService moduleService (){
+		ModuleService gs = new ModuleService();
+		logger.info("Modules Start");
 		return gs;
 	}
 	

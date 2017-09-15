@@ -93,6 +93,8 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/mina/mina-integration-spring/1.1.7/mina-integration-spring-1.1.7.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/mina/mina-filter-ssl/1.1.7/mina-filter-ssl-1.1.7.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/ow2/asm/asm/6.0_ALPHA/asm-6.0_ALPHA.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/httpcomponents/httpcore-nio/4.4.4/httpcore-nio-4.4.4.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/httpcomponents/httpcore/4.4.6/httpcore-4.4.6.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="EXTJAR" id="C:\workspaces\wp_spring\project_uma\libs\flex-messaging-common.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="EXTJAR" id="C:\workspaces\wp_spring\project_uma\libs\flex-messaging-core-3.2.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/cz/advel/jbullet/jbullet/20101010-1/jbullet-20101010-1.jar" enabled="true" runInBatchMode="false"/>

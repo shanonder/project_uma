@@ -34,8 +34,14 @@ public class ModuleFacade implements IModuleFacade {
 	@Override
 	public void start() {
 		registModels();
+		
+		
 		for (Class<Ifactory> cls:factorys) {
 			Application.context.getBean(cls).initCfgs();
+		}
+		
+		for (Class<ModelBase> cls:models) {
+			Application.context.getBean(cls).registProsesser();
 		}
 		
 		for (Class<ModelBase> cls:models) {

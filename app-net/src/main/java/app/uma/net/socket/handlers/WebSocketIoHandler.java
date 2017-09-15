@@ -2,9 +2,6 @@ package app.uma.net.socket.handlers;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,65 +11,80 @@ import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component; 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import app.uma.net.socket.decodes.ClientRequest;
+import app.uma.net.socket.interfaces.MsgProtocol;
+import app.uma.net.socket.message.MsgDispatcher;
+import app.uma.net.socket.services.WebGameSession;
+import app.uma.net.socket.sessions.GameSession; 
 
 @Component
 public class WebSocketIoHandler extends IoHandlerAdapter {  
   
     public static final String INDEX_KEY = WebSocketIoHandler.class.getName() + ".INDEX";  
-    private static Logger LOGGER = LoggerFactory.getLogger(WebSocketIoHandler.class);  
+    private static Logger logger = LoggerFactory.getLogger(WebSocketIoHandler.class);  
       
-    Map<Long, IoSession> ioSessionMap = new HashMap<Long, IoSession>();  
-      
+	@Autowired
+	MsgDispatcher msgDispatcher;
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {  
         IoBuffer buffer = (IoBuffer)message;  
-          
         byte[] b = new byte[buffer.limit()];    
-        buffer.get(b);   
-  
-        Long sid = session.getId();  
-  
-        if (!ioSessionMap.containsKey(sid)) {  
-            LOGGER.info("user '{}',has been created" + sid);  
-            ioSessionMap.put(sid, session);  
-              
-            String m = new String(buffer.array());  
-            String sss = getSecWebSocketAccept(m);  
-              
-            buffer.clear();  
-            buffer.put(sss.getBytes("utf-8"));  
-              
-            buffer.flip();  
-            session.write(buffer);  
-            buffer.free();  
-        } else {  
-            String m = decode(b);  
-            LOGGER.info("from client is :" + m);  
-            buffer.clear();  
-  
-            byte[] bb = encode(m);  
-  
-            buffer.put(bb);  
-            buffer.flip();  
-              
-            synchronized (ioSessionMap) {  
-                Collection<IoSession> ioSessionSet = ioSessionMap.values();  
-                for (IoSession is : ioSessionSet) {  
-                    if (is.isConnected()) {  
-                        System.out.println("response message to " + is);  
-                        is.write(buffer.duplicate());  
-                    }  
-                }  
-            }  
-            buffer.free();  
-        }  
+        buffer.get(b);
+        WebGameSession wgs = (WebGameSession)WebGameSession.getInstance(session);
+        if (wgs == null) {  
+        	return;
+        }
+        if(wgs.isHandshaked == false){
+        	try {
+
+        		Long sid = session.getId();  
+            	logger.info("user '{}',has been created" + sid.toString());  
+                String m = new String(buffer.array());  
+                String sss = getSecWebSocketAccept(m);  
+                buffer.clear();  
+                buffer.put(sss.getBytes("utf-8"));  
+                buffer.flip();  
+                session.write(buffer);  
+                buffer.free();  
+                wgs.isHandshaked = true;
+            	
+			} catch (Exception e) {
+				wgs.close();
+			}
+        }else{
+//        	String m = decode(b);
+//        	buffer.clear();
+//        	byte[] bb = encode(m);
+//        	buffer.put(bb);
+        	buffer.flip();
+    		int head = buffer.getShort();//2 version todo
+    		int v = buffer.getShort();//2 version todo
+    		int l = buffer.getInt();//4
+    		int bl = l - MsgProtocol.headSize;
+    		int remains = buffer.remaining();
+    		byte[] bytes = new byte[bl];
+    		ClientRequest clientRequest = new ClientRequest(bytes);
+    		clientRequest.cmd = buffer.getInt();
+    		clientRequest.status = buffer.getShort();
+    		clientRequest.testid = buffer.getInt();
+    		clientRequest.reserved = buffer.getInt();
+    		if(bl > 0){
+    			buffer.get(bytes, 0 , bl);
+    		}
+    		msgDispatcher.dispatchMsg(wgs,clientRequest);
+        }
     }  
   
     @Override     
     public void sessionOpened(IoSession session) throws Exception {  
-        session.setAttribute(INDEX_KEY, 0);  
+    	
+    		@SuppressWarnings("unused")
+    		GameSession gs = new WebGameSession(session);
+//    		todo
+    		
     }  
   
     @Override     

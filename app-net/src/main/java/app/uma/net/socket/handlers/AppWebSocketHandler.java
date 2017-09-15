@@ -18,23 +18,23 @@ import app.uma.net.socket.message.MsgDispatcher;
 import app.uma.net.socket.sessions.GameSession;
 
 public class AppWebSocketHandler implements WebSocketHandler {
-	 
+
 	private Logger log = LoggerFactory.getLogger(AppWebSocketHandler.class);
-	
- 
+
+
 	@Autowired
 	MsgDispatcher msgDispatcher;
-    @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-    	GameSession gs = new GameSession(session);
-    }
- 
-    
-    @Override
-    public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-    	log.info("handleMessage: " + message.toString());
-        //sendMessageToUsers();
-    	GameSession gs = GameSession.getInstance(session);
+	@Override
+	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		GameSession gs = new GameSession(session);
+	}
+
+
+	@Override
+	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+		log.info("handleMessage: " + message.toString());
+		//sendMessageToUsers();
+		GameSession gs = GameSession.getInstance(session);
 		if (gs == null) {
 			return;
 		}
@@ -55,48 +55,33 @@ public class AppWebSocketHandler implements WebSocketHandler {
 		if(bl > 0){
 			buffer.get(bytes, 0 , bl);
 		}
-		
+
 		msgDispatcher.dispatchMsg(gs,request);
-//    	session.sendMessage(new TextMessage(new Date() + ""));
-    }
- 
-    @Override
-    public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        if(session.isOpen()){
-            session.close();
-        }
-//        users.remove(session);
-        
-        log.info("handleTransportError" + exception.getMessage());
-    }
- 
-    @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-//        users.remove(session);
-        log.debug("afterConnectionClosed" + closeStatus.getReason());
-        
-    }
- 
-    @Override
-    public boolean supportsPartialMessages() {
-        return false;
-    }
- 
-    /**
-     * 给所有在线用户发送消息
-     *
-     * @param message
-     */
-    public void sendMessageToUsers(TextMessage message) {
-//        for (WebSocketSession user : users) {
-//            try {
-//                if (user.isOpen()) {
-//                    user.sendMessage(message);
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-    }
- 
+		//    	session.sendMessage(new TextMessage(new Date() + ""));
+	}
+
+	@Override
+	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
+		GameSession gs = GameSession.getInstance(session);
+		if (gs == null) {
+			return;
+		}
+		gs.close();
+
+		log.info("handleTransportError:" + exception.getMessage());
+	}
+
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
+		//        users.remove(session);
+		log.info("afterConnectionClosed:" + closeStatus.getReason());
+
+	}
+
+	@Override
+	public boolean supportsPartialMessages() {
+		return false;
+	}
+
+
 }

@@ -32,7 +32,10 @@ public class WorldModel extends ModelBase {
 			oScene.removeEntity(role.getInsId());
 		}
 		SceneEntity scene = hashMap.get(role.getSceneId());
-		scene.addEntity(role);
+		if(scene != null){
+			scene.addEntity(role);
+		}
+		
 	}
 
 
@@ -43,6 +46,7 @@ public class WorldModel extends ModelBase {
 
 	@Override
 	public void startup() {
+		hashMapSceneEntity = new HashMap<>();
 		hashMap = new HashMap<>();
 		HashMap<Integer, SceneCfg> sceneCfgs = sceneFactory.getCfg();
 		Iterator<Entry<Integer, SceneCfg>> iterator = sceneCfgs.entrySet().iterator();

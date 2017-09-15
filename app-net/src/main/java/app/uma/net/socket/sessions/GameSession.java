@@ -12,13 +12,12 @@ import org.apache.mina.core.session.IoSession;
 import org.springframework.web.socket.BinaryMessage;
 import org.springframework.web.socket.WebSocketSession;
 
-import app.uma.net.ISession;
 import app.uma.net.socket.interfaces.ResponseMsg;
 /**
  * 游戏中的session回话，封装了mina的session
  *
  */
-public class GameSession implements ISession{
+public class GameSession{
 
 	private IoSession session;
 	private WebSocketSession wsSession;
@@ -110,7 +109,17 @@ public class GameSession implements ISession{
 		return (T)this.role;
 	}
 	public void close(){
-		session.closeOnFlush();
+		if(session != null){
+			session.closeOnFlush();
+		}
+		if(wsSession != null){
+			try {
+				wsSession.close();
+			} catch (IOException e) {
+//				e.printStackTrace();
+			}
+		}
+		
 	}
 
 	/**

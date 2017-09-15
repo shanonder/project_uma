@@ -34,10 +34,11 @@ public class SocketDecoder extends CumulativeProtocolDecoder implements Protocol
 		int h = in.getUnsignedShort();//2
 		if(h != MsgProtocol.headFlag){
 			logger.info("包结构异常");
-			in.reset();
-//			session.closeNow();
-			return true;
+			session.closeNow();
+			return false;
 		}
+		
+		
 		@SuppressWarnings("unused")
 		int v = in.getUnsignedShort();//2 version todo
 		int l = in.getInt();//4

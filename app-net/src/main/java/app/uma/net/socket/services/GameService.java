@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import app.uma.net.socket.decodes.SocketCodeFactory;
 import app.uma.net.socket.factorys.ServerThreadFactory;
 import app.uma.net.socket.handlers.AppSocketIoHandler;
+import app.uma.net.socket.handlers.WebSocketIoHandler;
 import app.uma.net.socket.interfaces.IModuleFacade;
 
 @Service
@@ -31,9 +32,8 @@ public class GameService extends Thread {
 	}
 	
 	@Autowired
-	private IModuleFacade moduleFacade;
-	@Autowired
 	AppSocketIoHandler gameProtocolHandler;
+	
 	
 	public void start(){
 		acceptor = new NioSocketAcceptor();
@@ -42,7 +42,7 @@ public class GameService extends Thread {
 		
         DefaultIoFilterChainBuilder chain = acceptor.getFilterChain();
 		acceptor.getFilterChain().addLast("logger", new LoggingFilter());
-		acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new SocketCodeFactory()));
+		acceptor.getFilterChain().addLast("protocol", new ProtocolCodecFilter(new SocketCodeFactory()));
 		acceptor.setHandler(gameProtocolHandler);
 		threadpool = new OrderedThreadPoolExecutor(500);
 		threadpool.setThreadFactory(new ServerThreadFactory("OrderedThreadPool"));
@@ -62,7 +62,6 @@ public class GameService extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		moduleFacade.start();
 	}
 
 	
